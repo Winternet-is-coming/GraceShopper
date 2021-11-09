@@ -34,6 +34,7 @@ class Routes extends Component {
     )
   }
 }
+.
 
 /**
  * CONTAINER
