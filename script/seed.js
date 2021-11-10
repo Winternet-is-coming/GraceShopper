@@ -45,6 +45,56 @@ async function seed() {
       imageUrl:
         "https://scstore.com.my/wp-content/uploads/2020/07/Untitled-design-20.jpg",
     }),
+
+    Product.create({
+      name: "Hello Panda Chocolate Biscuit",
+      price: 5.99,
+      quantity: 50,
+      description: "A box of adorable and yummy panda biscuits.",
+      imageUrl:
+        "https://target.scene7.com/is/image/Target/GUEST_083453b0-bd17-48bb-a9b6-02d4546afa66",
+    }),
+    Product.create({
+      name: "Daisuki Pikachu Gummies",
+      price: 3.99,
+      quantity: 50,
+      description:
+        "A bag of grape-flavored gummy candies in the shape of your favorite Pokémon, Pikachu.",
+      imageUrl:
+        "https://meccha-japan.com/138004-large_default/gummies-daisuki-pikachu-lotte.jpg",
+    }),
+    Product.create({
+      name: "Milk Tea Kit Kat",
+      price: 7.99,
+      quantity: 50,
+      description: "A bag of milk tea Kit Kats - perfect for a tea party!",
+      imageUrl:
+        "https://meccha-japan.com/169160-large_default/kit-kat-milk-tea-nestle-japan.jpg",
+    }),
+    Product.create({
+      name: "Chocolate Potato Chips",
+      price: 5.99,
+      quantity: 50,
+      description: "Your two favorite loves in one snack!",
+      imageUrl:
+        "https://meccha-japan.com/169055-large_default/potato-chips-zeitaku-chocolate-calbee.jpg",
+    }),
+    Product.create({
+      name: "Chocolate Potato Chips",
+      price: 3.99,
+      quantity: 50,
+      description: "Your two favorite loves in one snack!",
+      imageUrl:
+        "https://meccha-japan.com/169055-large_default/potato-chips-zeitaku-chocolate-calbee.jpg",
+    }),
+    Product.create({
+      name: "Chocolate Strawberry Apollo",
+      price: 2.99,
+      quantity: 50,
+      description:
+        "A box of creamy bite-sized chocolates with sweet strawberry flavor.",
+      imageUrl: "https://m.media-amazon.com/images/I/61MKyXmKk3L._SL1500_.jpg",
+    }),
   ]);
 
   await users[0].createOrder({ productId: 1, quantity: 10 });
