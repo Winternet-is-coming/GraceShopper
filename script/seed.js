@@ -45,6 +45,7 @@ async function seed() {
       imageUrl:
         "https://scstore.com.my/wp-content/uploads/2020/07/Untitled-design-20.jpg",
     }),
+
     Product.create({
       name: "Hello Panda Chocolate Biscuit",
       price: 5.99,
