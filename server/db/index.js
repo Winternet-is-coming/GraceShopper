@@ -93,4 +93,7 @@ Order.belongsToMany(Product, {through: OrderDetail})
 
 OrderDetail also needs ttal price per product. This makes it so that when you update the price in your Product model, you can see the historical price.
 
+Can do the qty * price multiplication in an instance method on the backend, or some other way.
+DO NOT do it on the frontend! Will slow it down if site scales.
+
 */
