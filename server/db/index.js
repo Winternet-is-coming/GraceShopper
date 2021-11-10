@@ -87,7 +87,10 @@ If someone adds multiple qty of the same productId, we need a qty column in Orde
 
 Product.belongsToMany(Order, through: {'OrderDetail'})
 
-Create the OrderDetail model, with the qty field included. Then use THAT as the through table.
-Product.belongsToMany(Order, through: {OrderDetail})
+Create the OrderDetail model in a separate file, with the qty field included. Then use THAT as the through table.
+Product.belongsToMany(Order, {through: OrderDetail})
+Order.belongsToMany(Product, {through: OrderDetail})
+
+OrderDetail also needs ttal price per product. This makes it so that when you update the price in your Product model, you can see the historical price.
 
 */
