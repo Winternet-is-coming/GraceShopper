@@ -4,23 +4,24 @@ import {fetchCart} from '../store/cart';
 
 class Cart extends Component {
 	componentDidMount() {
-		console.log('this.props', this.props);
 		this.props.fetchCart(this.props.match.params.id);
 	}
 
 	render() {
-		// return (
-		// 	// <div>
-		// 	// 	{this.props.cart.map((product) => (
-		// 	// 		<div key={product.id}>
-		// 	// 			<h1>{product.name}</h1>
-		// 	// 			<img src={product.imageUrl} style={{width: 300}} />
-		// 	// 			<p>{product.price}</p>
-		// 	// 			<p>{product.quantity}</p>
-		// 	// 		</div>
-		// 	// 	))}
-		// 	// </div>
-		// );
+		const cart = this.props.cart;
+
+		return (
+			<div>
+				{cart.map((order) => (
+					<div key={order.id}>
+						<h1>{order.product.name}</h1>
+						<img src={order.product.imageUrl} style={{width: 300}} />
+						<p>{order.product.price}</p>
+						<p>{order.quantity}</p>
+					</div>
+				))}
+			</div>
+		);
 	}
 }
 
