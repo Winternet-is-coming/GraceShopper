@@ -107,4 +107,11 @@ Rule of thumb for what goes inside a through table:
 - Is this type of data exclusive to one table or another?
 For the OrderDetail through table, qty and price are related to Order and Product.
 
+LOCAL STORAGE NOTES
+- Store the guest cart in local storage. You can do this with localStorage.setItem("myDog", "Yoshi")
+- Can get from local storage with localStorage.getItem("myDog")
+  - const dog = coolStorage.getItem("myDog") -> dog === "Yoshi"
+- You need to convert the cart object to a string with JSON.stringify().
+- To bring back the info from local storage use JSON.parse().
+
 */
