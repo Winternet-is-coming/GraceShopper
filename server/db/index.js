@@ -63,4 +63,17 @@ Is there a relationship between an order and a cart?
 A cart is an unfulfilled order. A cart is a boolean value on orders.
 Can add 'isFulfilled' field to the Orders table.
 
+As an MVP, we don't have to optimize for how many times the db is getting queried.
+(So if the cart is constantly being updated in the db, that's fine for this project.)
+
+THE ASSOCIATIONS
+User can have many Orders. (one-to-many)
+
+Orders have many Products. (many-to-many)
+Products have many Orders.
+Creates a through table with orderId, productId.
+
+DATA FLOW
+
+
 */
