@@ -24,14 +24,14 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       name: "Matcha Pocky",
-      price: 12.99,
+      price: 13,
       quantity: 99,
       description: "A box of delicious Pocky",
       imageUrl: "https://images.heb.com/is/image/HEBGrocery/001779488",
     }),
     Product.create({
       name: "Taiyaki",
-      price: 7.99,
+      price: 8,
       quantity: 85,
       description: "Matcha Ice Cream and Red bean paste what more do you want",
       imageUrl:
@@ -39,7 +39,7 @@ async function seed() {
     }),
     Product.create({
       name: "Sakura Pocky",
-      price: 8.99,
+      price: 9,
       quantity: 90,
       description: "A box of delicious Sakura Pocky",
       imageUrl:
