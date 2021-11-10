@@ -54,6 +54,8 @@ How do you separate these into tables (Sequelize models)?
 - Orders table
   - isFulfilled: false -> order still in progress or not started
   - isFulfilled: true -> historical order
+  
+- OrderDetail through table (between Products<->Orders)
 
 Is there a relationship between users and products?
 Users buy our products through the cart. So users and products have an indirect relationship.
@@ -74,6 +76,18 @@ Products have many Orders.
 Creates a through table with orderId, productId.
 
 DATA FLOW
+User ID 1 adds something to the cart.
+A new order is created in the Orders table. The foreign key userId links this order back to the User table.
+The order is currently unfulfilled.
 
+When User 1 adds Product 1 to their cart (Orders table), a new row is added to OrderDetail through table with orderId: 1, productId: 1.
+User 1 adds Product 2 to their cart, a  new row is added to the through table orderId: 1, productId: 2.
+
+If someone adds multiple qty of the same productId, we need a qty column in OrderDetail through table.
+
+Product.belongsToMany(Order, through: {'OrderDetail'})
+
+Create the OrderDetail model, with the qty field included. Then use THAT as the through table.
+Product.belongsToMany(Order, through: {OrderDetail})
 
 */
