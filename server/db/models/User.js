@@ -17,9 +17,14 @@ const User = db.define("user", {
   },
   password: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
-});
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
+})
+
 
 module.exports = User;
 
@@ -38,14 +43,16 @@ User.prototype.generateToken = function () {
 /**
  * classMethods
  */
-User.authenticate = async function ({ email, password }) {
-  const user = await this.findOne({ where: { email } });
-  if (!user || !(await user.correctPassword(password))) {
-    const error = Error("Incorrect email/password");
-    error.status = 401;
-    throw error;
-  }
-  return user.generateToken();
+
+User.authenticate = async function({ email, password }){
+    const user = await this.findOne({where: { email }})
+    if (!user || !(await user.correctPassword(password))) {
+      const error = Error('Incorrect email/password');
+      error.status = 401;
+      throw error;
+    }
+    return user.generateToken();
+
 };
 
 User.findByToken = async function (token) {

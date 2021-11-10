@@ -13,8 +13,9 @@ describe("Home", () => {
   let home;
 
   beforeEach(() => {
-    home = shallow(<Home email="cody" />);
-  });
+    home = shallow(<Home email="cody" />)
+  })
+
 
   it("renders the email in an h3", () => {
     expect(home.find("h3").text()).to.be.equal("Welcome, cody");
