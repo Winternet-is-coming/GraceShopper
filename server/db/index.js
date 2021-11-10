@@ -35,3 +35,32 @@ User.belongsToMany(Profile, { through: 'User_Profiles' });
 Profile.belongsToMany(User, { through: 'User_Profiles' });
 
 */
+
+/*
+What info do you need for an ecommerce site?
+- things to sell (products)
+- user info
+- cart
+- dummy orders
+- website name
+- address
+- payment info
+
+How do you separate these into tables (Sequelize models)?
+- Users table
+
+- Products table
+
+- Orders table
+  - isFulfilled: false -> order still in progress or not started
+  - isFulfilled: true -> historical order
+
+Is there a relationship between users and products?
+Users buy our products through the cart. So users and products have an indirect relationship.
+There's a relationship between products <-> orders and orders <-> users.
+
+Is there a relationship between an order and a cart?
+A cart is an unfulfilled order. A cart is a boolean value on orders.
+Can add 'isFulfilled' field to the Orders table.
+
+*/
