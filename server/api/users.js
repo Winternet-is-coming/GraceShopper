@@ -5,6 +5,7 @@ const { requireToken, isAdmin } = require('./gateKeepingMiddleware')
 module.exports = router
 
 router.get('/', requireToken, isAdmin, async (req, res, next) => {
+
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
@@ -13,7 +14,8 @@ router.get('/', requireToken, isAdmin, async (req, res, next) => {
       attributes: ['id', 'email']
     })
     res.json(users)
+
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
