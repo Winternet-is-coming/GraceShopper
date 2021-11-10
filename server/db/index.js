@@ -75,6 +75,13 @@ Orders have many Products. (many-to-many)
 Products have many Orders.
 Creates a through table with orderId, productId.
 
+When you make an association:
+- foreign key and primary key are set
+- access to eager loading (like joining tables)
+- magic methods
+
+A many-to-many relationship is two one-to-many relationships.
+
 DATA FLOW
 User ID 1 adds something to the cart.
 A new order is created in the Orders table. The foreign key userId links this order back to the User table.
@@ -91,9 +98,13 @@ Create the OrderDetail model in a separate file, with the qty field included. Th
 Product.belongsToMany(Order, {through: OrderDetail})
 Order.belongsToMany(Product, {through: OrderDetail})
 
-OrderDetail also needs ttal price per product. This makes it so that when you update the price in your Product model, you can see the historical price.
+OrderDetail also needs total price per product. This makes it so that when you update the price in your Product model, you can see the historical price.
 
 Can do the qty * price multiplication in an instance method on the backend, or some other way.
 DO NOT do it on the frontend! Will slow it down if site scales.
+
+Rule of thumb for what goes inside a through table:
+- Is this type of data exclusive to one table or another?
+For the OrderDetail through table, qty and price are related to Order and Product.
 
 */
