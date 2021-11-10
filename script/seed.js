@@ -1,34 +1,57 @@
-'use strict'
+"use strict";
 
-const {db, models: {User, Product, Order}} = require('../server/db')
+const {
+  db,
+  models: { User, Product, Order },
+} = require("../server/db");
 
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
 async function seed() {
-  await db.sync({ force: true }) // clears db and matches models to tables
-  console.log('db synced!')
+  await db.sync({ force: true }); // clears db and matches models to tables
+  console.log("db synced!");
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ email: 'grace@oiishi.com', password: '123' }),
-    User.create({ email: 'boxu@oiishi.com', password: '123' }),
-    User.create({ email: 'sen@oiishi.com', password: '123' }),
-    User.create({ email: 'courtney@oiishi.com', password: '123' }),
-  ])
+    User.create({ email: "grace@oiishi.com", password: "123" }),
+    User.create({ email: "boxu@oiishi.com", password: "123" }),
+    User.create({ email: "sen@oiishi.com", password: "123" }),
+    User.create({ email: "courtney@oiishi.com", password: "123" }),
+  ]);
 
   const products = await Promise.all([
-    Product.create({ name: 'Matcha Pocky', price: 12.99, quantity: 99, description: 'A box of delicious Pocky', imageUrl: 'https://images.heb.com/is/image/HEBGrocery/001779488' }),
-    Product.create({ name: 'Taiyaki', price: 7.99, quantity: 85, description:'Matcha Ice Cream and Red bean paste what more do you want', imageUrl: 'https://cdn.vox-cdn.com/thumbor/J8AtwCpBgNuGtHH3uvn3J1KI8yI=/0x120:960x840/1400x1400/filters:focal(0x120:960x840):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/51047099/14333641_175488296188873_4191830636852674148_n.0.jpg'}),
-    Product.create({ name: 'Sakura Pocky', price: 8.99, quantity: 90, description: 'A box of delicious Sakura Pocky', imageUrl:'https://scstore.com.my/wp-content/uploads/2020/07/Untitled-design-20.jpg'})
-  ])
+    Product.create({
+      name: "Matcha Pocky",
+      price: 12.99,
+      quantity: 99,
+      description: "A box of delicious Pocky",
+      imageUrl: "https://images.heb.com/is/image/HEBGrocery/001779488",
+    }),
+    Product.create({
+      name: "Taiyaki",
+      price: 7.99,
+      quantity: 85,
+      description: "Matcha Ice Cream and Red bean paste what more do you want",
+      imageUrl:
+        "https://cdn.vox-cdn.com/thumbor/J8AtwCpBgNuGtHH3uvn3J1KI8yI=/0x120:960x840/1400x1400/filters:focal(0x120:960x840):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/51047099/14333641_175488296188873_4191830636852674148_n.0.jpg",
+    }),
+    Product.create({
+      name: "Sakura Pocky",
+      price: 8.99,
+      quantity: 90,
+      description: "A box of delicious Sakura Pocky",
+      imageUrl:
+        "https://scstore.com.my/wp-content/uploads/2020/07/Untitled-design-20.jpg",
+    }),
+  ]);
 
-  await users[0].createOrder({productId: 1, quantity: 10})
-  await users[1].createOrder({productId: 2, quantity: 10})
-  await users[2].createOrder({productId: 2, quantity: 10})
-  await users[3].createOrder({productId: 3, quantity: 10})
-  await users[3].createOrder({productId: 1, quantity: 10})
+  await users[0].createOrder({ productId: 1, quantity: 10 });
+  await users[1].createOrder({ productId: 2, quantity: 10 });
+  await users[2].createOrder({ productId: 2, quantity: 10 });
+  await users[3].createOrder({ productId: 3, quantity: 10 });
+  await users[3].createOrder({ productId: 1, quantity: 10 });
 
   // const queryInterface = db.getQueryInterface();
   //   const now = new Date();
@@ -41,12 +64,12 @@ async function seed() {
   //     { createdAt: now, updatedAt: now, userId: 4, productId: 2, quantity: 20},
   //   ]);
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
+  console.log(`seeded ${users.length} users`);
+  console.log(`seeded successfully`);
   return {
     users,
     products,
-  }
+  };
 }
 
 /*
@@ -55,16 +78,16 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-  console.log('seeding...')
+  console.log("seeding...");
   try {
-    await seed()
+    await seed();
   } catch (err) {
-    console.error(err)
-    process.exitCode = 1
+    console.error(err);
+    process.exitCode = 1;
   } finally {
-    console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
+    console.log("closing db connection");
+    await db.close();
+    console.log("db connection closed");
   }
 }
 
@@ -74,12 +97,11 @@ async function runSeed() {
   any errors that might occur inside of `seed`.
 */
 if (module === require.main) {
-  runSeed()
+  runSeed();
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
-
+module.exports = seed;
 
 /*
 
