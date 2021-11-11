@@ -26,74 +26,73 @@ async function seed() {
       name: "Matcha Pocky",
       price: 13,
       quantity: 99,
-      description: "A box of delicious Pocky",
+      description:
+        "The perfect balance of high-quality, matcha green tea cream and the crunch of the crispy cookie biscuit stick make it the perfect every-day snack. Pocky is all about sharing happiness with friends, family and co-workers.",
       imageUrl: "https://images.heb.com/is/image/HEBGrocery/001779488",
     }),
     Product.create({
-      name: "Taiyaki",
+      name: "Taiyaki Ice Cream",
       price: 8,
       quantity: 85,
-      description: "Matcha Ice Cream and Red bean paste what more do you want",
+      description:
+        "This cute fish shaped biscuit (similar texture to an ice cream cone) is very crispy and has an airy chocolate filling. A nice light snack and not too sweet.",
       imageUrl:
-        "https://cdn.vox-cdn.com/thumbor/J8AtwCpBgNuGtHH3uvn3J1KI8yI=/0x120:960x840/1400x1400/filters:focal(0x120:960x840):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/51047099/14333641_175488296188873_4191830636852674148_n.0.jpg",
+        "https://www.imuraya-group.com/english/information/global_activities/images/global_img08.jpg",
     }),
     Product.create({
       name: "Sakura Pocky",
       price: 9,
       quantity: 90,
-      description: "A box of delicious Sakura Pocky",
+      description:
+        "The buttery biscuit is dipped in a pale pink white chocolate flavored with real sakura cherry blossoms. The blossoms are preserved with salt, adding brightness to the sweet chocolate, and are blended into a powder to infuse the chocolate with flavor. This classic Japanese flavor is perfect for enjoying under the spring flowers. ",
       imageUrl:
         "https://scstore.com.my/wp-content/uploads/2020/07/Untitled-design-20.jpg",
     }),
 
     Product.create({
       name: "Hello Panda Chocolate Biscuit",
-      price: 5.99,
+      price: 5,
       quantity: 50,
-      description: "A box of adorable and yummy panda biscuits.",
+      description:
+        "For a yummy snack you can take with you on the go, reach for these Hello Panda Choco Cream Biscuits from Meiji. These biscuit cookies feature a creamy chocolate center. Stash them in your bag for a little pick-me-up or add to your child's lunch box for a sweet treat.",
       imageUrl:
         "https://target.scene7.com/is/image/Target/GUEST_083453b0-bd17-48bb-a9b6-02d4546afa66",
     }),
     Product.create({
       name: "Daisuki Pikachu Gummies",
-      price: 3.99,
+      price: 3,
       quantity: 50,
       description:
-        "A bag of grape-flavored gummy candies in the shape of your favorite Pokémon, Pikachu.",
+        "Perfect for Pikachu and Pokemon lovers, these gummies feature various Pikachu shaped gummies including his cute face, tail, and more! They are almost too cute to eat, but with a yummy aroma and the sweetness of real grape juice, they are irresistible!",
       imageUrl:
         "https://meccha-japan.com/138004-large_default/gummies-daisuki-pikachu-lotte.jpg",
     }),
     Product.create({
       name: "Milk Tea Kit Kat",
-      price: 7.99,
+      price: 7,
       quantity: 50,
-      description: "A bag of milk tea Kit Kats - perfect for a tea party!",
+      description:
+        "Nestle Japan's newest creation is a royal favorite, Milk Tea! The cream is kneaded with milk tea flavored chocolate, and tea powder is sandwiched into the wafer. Together they created a delicious treat that tastes just like Royal Milk Tea.",
       imageUrl:
         "https://meccha-japan.com/169160-large_default/kit-kat-milk-tea-nestle-japan.jpg",
     }),
     Product.create({
       name: "Chocolate Potato Chips",
-      price: 5.99,
+      price: 5,
       quantity: 50,
-      description: "Your two favorite loves in one snack!",
-      imageUrl:
-        "https://meccha-japan.com/169055-large_default/potato-chips-zeitaku-chocolate-calbee.jpg",
-    }),
-    Product.create({
-      name: "Chocolate Potato Chips",
-      price: 3.99,
-      quantity: 50,
-      description: "Your two favorite loves in one snack!",
+      description:
+        "Enjoy the luxurious taste of rich 'Zaitaku' chocolate drizzled over thick, delicious ripple potato chips. World famous Lorraine rock salt is used to make the brilliant flavor combination. Calbee has been pleasing mouths in Japan for some time. A perfect snack with just the right amount of crunch, saltiness, and sweetness.",
       imageUrl:
         "https://meccha-japan.com/169055-large_default/potato-chips-zeitaku-chocolate-calbee.jpg",
     }),
     Product.create({
       name: "Chocolate Strawberry Apollo",
-      price: 2.99,
+      price: 2,
       quantity: 50,
       description:
-        "A box of creamy bite-sized chocolates with sweet strawberry flavor.",
-      imageUrl: "https://m.media-amazon.com/images/I/61MKyXmKk3L._SL1500_.jpg",
+        "These delicious bite-sized, cone shaped chocolates with strawberry tips and milk chocolate bases are a staple in the Japanese confectionery scene. Meiji is one of the finest mass-produced chocolate makers in Japan.",
+      imageUrl:
+        "https://cdn.shopify.com/s/files/1/0561/3553/products/JP-656_x700.jpg?v=1575122802",
     }),
   ]);
 

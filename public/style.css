@@ -19,3 +19,9 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.single-product-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 50px;
+}
