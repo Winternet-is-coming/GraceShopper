@@ -24,7 +24,7 @@ export class AllProducts extends React.Component {
 }
 
 const mapState = (state) => {
-  return { products: state.products };
+  return { products: state.products.allProducts };
 };
 
 const mapDispatch = (dispatch) => {

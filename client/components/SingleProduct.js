@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchProduct } from "../store/singleProduct";
+import { fetchSingleProduct } from "../store/products";
 
 class SingleProduct extends Component {
   componentDidMount() {
@@ -26,13 +26,13 @@ class SingleProduct extends Component {
 
 const mapState = (state) => {
   return {
-    product: state.product,
+    product: state.products.singleProduct,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchProduct: (id) => dispatch(fetchProduct(id)),
+    fetchProduct: (id) => dispatch(fetchSingleProduct(id)),
   };
 };
 
