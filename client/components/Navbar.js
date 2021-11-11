@@ -27,7 +27,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
   <ThemeProvider theme={theme}>
     <div>
       <h1>Oishii</h1>
-      <AppBar>
+      <AppBar style={{ backgroundColor: "slategray" }}>
         <ToolBar>
           <IconButton></IconButton>
           <Typography variant="h6">Oishii</Typography>
