@@ -15,9 +15,9 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ email: "grace@oishii.com", password: "123" }),
-    User.create({ email: "boxu@oishii.com", password: "123" }),
-    User.create({ email: "sen@oishii.com", password: "123" }),
+    User.create({ email: "grace@oishii.com", password: "123"}),
+    User.create({ email: "boxu@oishii.com", password: "123"}),
+    User.create({ email: "sen@oishii.com", password: "123", isAdmin: true}),
     User.create({ email: "courtney@oishii.com", password: "123" }),
   ]);
 
@@ -97,11 +97,11 @@ async function seed() {
     }),
   ]);
 
-  await users[0].createOrder({ productId: 1, quantity: 10 });
-  await users[1].createOrder({ productId: 2, quantity: 10 });
-  await users[2].createOrder({ productId: 2, quantity: 10 });
-  await users[3].createOrder({ productId: 3, quantity: 10 });
-  await users[3].createOrder({ productId: 1, quantity: 10 });
+  await users[0].createOrder(Order, { productId: 1, quantity: 10 });
+  await users[1].createOrder(Order, { productId: 2, quantity: 10 });
+  await users[2].createOrder(Order, { productId: 2, quantity: 10 });
+  await users[3].createOrder(Order, { productId: 3, quantity: 10 });
+  await users[3].createOrder(Order, { productId: 1, quantity: 10 });
 
   // const queryInterface = db.getQueryInterface();
   //   const now = new Date();
