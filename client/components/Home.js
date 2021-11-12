@@ -125,7 +125,6 @@ export const Home = (props) => {
       <Box
         fixed
         sx={{
-          marginBottom: 10,
           display: "flex",
         }}
       >
