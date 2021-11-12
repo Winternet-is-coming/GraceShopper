@@ -3,29 +3,72 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div>
-    <h1>Oishii</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
-);
+//Material UI
+import ShoppingCart from "@material-ui/icons/ShoppingCart";
+import AppBar from "@material-ui/core/AppBar";
+import ToolBar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import {
+  makeStyles,
+  ThemeProvider,
+  createTheme,
+} from "@material-ui/core/styles";
+import { CssBaseline } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  header: {
+    backgroundColor: "pink",
+    color: "black",
+    margin: 0,
+  },
+  tool: {
+    flexGrow: 1,
+  },
+});
+
+function Navbar({ handleClick, isLoggedIn }) {
+  const classes = useStyles();
+
+  return (
+    <div>
+      <CssBaseline>
+        <AppBar position="sticky" className={classes.header}>
+          <ToolBar>
+            <Typography variant="h6" className={classes.tool}>
+              Oishii
+            </Typography>
+            {isLoggedIn ? (
+              <div>
+                {/* The navbar will show these links after you log in */}
+                <Button>
+                  <Link to="/home">Home</Link>
+                </Button>
+                <Button>
+                  <a href="#" onClick={handleClick}>
+                    Logout
+                  </a>
+                </Button>
+              </div>
+            ) : (
+              <div>
+                {/* The navbar will show these links before you log in */}
+                <Button>
+                  <Link to="/login">Login</Link>
+                </Button>
+                <Button>
+                  <Link to="/signup">Sign Up</Link>
+                </Button>
+              </div>
+            )}
+            <ShoppingCart />
+          </ToolBar>
+        </AppBar>
+      </CssBaseline>
+    </div>
+  );
+}
 
 /**
  * CONTAINER

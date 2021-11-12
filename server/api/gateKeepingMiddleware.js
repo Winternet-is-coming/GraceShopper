@@ -13,14 +13,15 @@ const requireToken = async (req, res, next) => {
 }
 
 const isAdmin = (req, res, next) => {
-  if (!req.user.isAdmin) {
-    return res.status(403).send("Permission denied")
-  } else {
-    next()
-  }
-}
+	if (!req.user.isAdmin) {
+		return res.status(403).send('Permission denied');
+	} else {
+		next();
+	}
+};
 
 module.exports = {
-  requireToken,
-  isAdmin
-}
+	requireToken,
+	isAdmin,
+
+};
