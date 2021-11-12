@@ -1,10 +1,12 @@
-const { models: { User }} = require('../db/models/User.js')
+const { models: { User } } = require('../db')
 
 const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization
+    console.log(token)
     const user = await User.findByToken(token)
     req.user = user
+    next();
   } catch (e) {
       next(e)
   }

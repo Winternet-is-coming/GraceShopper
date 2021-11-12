@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom"
 import { authenticate } from "../store";
 
 /**
@@ -7,29 +8,60 @@ import { authenticate } from "../store";
  */
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
-
-  return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
+  console.log(props)
+  if (props.name === "signup") {
+    return (
+      <div>
+        <form onSubmit={handleSubmit} name={name}>
+          <div>
+            <label htmlFor="email">
+              <small>Email</small>
+            </label>
+            <input name="email" type="text" />
+          </div>
+          <div>
+            <label htmlFor="password">
+              <small>Password</small>
+            </label>
+            <input name="password" type="password" />
+          </div>
+          <div>
+            <button type="submit">{displayName}</button>
+          </div>
+          {error && error.response && <div> {error.response.data} </div>}
+          <div>
+            Already have an account? Login <Link to="/login">here</Link>.
+          </div>
+        </form>
+      </div>
+    );
+  } else {
+      return (
         <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
+          <form onSubmit={handleSubmit} name={name}>
+            <div>
+              <label htmlFor="email">
+                <small>Email</small>
+              </label>
+              <input name="email" type="text" />
+            </div>
+            <div>
+              <label htmlFor="password">
+                <small>Password</small>
+              </label>
+              <input name="password" type="password" />
+            </div>
+            <div>
+              <button type="submit">{displayName}</button>
+            </div>
+            {error && error.response && <div> {error.response.data} </div>}
+            <div>
+              Don't have an account? <Link to="/signup">Sign up!</Link>
+            </div>
+          </form>
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-    </div>
-  );
+      )
+    }
 };
 
 /**

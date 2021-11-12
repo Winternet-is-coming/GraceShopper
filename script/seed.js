@@ -48,7 +48,7 @@ async function seed() {
 
     Product.create({
       name: "Hello Panda Chocolate Biscuit",
-      price: 5.99,
+      price: 6,
       quantity: 50,
       description: "A box of adorable and yummy panda biscuits.",
       imageUrl:
@@ -56,7 +56,7 @@ async function seed() {
     }),
     Product.create({
       name: "Daisuki Pikachu Gummies",
-      price: 3.99,
+      price: 4,
       quantity: 50,
       description:
         "A bag of grape-flavored gummy candies in the shape of your favorite Pokémon, Pikachu.",
@@ -65,7 +65,7 @@ async function seed() {
     }),
     Product.create({
       name: "Milk Tea Kit Kat",
-      price: 7.99,
+      price: 8,
       quantity: 50,
       description: "A bag of milk tea Kit Kats - perfect for a tea party!",
       imageUrl:
@@ -73,15 +73,16 @@ async function seed() {
     }),
     Product.create({
       name: "Chocolate Potato Chips",
-      price: 5.99,
+      price: 6,
       quantity: 50,
       description: "Your two favorite loves in one snack!",
       imageUrl:
         "https://meccha-japan.com/169055-large_default/potato-chips-zeitaku-chocolate-calbee.jpg",
     }),
+    // two of the same here?
     Product.create({
       name: "Chocolate Potato Chips",
-      price: 3.99,
+      price: 4,
       quantity: 50,
       description: "Your two favorite loves in one snack!",
       imageUrl:
@@ -89,7 +90,7 @@ async function seed() {
     }),
     Product.create({
       name: "Chocolate Strawberry Apollo",
-      price: 2.99,
+      price: 3,
       quantity: 50,
       description:
         "A box of creamy bite-sized chocolates with sweet strawberry flavor.",
@@ -97,11 +98,11 @@ async function seed() {
     }),
   ]);
 
-  await users[0].createOrder(Order, { productId: 1, quantity: 10 });
-  await users[1].createOrder(Order, { productId: 2, quantity: 10 });
-  await users[2].createOrder(Order, { productId: 2, quantity: 10 });
-  await users[3].createOrder(Order, { productId: 3, quantity: 10 });
-  await users[3].createOrder(Order, { productId: 1, quantity: 10 });
+  // await users[0].createOrder(Order, { productId: 1, quantity: 10 });
+  // await users[1].createOrder(Order, { productId: 2, quantity: 10 });
+  // await users[2].createOrder(Order, { productId: 2, quantity: 10 });
+  // await users[3].createOrder(Order, { productId: 3, quantity: 10 });
+  // await users[3].createOrder(Order, { productId: 1, quantity: 10 });
 
   // const queryInterface = db.getQueryInterface();
   //   const now = new Date();
