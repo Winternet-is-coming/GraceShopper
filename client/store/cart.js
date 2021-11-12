@@ -2,6 +2,7 @@ import axios from "axios";
 //action type
 const SET_CART = "SET_CART";
 const DELETE_FROM_CART = "DELETE_FROM_CART";
+const CHANGE_QUANTITY = "CHANGE_QUANTITY";
 
 //action creator
 export const setCART = (cart) => {
@@ -14,6 +15,13 @@ export const setCART = (cart) => {
 const _deleteFromCart = (product) => {
   return {
     type: DELETE_FROM_CART,
+    product,
+  };
+};
+
+const _changeQuantity = (product) => {
+  return {
+    type: CHANGE_QUANTITY,
     product,
   };
 };
@@ -33,11 +41,9 @@ export const fetchCart = (userId) => {
 export const deleteFromCart = (userId, productId, history) => {
   return async (dispatch) => {
     try {
-      // console.log("history from thunk:", history);
       const { data: product } = await axios.delete(
         `/api/cart/${userId}/${productId}`
       );
-      console.log("product from thunk:", product);
       dispatch(_deleteFromCart(product));
       // history.push(`/cart/${userId}`);
     } catch (e) {
@@ -45,6 +51,21 @@ export const deleteFromCart = (userId, productId, history) => {
     }
   };
 };
+
+export const changeQuantity = (userId, productId, newQuantity) => {
+  return async (dispatch) => {
+    try {
+      const { data: product } = await axios.post(
+        `/api/cart/${userId}/${productId}`,
+        { data: { newQuantity } }
+      );
+      dispatch(_changeQuantity(product));
+    } catch (e) {
+      console.log("There was an issue with changing quantity in the cart:", e);
+    }
+  };
+};
+
 // export const addToCart = () => {};
 
 export default function cartReducer(state = [], action) {
@@ -54,6 +75,13 @@ export default function cartReducer(state = [], action) {
     case DELETE_FROM_CART:
       return state.filter((cartItem) => {
         return cartItem.product.id !== action.product.productId;
+      });
+    case CHANGE_QUANTITY:
+      return state.map((cartItem) => {
+        if (cartItem.product.id === action.product.productId) {
+          cartItem.product.quantity = action.product.quantity;
+        }
+        return cartItem;
       });
     default:
       return state;

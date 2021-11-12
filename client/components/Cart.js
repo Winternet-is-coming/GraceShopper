@@ -15,6 +15,8 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ButtonGroup from "@mui/material/ButtonGroup";
 
+import { changeQuantity } from "../store/cart";
+
 <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -23,10 +25,19 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 class Cart extends Component {
   constructor() {
     super();
+    this.changeQuantity = this.changeQuantity.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchCart(this.props.match.params.userId);
+  }
+
+  changeQuantity(productId, newQuantity) {
+    this.props.changeQuantity(
+      this.props.match.params.userId,
+      productId,
+      newQuantity
+    );
   }
 
   render() {
@@ -64,12 +75,24 @@ class Cart extends Component {
 
               <ButtonGroup>
                 <Tooltip title="Decrease">
-                  <Button aria-label="reduce">
+                  <Button
+                    aria-label="reduce"
+                    onClick={() => {
+                      order.quantity--;
+                      this.changeQuantity(order.product.id, order.quantity);
+                    }}
+                  >
                     <RemoveIcon fontSize="small" />
                   </Button>
                 </Tooltip>
                 <Tooltip title="Increase">
-                  <Button aria-label="increase">
+                  <Button
+                    aria-label="increase"
+                    onClick={() => {
+                      order.quantity++;
+                      this.changeQuantity(order.product.id, order.quantity);
+                    }}
+                  >
                     <AddIcon fontSize="small" />
                   </Button>
                 </Tooltip>
@@ -91,6 +114,8 @@ const mapDispatch = (dispatch) => {
     fetchCart: (userId) => dispatch(fetchCart(userId)),
     deleteFromCart: (userId, productId, history) =>
       dispatch(deleteFromCart(userId, productId, history)),
+    changeQuantity: (userId, productId, newQuantity) =>
+      dispatch(changeQuantity(userId, productId, newQuantity)),
   };
 };
 

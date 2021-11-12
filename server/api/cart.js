@@ -49,3 +49,24 @@ router.delete("/:userId/:productId", async (req, res, next) => {
     next(e);
   }
 });
+
+router.post("/:userId/:productId", async (req, res, next) => {
+  try {
+    const product = await Order_Products.findOne({
+      include: {
+        model: Order,
+        where: {
+          userId: req.params.userId,
+        },
+        attributes: [],
+      },
+      where: {
+        productId: req.params.productId,
+      },
+    });
+
+    await product.update({ quantity: req.body.data.newQuantity });
+  } catch (e) {
+    next(e);
+  }
+});
