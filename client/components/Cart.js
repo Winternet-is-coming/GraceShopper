@@ -53,7 +53,7 @@ class Cart extends Component {
   changeQuantity(productId, newQuantity) {
     if (newQuantity === 0) {
       this.handleDelete(productId);
-      console.log("changed cart:", this.props.cart);
+      // console.log("changed cart:", this.props.cart);
     } else {
       this.props.changeQuantity(
         this.props.match.params.userId,
@@ -69,9 +69,9 @@ class Cart extends Component {
   render() {
     const cart = this.props.cart;
 
-    console.log("props:", this.props);
-    console.log("cart:", cart);
-    console.log("state:", this.state);
+    // console.log("props:", this.props);
+    // console.log("cart:", cart);
+    // console.log("state:", this.state);
 
     return (
       <div>
