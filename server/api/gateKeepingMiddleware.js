@@ -21,4 +21,5 @@ const isAdmin = (req, res, next) => {
 module.exports = {
 	requireToken,
 	isAdmin,
+
 };

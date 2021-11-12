@@ -1,6 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchProduct } from "../store/singleProduct";
+import { fetchSingleProduct } from "../store/products";
+import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@material-ui/core/Button";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import { styled } from "@mui/material/styles";
+
+const Root = styled("div")(({ theme }) => ({
+  width: "90%",
+  margin: "auto",
+  ...theme.typography.body2,
+  "& > :not(style) + :not(style)": {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 class SingleProduct extends Component {
   componentDidMount() {
@@ -11,28 +27,40 @@ class SingleProduct extends Component {
     const { product } = this.props;
 
     return (
-      <div className="single-product-container">
-        <img src={product.imageUrl} style={{ width: 300 }} />
-        <div className="single-product-details">
-          <p>{product.name}</p>
-          <p>{product.description}</p>
-          <p>${product.price}</p>
-          <button>Add to Cart</button>
+      <Container fixed>
+        <div className="single-product-container">
+          <Card sx={{ width: 550, minHeight: 400, padding: 5 }}>
+            <Root>
+              <Typography variant="h4">{product.name}</Typography>
+              <Divider>Product Details</Divider>
+              <Typography variant="body2">{product.description}</Typography>
+              <Divider />
+              <Typography variant="body2">$ {product.price}</Typography>
+              <Box textAlign="center">
+                <Button variant="contained">Add to Cart</Button>
+              </Box>
+            </Root>
+          </Card>
+
+          <img
+            src={product.imageUrl}
+            style={{ maxWidth: 600, maxHeight: 500 }}
+          />
         </div>
-      </div>
+      </Container>
     );
   }
 }
 
 const mapState = (state) => {
   return {
-    product: state.product,
+    product: state.products.singleProduct,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchProduct: (id) => dispatch(fetchProduct(id)),
+    fetchProduct: (id) => dispatch(fetchSingleProduct(id)),
   };
 };
 
