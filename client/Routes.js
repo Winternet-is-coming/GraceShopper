@@ -8,6 +8,7 @@ import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import Cart from './components/Cart';
 
+
 /**
  * COMPONENT
  */
@@ -15,6 +16,7 @@ class Routes extends Component {
 	componentDidMount() {
 		this.props.loadInitialData();
 	}
+
 
 	render() {
 		const {isLoggedIn} = this.props;
