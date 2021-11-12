@@ -15,53 +15,60 @@ import {
   ThemeProvider,
   createTheme,
 } from "@material-ui/core/styles";
-import { B0BEC5 } from "@material-ui/core/colors";
-//MUI Theme
-const theme = createTheme({
-  palette: {
-    main: B0BEC5,
+import { CssBaseline } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  header: {
+    backgroundColor: "pink",
+    color: "black",
+    margin: 0,
+  },
+  tool: {
+    flexGrow: 1,
   },
 });
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
-  <ThemeProvider theme={theme}>
-    <div>
-      <h1>Oishii</h1>
-      <AppBar style={{ backgroundColor: "slategray" }}>
-        <ToolBar>
-          <IconButton></IconButton>
-          <Typography variant="h6">Oishii</Typography>
-          {isLoggedIn ? (
-            <div>
-              {/* The navbar will show these links after you log in */}
-              <Button>
-                <Link to="/home">Home</Link>
-              </Button>
-              <Button>
-                <a href="#" onClick={handleClick}>
-                  Logout
-                </a>
-              </Button>
-            </div>
-          ) : (
-            <div>
-              {/* The navbar will show these links before you log in */}
-              <Button>
-                <Link to="/login">Login</Link>
-              </Button>
-              <Button>
-                <Link to="/signup">Sign Up</Link>
-              </Button>
-            </div>
-          )}
-          <ShoppingCart />
-        </ToolBar>
-      </AppBar>
+function Navbar({ handleClick, isLoggedIn }) {
+  const classes = useStyles();
 
-      <hr />
+  return (
+    <div>
+      <CssBaseline>
+        <AppBar position="sticky" className={classes.header}>
+          <ToolBar>
+            <Typography variant="h6" className={classes.tool}>
+              Oishii
+            </Typography>
+            {isLoggedIn ? (
+              <div>
+                {/* The navbar will show these links after you log in */}
+                <Button>
+                  <Link to="/home">Home</Link>
+                </Button>
+                <Button>
+                  <a href="#" onClick={handleClick}>
+                    Logout
+                  </a>
+                </Button>
+              </div>
+            ) : (
+              <div>
+                {/* The navbar will show these links before you log in */}
+                <Button>
+                  <Link to="/login">Login</Link>
+                </Button>
+                <Button>
+                  <Link to="/signup">Sign Up</Link>
+                </Button>
+              </div>
+            )}
+            <ShoppingCart />
+          </ToolBar>
+        </AppBar>
+      </CssBaseline>
     </div>
-  </ThemeProvider>
-);
+  );
+}
 
 /**
  * CONTAINER

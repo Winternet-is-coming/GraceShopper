@@ -2,10 +2,10 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import Routes from "./Routes";
 import AllProducts from "./components/AllProducts";
+import AllCards from "./components/AllCards";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
 //Material UI
-import AllProductsMui from "./components/AllProductsMui";
 import Grid from "@material-ui/core/Grid";
 
 const App = () => {
@@ -18,9 +18,8 @@ const App = () => {
       <Navbar />
       <div>
         <Grid container justifyContent="center">
-          <Grid item>
-            <AllProductsMui />
-          </Grid>
+          <Grid item></Grid>
+          <AllProducts />
         </Grid>
       </div>
       <Routes />
