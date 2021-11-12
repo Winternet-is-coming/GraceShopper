@@ -11,7 +11,6 @@ import Grid from "@material-ui/core/Grid";
 
 import Footer from "./components/Footer";
 
-
 const App = () => {
   return (
     <div>
@@ -24,7 +23,6 @@ const App = () => {
       <div>
         <Grid container justifyContent="center">
           <Grid item></Grid>
-          <AllProducts />
         </Grid>
       </div>
 
