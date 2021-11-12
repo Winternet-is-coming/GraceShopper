@@ -1,12 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
-import { styled } from "@mui/material/styles";
 
 export const Home = (props) => {
   const { email } = props;
