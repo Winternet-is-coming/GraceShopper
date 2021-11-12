@@ -12,28 +12,150 @@ export const Home = (props) => {
   const { email } = props;
 
   return (
-    <Container fixed>
-      <CardMedia
-        component="img"
-        image="https://assets.epicurious.com/photos/59381e2ae468e80d4bf4d5b4/5:4/w_1300,h_1040,c_limit/Pocky.jpeg"
-        height="300"
-      />
-      <Typography variant="h4">Welcome</Typography>
-      <Divider>About Oishii</Divider>
-      <Typography variant="body2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </Typography>
-      <Divider>Our Products</Divider>
-      <Typography variant="body2" textAlign="center">
-        Product cards will go here
-      </Typography>
-    </Container>
+    <div>
+      {/* <Container fixed sx={{ marginBottom: 10 }}>
+        <CardMedia
+          component="img"
+          image="https://assets.epicurious.com/photos/59381e2ae468e80d4bf4d5b4/5:4/w_1300,h_1040,c_limit/Pocky.jpeg"
+          height="300"
+        />
+        <Typography variant="h4">Welcome</Typography>
+        <Divider>About Oishii</Divider>
+        <Typography variant="body2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </Typography>
+        <Divider>Our Products</Divider>
+        <Typography variant="body2" textAlign="center">
+          Product cards will go here
+        </Typography>
+      </Container> */}
+      <Box
+        sx={{
+          backgroundImage: 'url("/images/sakura-bg.jpg")',
+          height: 700,
+        }}
+      >
+        <Typography
+          variant="h3"
+          bgcolor="#ff8080"
+          color="white"
+          sx={{
+            position: "relative",
+            top: 100,
+            paddingLeft: 110,
+          }}
+        >
+          Welcome to Oishii
+        </Typography>
+
+        <Typography
+          variant="h4"
+          color="white"
+          sx={{
+            position: "relative",
+            top: 160,
+            paddingLeft: 130,
+          }}
+        >
+          adorable snacks
+        </Typography>
+
+        <Typography
+          variant="h4"
+          color="white"
+          sx={{
+            position: "relative",
+            top: 180,
+            paddingLeft: 125,
+          }}
+        >
+          at a delicious price
+        </Typography>
+      </Box>
+
+      <Box
+        fixed
+        sx={{
+          display: "flex",
+        }}
+      >
+        <img
+          src="https://assets.epicurious.com/photos/59381e2ae468e80d4bf4d5b4/5:4/w_1300,h_1040,c_limit/Pocky.jpeg"
+          style={{ width: "50%" }}
+        />
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: 10,
+            gap: 2,
+          }}
+        >
+          <Divider>About Oishii</Divider>
+          <Typography variant="body2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </Typography>
+        </Box>
+      </Box>
+
+      <Box
+        fixed
+        sx={{
+          marginBottom: 10,
+          display: "flex",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: 10,
+            gap: 2,
+          }}
+        >
+          <Divider>More Info</Divider>
+          <Typography variant="body2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </Typography>
+        </Box>
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/58fd82dbbf629ab224f81b68/1561008448509-USZXYK88MYA7WQLB4RJI/Japanese-Snacks.jpg"
+          style={{ width: "50%" }}
+        />
+      </Box>
+
+      <Box
+        sx={{
+          marginBottom: 20,
+        }}
+      >
+        <Divider>Our Products</Divider>
+        <Typography variant="body2" textAlign="center">
+          Product cards will go here
+        </Typography>
+      </Box>
+    </div>
   );
 };
 
