@@ -26,22 +26,37 @@ class Cart extends Component {
   constructor() {
     super();
     this.changeQuantity = this.changeQuantity.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchCart(this.props.match.params.userId);
   }
 
-  changeQuantity(productId, newQuantity) {
-    this.props.changeQuantity(
+  handleDelete(productId) {
+    this.props.deleteFromCart(
       this.props.match.params.userId,
       productId,
-      newQuantity
+      this.props.history
     );
+  }
+
+  changeQuantity(productId, newQuantity) {
+    if (newQuantity === 0) {
+      this.handleDelete(productId);
+    } else {
+      this.props.changeQuantity(
+        this.props.match.params.userId,
+        productId,
+        newQuantity
+      );
+    }
   }
 
   render() {
     const cart = this.props.cart;
+
+    console.log("cart:", cart);
 
     return (
       <div>
@@ -62,11 +77,7 @@ class Cart extends Component {
                 <IconButton
                   onClick={(event) => {
                     event.defaultMuiPrevented = true;
-                    this.props.deleteFromCart(
-                      this.props.match.params.userId,
-                      order.product.id,
-                      this.props.history
-                    );
+                    this.handleDelete(order.product.id);
                   }}
                 >
                   <DeleteIcon />
