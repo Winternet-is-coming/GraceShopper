@@ -46,38 +46,41 @@ describe("thunk creators", () => {
             getItem: () => {
               return "some-token";
             },
-            setItem: () => {},
-          },
-        };
-      });
-      it("eventually dispatches the SET_AUTH action", async () => {
-        const fakeUser = { email: "Cody" };
-        mockAxios.onGet("/auth/me").replyOnce(200, fakeUser);
-        await store.dispatch(me());
-        const actions = store.getActions();
-        expect(actions[0].type).to.be.equal("SET_AUTH");
-        expect(actions[0].auth).to.be.deep.equal(fakeUser);
-      });
-    });
-    describe("without valid token", () => {
+
+            setItem: () => {}
+          }
+        }
+      })
+      it('eventually dispatches the SET_AUTH action', async () => {
+        const fakeUser = {email: 'Cody'}
+        mockAxios.onGet('/auth/me').replyOnce(200, fakeUser)
+        await store.dispatch(me())
+        const actions = store.getActions()
+        expect(actions[0].type).to.be.equal('SET_AUTH')
+        expect(actions[0].auth).to.be.deep.equal(fakeUser)
+      })
+    })
+    describe('without valid token', () => {
+
       beforeEach(() => {
         global.window = {
           localStorage: {
             removeItem: () => {},
             getItem: () => {},
-            setItem: () => {},
-          },
-        };
-      });
-      it("does not dispatch GET USER action", async () => {
-        const fakeUser = { email: "Cody" };
-        mockAxios.onGet("/auth/me").replyOnce(200, fakeUser);
-        await store.dispatch(me());
-        const actions = store.getActions();
-        expect(actions.length).to.equal(0);
-      });
-    });
-  });
+            setItem: () => {}
+          }
+        }
+      })
+      it('does not dispatch GET USER action', async () => {
+        const fakeUser = {email: 'Cody'}
+        mockAxios.onGet('/auth/me').replyOnce(200, fakeUser)
+        await store.dispatch(me())
+        const actions = store.getActions()
+        expect(actions.length).to.equal(0)
+      })
+    })
+  })
+
 
   describe("logout", () => {
     it("logout: eventually dispatches the SET_AUTH action withan empty object", async () => {
