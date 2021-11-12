@@ -21,14 +21,16 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 />;
 
 class Cart extends Component {
+  constructor() {
+    super();
+  }
+
   componentDidMount() {
     this.props.fetchCart(this.props.match.params.userId);
   }
 
   render() {
     const cart = this.props.cart;
-
-    console.log("cart:", cart);
 
     return (
       <div>
@@ -47,7 +49,14 @@ class Cart extends Component {
             <CardActions>
               <Tooltip title="Delete">
                 <IconButton
-                  onClick={() => this.props.deleteFromCart(order.product.id)}
+                  onClick={(event) => {
+                    event.defaultMuiPrevented = true;
+                    this.props.deleteFromCart(
+                      this.props.match.params.userId,
+                      order.product.id,
+                      this.props.history
+                    );
+                  }}
                 >
                   <DeleteIcon />
                 </IconButton>
@@ -80,7 +89,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchCart: (userId) => dispatch(fetchCart(userId)),
-    deleteFromCart: (userId, productId) =>
+    deleteFromCart: (userId, productId, history) =>
       dispatch(deleteFromCart(userId, productId, history)),
   };
 };
