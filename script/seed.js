@@ -29,7 +29,7 @@ async function seed() {
 	const products = await Product.bulkCreate([
 		{
 			name: 'Matcha Pocky',
-			price: 13.5,
+			price: 1350 / 100,
 			quantity: 99,
 			description: 'A box of delicious Pocky',
 			imageUrl: 'https://images.heb.com/is/image/HEBGrocery/001779488',
