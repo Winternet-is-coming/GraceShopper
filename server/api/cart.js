@@ -29,7 +29,7 @@ router.get('/:userId', async (req, res, next) => {
 	}
 });
 
-router.get('/:userId/:productId', async (req, res, next) => {
+router.delete('/:userId/:productId', async (req, res, next) => {
 	try {
 		const product = await Order_Products.findOne({
 			include: {

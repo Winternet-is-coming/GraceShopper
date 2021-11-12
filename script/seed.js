@@ -29,14 +29,14 @@ async function seed() {
 	const products = await Product.bulkCreate([
 		{
 			name: 'Matcha Pocky',
-			price: 1350 / 100,
+			price: 1350,
 			quantity: 99,
 			description: 'A box of delicious Pocky',
 			imageUrl: 'https://images.heb.com/is/image/HEBGrocery/001779488',
 		},
 		{
 			name: 'Taiyaki',
-			price: 8,
+			price: 899,
 			quantity: 85,
 			description: 'Matcha Ice Cream and Red bean paste what more do you want',
 			imageUrl:
@@ -44,7 +44,7 @@ async function seed() {
 		},
 		{
 			name: 'Sakura Pocky',
-			price: 9,
+			price: 999,
 			quantity: 90,
 			description: 'A box of delicious Sakura Pocky',
 			imageUrl:
@@ -52,7 +52,7 @@ async function seed() {
 		},
 		{
 			name: 'Hello Panda Chocolate Biscuit',
-			price: 5.99,
+			price: 599,
 			quantity: 50,
 			description: 'A box of adorable and yummy panda biscuits.',
 			imageUrl:

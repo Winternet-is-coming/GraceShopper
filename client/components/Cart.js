@@ -9,6 +9,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+
 <link
 	rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -29,8 +30,8 @@ class Cart extends Component {
 						<CardContent key={cart.id}>
 							<img src={order.product.imageUrl} style={{width: 100}} />
 							<h4>{order.product.name}</h4>
-							<p>Price:{order.product.price}</p>
-							<p>Quantity:{order.quantity}</p>
+							<p>Price: $ {order.product.price / 100}</p>
+							<p>Quantity: {order.quantity}</p>
 						</CardContent>
 						<CardActions>
 							<Tooltip title="Delete">
