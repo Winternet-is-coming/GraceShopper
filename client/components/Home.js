@@ -39,43 +39,53 @@ export const Home = (props) => {
         sx={{
           backgroundImage: 'url("/images/sakura-bg.jpg")',
           height: 700,
+          textAlign: "right",
         }}
       >
+        <br />
         <Typography
           variant="h3"
           bgcolor="#ff8080"
           color="white"
           sx={{
-            position: "relative",
-            top: 100,
-            paddingLeft: 110,
+            marginTop: 5,
+            padding: 1,
+            paddingRight: 5,
           }}
         >
           Welcome to Oishii
         </Typography>
-
         <Typography
           variant="h4"
           color="white"
           sx={{
-            position: "relative",
-            top: 160,
-            paddingLeft: 130,
+            paddingTop: 5,
+            paddingRight: 5,
           }}
         >
           adorable snacks
         </Typography>
-
         <Typography
           variant="h4"
           color="white"
           sx={{
-            position: "relative",
-            top: 180,
-            paddingLeft: 125,
+            paddingTop: 3,
+            paddingRight: 5,
           }}
         >
           at a delicious price
+        </Typography>
+      </Box>
+
+      <Box
+        sx={{
+          marginBottom: 20,
+          marginTop: 10,
+        }}
+      >
+        <Divider>Our Products</Divider>
+        <Typography variant="body2" textAlign="center">
+          Product cards will go here
         </Typography>
       </Box>
 
@@ -143,17 +153,6 @@ export const Home = (props) => {
           src="https://images.squarespace-cdn.com/content/v1/58fd82dbbf629ab224f81b68/1561008448509-USZXYK88MYA7WQLB4RJI/Japanese-Snacks.jpg"
           style={{ width: "50%" }}
         />
-      </Box>
-
-      <Box
-        sx={{
-          marginBottom: 20,
-        }}
-      >
-        <Divider>Our Products</Divider>
-        <Typography variant="body2" textAlign="center">
-          Product cards will go here
-        </Typography>
       </Box>
     </div>
   );
