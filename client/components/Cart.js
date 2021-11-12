@@ -55,6 +55,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
 	return {
 		fetchCart: (userId) => dispatch(fetchCart(userId)),
+		deleteFromCart: (userId, productId) =>
+			dispatch(deleteFromCart(userId, productId, history)),
 	};
 };
 
