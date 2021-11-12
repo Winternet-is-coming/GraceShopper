@@ -77,14 +77,6 @@ async function seed() {
 		},
 		{
 			name: 'Chocolate Potato Chips',
-			price: 5.99,
-			quantity: 50,
-			description: 'Your two favorite loves in one snack!',
-			imageUrl:
-				'https://meccha-japan.com/169055-large_default/potato-chips-zeitaku-chocolate-calbee.jpg',
-		},
-		{
-			name: 'Chocolate Potato Chips',
 			price: 3.99,
 			quantity: 50,
 			description: 'Your two favorite loves in one snack!',
@@ -116,7 +108,7 @@ async function seed() {
 		{orderId: 2, productId: 6, quantity: 1},
 		{orderId: 2, productId: 7, quantity: 5},
 		{orderId: 2, productId: 8, quantity: 1},
-		{orderId: 2, productId: 9, quantity: 3},
+		{orderId: 2, productId: 1, quantity: 3},
 		{orderId: 3, productId: 1, quantity: 2},
 		{orderId: 3, productId: 2, quantity: 3},
 		{orderId: 3, productId: 3, quantity: 1},
@@ -125,7 +117,7 @@ async function seed() {
 		{orderId: 4, productId: 6, quantity: 6},
 		{orderId: 4, productId: 7, quantity: 1},
 		{orderId: 4, productId: 8, quantity: 2},
-		{orderId: 4, productId: 9, quantity: 1},
+		{orderId: 4, productId: 4, quantity: 1},
 	]);
 
 	// const products = await Promise.[
