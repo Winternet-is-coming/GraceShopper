@@ -1,27 +1,32 @@
-"use strict";
+'use strict';
 
 const {
-  db,
-  models: { User, Product, Order },
-} = require("../server/db");
+	db,
+	models: {User, Product, Order, Order_Products},
+} = require('../server/db');
 
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
 async function seed() {
-  await db.sync({ force: true }); // clears db and matches models to tables
-  console.log("db synced!");
+	await db.sync({force: true}); // clears db and matches models to tables
+	console.log('db synced!');
 
-  // Creating Users
-  const users = await Promise.all([
-    User.create({ email: "grace@oishii.com", password: "123" }),
-    User.create({ email: "boxu@oishii.com", password: "123" }),
-    User.create({ email: "sen@oishii.com", password: "123" }),
-    User.create({ email: "courtney@oishii.com", password: "123" }),
-  ]);
-
-  const products = await Promise.all([
+	// Creating Users
+	const users = await User.bulkCreate([
+		{email: 'grace@oishii.com', password: '123'},
+		{email: 'boxu@oishii.com', password: '123'},
+		{email: 'sen@oishii.com', password: '123'},
+		{email: 'courtney@oishii.com', password: '123'},
+	]);
+	// const users = await Promise.all([
+	// 	User.create({email: 'grace@oishii.com', password: '123'}),
+	// 	User.create({email: 'boxu@oishii.com', password: '123'}),
+	// 	User.create({email: 'sen@oishii.com', password: '123'}),
+	// 	User.create({email: 'courtney@oishii.com', password: '123'}),
+	// ]);
+	const products = await Promise.all([
     Product.create({
       name: "Matcha Pocky",
       price: 13,
@@ -95,30 +100,43 @@ async function seed() {
         "https://cdn.shopify.com/s/files/1/0561/3553/products/JP-656_x700.jpg?v=1575122802",
     }),
   ]);
+  
+	const orders = await Order.bulkCreate([
+		{userId: 1},
+		{userId: 2},
+		{userId: 3},
+		{userId: 4},
+	]);
 
-  await users[0].createOrder({ productId: 1, quantity: 10 });
-  await users[1].createOrder({ productId: 2, quantity: 10 });
-  await users[2].createOrder({ productId: 2, quantity: 10 });
-  await users[3].createOrder({ productId: 3, quantity: 10 });
-  await users[3].createOrder({ productId: 1, quantity: 10 });
+	const orderProducts = await Order_Products.bulkCreate([
+		{orderId: 1, productId: 1, quantity: 3},
+		{orderId: 1, productId: 2, quantity: 1},
+		{orderId: 1, productId: 3, quantity: 4},
+		{orderId: 1, productId: 4, quantity: 1},
+		{orderId: 2, productId: 5, quantity: 2},
+		{orderId: 2, productId: 6, quantity: 1},
+		{orderId: 2, productId: 7, quantity: 5},
+		{orderId: 2, productId: 8, quantity: 1},
+		{orderId: 2, productId: 1, quantity: 3},
+		{orderId: 3, productId: 1, quantity: 2},
+		{orderId: 3, productId: 2, quantity: 3},
+		{orderId: 3, productId: 3, quantity: 1},
+		{orderId: 3, productId: 4, quantity: 4},
+		{orderId: 4, productId: 5, quantity: 1},
+		{orderId: 4, productId: 6, quantity: 6},
+		{orderId: 4, productId: 7, quantity: 1},
+		{orderId: 4, productId: 8, quantity: 2},
+		{orderId: 4, productId: 4, quantity: 1},
+	]);
 
-  // const queryInterface = db.getQueryInterface();
-  //   const now = new Date();
-
-  //   await queryInterface.bulkInsert(Order, [
-  //     { createdAt: now, updatedAt: now, userId: 1, productId: 1, quantity: 10},
-  //     { createdAt: now, updatedAt: now, userId: 1, productId: 2, quantity: 5},
-  //     { createdAt: now, updatedAt: now, userId: 2, productId: 3, quantity: 2},
-  //     { createdAt: now, updatedAt: now, userId: 3, productId: 1, quantity: 10},
-  //     { createdAt: now, updatedAt: now, userId: 4, productId: 2, quantity: 20},
-  //   ]);
-
-  console.log(`seeded ${users.length} users`);
-  console.log(`seeded successfully`);
-  return {
-    users,
-    products,
-  };
+		console.log(`seeded ${users.length} users`);
+	console.log(`seeded successfully`);
+	return {
+		users,
+		products,
+		orders,
+		orderProducts,
+	};
 }
 
 /*
@@ -127,17 +145,17 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-  console.log("seeding...");
-  try {
-    await seed();
-  } catch (err) {
-    console.error(err);
-    process.exitCode = 1;
-  } finally {
-    console.log("closing db connection");
-    await db.close();
-    console.log("db connection closed");
-  }
+	console.log('seeding...');
+	try {
+		await seed();
+	} catch (err) {
+		console.error(err);
+		process.exitCode = 1;
+	} finally {
+		console.log('closing db connection');
+		await db.close();
+		console.log('db connection closed');
+	}
 }
 
 /*
@@ -146,7 +164,7 @@ async function runSeed() {
   any errors that might occur inside of `seed`.
 */
 if (module === require.main) {
-  runSeed();
+	runSeed();
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
