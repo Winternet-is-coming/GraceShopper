@@ -42,18 +42,28 @@ class Cart extends Component {
     }
   }
 
-  handleDelete(productId) {
+  handleDelete(productId, currentCart) {
     this.props.deleteFromCart(
       this.props.match.params.userId,
       productId,
       this.props.history
     );
+
+    // remove deleted product from local cart
+    currentCart = currentCart.filter((cartItem) => {
+      return cartItem.product.id !== productId;
+    });
+
+    this.setState({
+      cart: currentCart,
+    });
   }
 
   changeQuantity(productId, newQuantity, currentCart) {
     if (newQuantity === 0) {
-      this.handleDelete(productId);
+      this.handleDelete(productId, currentCart);
     } else {
+      // update quantity in db
       this.props.changeQuantity(
         this.props.match.params.userId,
         productId,
@@ -61,6 +71,7 @@ class Cart extends Component {
       );
     }
 
+    // update product quantity in cart
     currentCart = currentCart.map((cartItem) => {
       if (cartItem.product.id === productId) {
         cartItem.quantity = newQuantity;
@@ -68,10 +79,12 @@ class Cart extends Component {
       return cartItem;
     });
 
+    // filter out product with 0 quantity
     currentCart = currentCart.filter((cartItem) => {
       return cartItem.quantity >= 1;
     });
 
+    // update local state for re-render
     this.setState({
       cart: currentCart,
     });
@@ -97,9 +110,8 @@ class Cart extends Component {
             <CardActions>
               <Tooltip title="Delete">
                 <IconButton
-                  onClick={(event) => {
-                    event.defaultMuiPrevented = true;
-                    this.handleDelete(order.product.id);
+                  onClick={() => {
+                    this.handleDelete(order.product.id, cart);
                   }}
                 >
                   <DeleteIcon />
