@@ -50,10 +50,9 @@ class Cart extends Component {
     );
   }
 
-  changeQuantity(productId, newQuantity) {
+  changeQuantity(productId, newQuantity, currentCart) {
     if (newQuantity === 0) {
       this.handleDelete(productId);
-      // console.log("changed cart:", this.props.cart);
     } else {
       this.props.changeQuantity(
         this.props.match.params.userId,
@@ -61,13 +60,21 @@ class Cart extends Component {
         newQuantity
       );
     }
+
+    currentCart = currentCart.map((cartItem) => {
+      if (cartItem.product.id === productId) {
+        cartItem.quantity = newQuantity;
+      }
+      return cartItem;
+    });
+
     this.setState({
-      cart: this.props.cart,
+      cart: currentCart,
     });
   }
 
   render() {
-    const cart = this.props.cart;
+    const cart = this.state.cart || [];
 
     // console.log("props:", this.props);
     // console.log("cart:", cart);
@@ -104,8 +111,8 @@ class Cart extends Component {
                   <Button
                     aria-label="reduce"
                     onClick={() => {
-                      order.quantity--;
-                      this.changeQuantity(order.product.id, order.quantity);
+                      let newQuantity = order.quantity - 1;
+                      this.changeQuantity(order.product.id, newQuantity, cart);
                     }}
                   >
                     <RemoveIcon fontSize="small" />
@@ -115,8 +122,8 @@ class Cart extends Component {
                   <Button
                     aria-label="increase"
                     onClick={() => {
-                      order.quantity++;
-                      this.changeQuantity(order.product.id, order.quantity);
+                      let newQuantity = order.quantity + 1;
+                      this.changeQuantity(order.product.id, newQuantity, cart);
                     }}
                   >
                     <AddIcon fontSize="small" />
