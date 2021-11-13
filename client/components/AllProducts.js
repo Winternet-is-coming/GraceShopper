@@ -58,7 +58,7 @@ export class AllProducts extends React.Component {
                     </Grid>
 
                     <Grid container justifyContent="center">
-                      <Link to="/product/id">
+                      <Link to={`/products/${product.id}`}>
                         <Button variant="outlined" size="small">
                           View Details
                         </Button>
