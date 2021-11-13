@@ -68,6 +68,10 @@ class Cart extends Component {
       return cartItem;
     });
 
+    currentCart = currentCart.filter((cartItem) => {
+      return cartItem.quantity >= 1;
+    });
+
     this.setState({
       cart: currentCart,
     });
@@ -75,10 +79,6 @@ class Cart extends Component {
 
   render() {
     const cart = this.state.cart || [];
-
-    // console.log("props:", this.props);
-    // console.log("cart:", cart);
-    // console.log("state:", this.state);
 
     return (
       <div>
