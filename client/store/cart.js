@@ -79,7 +79,10 @@ export default function cartReducer(state = [], action) {
     case CHANGE_QUANTITY:
       const newState = state.map((cartItem) => {
         if (cartItem.product.id === action.product.productId) {
-          cartItem.product.quantity = action.product.quantity;
+          return {
+            ...cartItem,
+            quantity: action.product.quantity,
+          };
         }
         return cartItem;
       });

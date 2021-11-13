@@ -36,32 +36,17 @@ class Cart extends Component {
     this.props.fetchCart(this.props.match.params.userId);
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.cart.length > prevProps.cart.length) {
-      this.setState({ cart: this.props.cart });
-    }
-  }
-
-  handleDelete(productId, currentCart) {
+  handleDelete(productId) {
     this.props.deleteFromCart(
       this.props.match.params.userId,
       productId,
       this.props.history
     );
-
-    // remove deleted product from local cart
-    currentCart = currentCart.filter((cartItem) => {
-      return cartItem.product.id !== productId;
-    });
-
-    this.setState({
-      cart: currentCart,
-    });
   }
 
-  changeQuantity(productId, newQuantity, currentCart) {
+  changeQuantity(productId, newQuantity) {
     if (newQuantity === 0) {
-      this.handleDelete(productId, currentCart);
+      this.handleDelete(productId);
     } else {
       // update quantity in db
       this.props.changeQuantity(
@@ -70,28 +55,10 @@ class Cart extends Component {
         newQuantity
       );
     }
-
-    // update product quantity in cart
-    currentCart = currentCart.map((cartItem) => {
-      if (cartItem.product.id === productId) {
-        cartItem.quantity = newQuantity;
-      }
-      return cartItem;
-    });
-
-    // filter out product with 0 quantity
-    currentCart = currentCart.filter((cartItem) => {
-      return cartItem.quantity >= 1;
-    });
-
-    // update local state for re-render
-    this.setState({
-      cart: currentCart,
-    });
   }
 
   render() {
-    const cart = this.state.cart || [];
+    const cart = this.props.cart || [];
 
     return (
       <div>
@@ -112,7 +79,7 @@ class Cart extends Component {
                 <Tooltip title="Delete">
                   <IconButton
                     onClick={() => {
-                      this.handleDelete(order.product.id, cart);
+                      this.handleDelete(order.product.id);
                     }}
                   >
                     <DeleteIcon />
@@ -125,11 +92,7 @@ class Cart extends Component {
                       aria-label="reduce"
                       onClick={() => {
                         let newQuantity = order.quantity - 1;
-                        this.changeQuantity(
-                          order.product.id,
-                          newQuantity,
-                          cart
-                        );
+                        this.changeQuantity(order.product.id, newQuantity);
                       }}
                     >
                       <RemoveIcon fontSize="small" />
@@ -140,11 +103,7 @@ class Cart extends Component {
                       aria-label="increase"
                       onClick={() => {
                         let newQuantity = order.quantity + 1;
-                        this.changeQuantity(
-                          order.product.id,
-                          newQuantity,
-                          cart
-                        );
+                        this.changeQuantity(order.product.id, newQuantity);
                       }}
                     >
                       <AddIcon fontSize="small" />
