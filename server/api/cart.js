@@ -66,6 +66,8 @@ router.post("/:userId/:productId", async (req, res, next) => {
     });
 
     await product.update({ quantity: req.body.data.newQuantity });
+    console.log("done updating in db");
+    res.json(product);
   } catch (e) {
     next(e);
   }
