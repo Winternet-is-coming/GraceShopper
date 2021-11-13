@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
+// import ricebowl from "../assets/logo.png";
 
 //Material UI
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
@@ -25,6 +26,11 @@ const useStyles = makeStyles({
   tool: {
     flexGrow: 1,
   },
+  logo: {
+    width: 45,
+    height: 45,
+    marginRight: 10,
+  },
 });
 
 function Navbar({ handleClick, isLoggedIn }) {
@@ -35,6 +41,13 @@ function Navbar({ handleClick, isLoggedIn }) {
       <CssBaseline>
         <AppBar position="sticky" className={classes.header}>
           <ToolBar>
+            <Link to="/" className={classes.logo}>
+              <img
+                src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/15849/giant-panda-taiyaki-clipart-md.png"
+                className={classes.logo}
+              />
+            </Link>
+            {/* <img src={ricebowl} alt="logo" className={classes.logo} /> */}
             <Typography variant="h6" className={classes.tool}>
               Oishii
             </Typography>

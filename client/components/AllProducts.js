@@ -39,12 +39,12 @@ export class AllProducts extends React.Component {
                   <Root>
                     <Grid container justifyContent="center">
                       <CardMedia
-                        sx={{ height: 275, width: 300 }}
+                        sx={{ height: 255, width: 300 }}
                         component="img"
                         image={product.imageUrl}
                         alt="product-img"
                       />
-                      <Typography variant="h5">{product.name}</Typography>
+                      <Typography variant="h6">{product.name}</Typography>
 
                       {/* <CardContent>
                       <Typography variant="body2">
@@ -68,6 +68,7 @@ export class AllProducts extends React.Component {
                       <Button aligncontent="right">
                         <AddShoppingCartIcon />
                       </Button>
+                      <script type="module" src="/cart.js"></script>
                       {/* </Box> */}
                     </Grid>
                   </Root>
