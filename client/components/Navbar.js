@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
-// import ricebowl from "../assets/logo.png";
+import AllProducts from "./AllProducts";
 
 //Material UI
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
@@ -47,34 +47,41 @@ function Navbar({ handleClick, isLoggedIn }) {
                 className={classes.logo}
               />
             </Link>
-            {/* <img src={ricebowl} alt="logo" className={classes.logo} /> */}
             <Typography variant="h6" className={classes.tool}>
               Oishii
             </Typography>
             {isLoggedIn ? (
               <div>
                 {/* The navbar will show these links after you log in */}
-                <Button>
-                  <Link to="/home">Home</Link>
+                <Button color="inherit" href="/products">
+                  Snacks
                 </Button>
-                <Button>
-                  <a href="#" onClick={handleClick}>
-                    Logout
-                  </a>
+                <Button color="inherit" href="/home">
+                  Home
+                </Button>
+                <Button color="inherit" href="#" onClick={handleClick}>
+                  {/* <a href="#" onClick={handleClick}> */}
+                  Logout
+                  {/* </a> */}
                 </Button>
               </div>
             ) : (
               <div>
                 {/* The navbar will show these links before you log in */}
-                <Button>
-                  <Link to="/login">Login</Link>
+                <Button color="inherit" href="/products">
+                  Snacks
                 </Button>
-                <Button>
-                  <Link to="/signup">Sign Up</Link>
+                <Button color="inherit" href="/login">
+                  Login
+                </Button>
+                <Button color="inherit" href="/signup">
+                  Sign Up
                 </Button>
               </div>
             )}
-            <ShoppingCart />
+            <Button color="inherit" href="/cart/:userId">
+              <ShoppingCart />
+            </Button>
           </ToolBar>
         </AppBar>
       </CssBaseline>

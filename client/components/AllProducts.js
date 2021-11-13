@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
+import { Link } from "react-router-dom";
+import SingleProduct from "./SingleProduct";
+import Cart from "./Cart";
 
 //MUI Components
 import Container from "@material-ui/core/Container";
@@ -45,12 +48,6 @@ export class AllProducts extends React.Component {
                         alt="product-img"
                       />
                       <Typography variant="h6">{product.name}</Typography>
-
-                      {/* <CardContent>
-                      <Typography variant="body2">
-                        {product.description}
-                      </Typography> 
-                    </CardContent>*/}
                     </Grid>
 
                     <Divider />
@@ -61,12 +58,16 @@ export class AllProducts extends React.Component {
                     </Grid>
 
                     <Grid container justifyContent="center">
-                      <Button variant="outlined" size="small">
-                        View Details
-                      </Button>
+                      <Link to="/product/id">
+                        <Button variant="outlined" size="small">
+                          View Details
+                        </Button>
+                      </Link>
                       {/* <Box alignContent="center"> */}
                       <Button aligncontent="right">
-                        <AddShoppingCartIcon />
+                        <Link to="/cart/userId">
+                          <AddShoppingCartIcon />
+                        </Link>
                       </Button>
                       <script type="module" src="/cart.js"></script>
                       {/* </Box> */}
