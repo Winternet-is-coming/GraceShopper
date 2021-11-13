@@ -31,17 +31,15 @@ export class AllProducts extends React.Component {
   render() {
     return (
       <div className="all-products">
-        <Grid container spacing={1}>
+        <Grid justifyContent="center" container spacing={1}>
           {this.props.products.allProducts.map((product) => (
-            <Grid item key={product.id} xs={12} sm={2} md={3}>
-              <Card
-                sx={{ minWidth: 300, padding: 5, margin: 5, minHeight: 300 }}
-              >
+            <Grid item key={product.id}>
+              <Card sx={{ width: 325, padding: 5, margin: 5, height: 500 }}>
                 <div>
                   <Root>
                     <Grid container justifyContent="center">
                       <CardMedia
-                        sx={{ height: 300, width: 300 }}
+                        sx={{ height: 275, width: 300 }}
                         component="img"
                         image={product.imageUrl}
                         alt="product-img"
@@ -54,19 +52,23 @@ export class AllProducts extends React.Component {
                       </Typography> 
                     </CardContent>*/}
                     </Grid>
+
                     <Divider />
                     <Grid container justifyContent="center">
                       <Typography variant="body2">
                         ${product.price}.00
                       </Typography>
                     </Grid>
-                    <Grid item>
+
+                    <Grid container justifyContent="center">
                       <Button variant="outlined" size="small">
                         View Details
                       </Button>
-                      <CardContent>
+                      {/* <Box alignContent="center"> */}
+                      <Button aligncontent="right">
                         <AddShoppingCartIcon />
-                      </CardContent>
+                      </Button>
+                      {/* </Box> */}
                     </Grid>
                   </Root>
                 </div>
