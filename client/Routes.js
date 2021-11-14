@@ -7,8 +7,6 @@ import { me } from "./store";
 import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
 import Cart from "./components/Cart";
-import Footer from "./components/Footer";
-import BottomNavigation from "@mui/material/BottomNavigation";
 
 /**
  * COMPONENT
@@ -22,28 +20,24 @@ class Routes extends Component {
     const { isLoggedIn } = this.props;
 
     return (
-      <div>
-        <div style={{ height: "100vh" }}>
-          {isLoggedIn ? (
-            <Switch>
-              <Route exact path="/products" component={AllProducts} />
-              <Route exact path="/products/:id" component={SingleProduct} />
-              <Route path="/home" component={Home} />
-              <Route path="/cart/:userId" component={Cart} />
-              <Redirect to="/home" />
-            </Switch>
-          ) : (
-            <Switch>
-              <Route path="/" exact component={Login} />
-              <Route path="/home" component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/cart/:userId" component={Cart} />
-            </Switch>
-          )}
-        </div>
-
-        <Footer />
+      <div className="body-container">
+        {isLoggedIn ? (
+          <Switch>
+            <Route exact path="/products" component={AllProducts} />
+            <Route exact path="/products/:id" component={SingleProduct} />
+            <Route path="/home" component={Home} />
+            <Route path="/cart/:userId" component={Cart} />
+            <Redirect to="/home" />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route path="/" exact component={Login} />
+            <Route path="/home" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/cart/:userId" component={Cart} />
+          </Switch>
+        )}
       </div>
     );
   }
