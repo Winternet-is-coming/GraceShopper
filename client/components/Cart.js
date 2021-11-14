@@ -16,6 +16,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import ButtonGroup from "@mui/material/ButtonGroup";
 
 import EmptyCart from "./EmptyCart";
+import PageNotFound from "./PageNotFound";
 
 <link
   rel="stylesheet"
@@ -65,7 +66,7 @@ class Cart extends Component {
     if (authId && authId !== +userId) {
       // if there is an authId and it does not match id in URL
       // (a user is logged in but does not own this cart)
-      return <div>Page not found.</div>;
+      return <PageNotFound />;
     } else if (authId) {
       // if the authId does match
       return (
@@ -128,7 +129,7 @@ class Cart extends Component {
       );
     } else {
       // if there is no authId (not logged in)
-      return <div>Page not found.</div>;
+      return <PageNotFound />;
     }
   }
 }
