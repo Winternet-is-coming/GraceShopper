@@ -7,23 +7,25 @@ module.exports = router;
 
 router.get("/:userId", async (req, res, next) => {
   try {
-    const cart = await Order_Products.findAll({
-      include: [
-        {
-          model: Order,
-          where: {
-            userId: req.params.userId,
+    if (req.headers.authorization === req.params.userId) {
+      const cart = await Order_Products.findAll({
+        include: [
+          {
+            model: Order,
+            where: {
+              userId: req.params.userId,
+            },
+            attributes: [],
           },
-          attributes: [],
-        },
-        {
-          model: Product,
-          attributes: ["id", "name", "price", "imageUrl"],
-        },
-      ],
-      attributes: ["quantity"],
-    });
-    res.json(cart);
+          {
+            model: Product,
+            attributes: ["id", "name", "price", "imageUrl"],
+          },
+        ],
+        attributes: ["quantity"],
+      });
+      res.json(cart);
+    }
   } catch (err) {
     next(err);
   }

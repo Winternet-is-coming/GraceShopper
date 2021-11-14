@@ -30,8 +30,22 @@ const _changeQuantity = (product) => {
 export const fetchCart = (userId) => {
   return async (dispatch) => {
     try {
-      const { data: cart } = await axios.get(`/api/cart/${userId}`);
-      dispatch(setCART(cart));
+      const token = window.localStorage.getItem("token");
+
+      const { data: auth } = await axios.get("/auth/me", {
+        headers: {
+          authorization: token,
+        },
+      });
+
+      if (auth) {
+        const { data: cart } = await axios.get(`/api/cart/${userId}`, {
+          headers: {
+            authorization: auth.id,
+          },
+        });
+        dispatch(setCART(cart));
+      }
     } catch (error) {
       console.log("Can't find your order", error);
     }
