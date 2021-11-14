@@ -29,7 +29,7 @@ class SingleProduct extends Component {
     return (
       <Container fixed>
         <div className="single-product-container">
-          <Card sx={{ width: 550, minHeight: 400, padding: 5 }}>
+          <Card sx={{ width: 550, minWidth: 300, minHeight: 400, padding: 5 }}>
             <Root>
               <Typography variant="h4">{product.name}</Typography>
               <Divider>Product Details</Divider>
