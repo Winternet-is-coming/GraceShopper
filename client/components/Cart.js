@@ -59,70 +59,85 @@ class Cart extends Component {
 
   render() {
     const cart = this.props.cart || [];
+    const authId = this.props.auth.id;
+    const { userId } = this.props.match.params;
 
-    return (
-      <div>
-        {cart.length ? (
-          cart.map((order) => (
-            <Card
-              key={order.product.id}
-              className="cartProductCard"
-              variant="outlined"
-            >
-              <CardContent>
-                <img src={order.product.imageUrl} style={{ width: 100 }} />
-                <h4>{order.product.name}</h4>
-                <p>Price: $ {order.product.price}</p>
-                <p>Quantity: {order.quantity}</p>
-              </CardContent>
-              <CardActions>
-                <Tooltip title="Delete">
-                  <IconButton
-                    onClick={() => {
-                      this.handleDelete(order.product.id);
-                    }}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Tooltip>
-
-                <ButtonGroup>
-                  <Tooltip title="Decrease">
-                    <Button
-                      aria-label="reduce"
+    if (authId && authId !== +userId) {
+      // if there is an authId and it does not match id in URL
+      // (a user is logged in but does not own this cart)
+      return <div>Page not found.</div>;
+    } else if (authId) {
+      // if the authId does match
+      return (
+        <div>
+          {cart.length ? (
+            cart.map((order) => (
+              <Card
+                key={order.product.id}
+                className="cartProductCard"
+                variant="outlined"
+              >
+                <CardContent>
+                  <img src={order.product.imageUrl} style={{ width: 100 }} />
+                  <h4>{order.product.name}</h4>
+                  <p>Price: $ {order.product.price}</p>
+                  <p>Quantity: {order.quantity}</p>
+                </CardContent>
+                <CardActions>
+                  <Tooltip title="Delete">
+                    <IconButton
                       onClick={() => {
-                        let newQuantity = order.quantity - 1;
-                        this.changeQuantity(order.product.id, newQuantity);
+                        this.handleDelete(order.product.id);
                       }}
                     >
-                      <RemoveIcon fontSize="small" />
-                    </Button>
+                      <DeleteIcon />
+                    </IconButton>
                   </Tooltip>
-                  <Tooltip title="Increase">
-                    <Button
-                      aria-label="increase"
-                      onClick={() => {
-                        let newQuantity = order.quantity + 1;
-                        this.changeQuantity(order.product.id, newQuantity);
-                      }}
-                    >
-                      <AddIcon fontSize="small" />
-                    </Button>
-                  </Tooltip>
-                </ButtonGroup>
-              </CardActions>
-            </Card>
-          ))
-        ) : (
-          <EmptyCart />
-        )}
-      </div>
-    );
+
+                  <ButtonGroup>
+                    <Tooltip title="Decrease">
+                      <Button
+                        aria-label="reduce"
+                        onClick={() => {
+                          let newQuantity = order.quantity - 1;
+                          this.changeQuantity(order.product.id, newQuantity);
+                        }}
+                      >
+                        <RemoveIcon fontSize="small" />
+                      </Button>
+                    </Tooltip>
+                    <Tooltip title="Increase">
+                      <Button
+                        aria-label="increase"
+                        onClick={() => {
+                          let newQuantity = order.quantity + 1;
+                          this.changeQuantity(order.product.id, newQuantity);
+                        }}
+                      >
+                        <AddIcon fontSize="small" />
+                      </Button>
+                    </Tooltip>
+                  </ButtonGroup>
+                </CardActions>
+              </Card>
+            ))
+          ) : (
+            <EmptyCart />
+          )}
+        </div>
+      );
+    } else {
+      // if there is no authId (not logged in)
+      return <div>Page not found.</div>;
+    }
   }
 }
 
 const mapState = (state) => {
-  return { cart: state.cart };
+  return {
+    cart: state.cart,
+    auth: state.auth,
+  };
 };
 
 const mapDispatch = (dispatch) => {
