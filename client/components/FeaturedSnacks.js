@@ -1,9 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
-import { fetchProducts } from "../store/products";
-import { Link } from "react-router-dom";
-import AllProducts from "./AllProducts";
+import React from 'react';
+import {connect} from 'react-redux';
+import {fetchProducts} from '../store/products';
+import {Link} from 'react-router-dom';
+import AllProducts from './AllProducts';
 //MUI Components
+
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -21,24 +22,27 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Carousel from '@mui/material/Carousel';
 
+
 const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
+	const {expand, ...other} = props;
+	return <IconButton {...other} />;
+})(({theme, expand}) => ({
+	transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+	marginLeft: 'auto',
+	transition: theme.transitions.create('transform', {
+		duration: theme.transitions.duration.shortest,
+	}),
 }));
 
 export class FeaturedSnacks extends React.Component {
+
   componentDidMount() {
     this.props.fetchProducts();
   }
   render() {
     console.log(this.props);
     const products = this.props.products.allProducts || [];
+    
     return (
       <div>
         <Carousel>
@@ -54,7 +58,9 @@ export class FeaturedSnacks extends React.Component {
                 {product.description}
               </Typography>
             </CardContent>
+
         {/* <CardActions disableSpacing>
+
           <ExpandMore
               expand={expanded}
               onClick={handleExpandClick}
@@ -73,22 +79,24 @@ export class FeaturedSnacks extends React.Component {
             <Typography>direction</Typography>
           </CardContent>
           </Collapse> */}
+
         </Card>
         ))}
       </Carousel>
       </div>
+
     );
   }
 }
 
 const mapState = (state) => {
-  return { products: state.products };
+	return {products: state.products};
 };
 
 const mapDispatch = (dispatch) => {
-  return {
-    fetchProducts: () => dispatch(fetchProducts()),
-  };
+	return {
+		fetchProducts: () => dispatch(fetchProducts()),
+	};
 };
 
 export default connect(mapState, mapDispatch)(FeaturedSnacks);
