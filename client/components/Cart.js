@@ -1,32 +1,25 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {fetchCart} from '../store/cart';
-import {deleteFromCart} from '../store/cart';
-import {changeQuantity} from '../store/cart';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchCart } from "../store/cart";
+import { deleteFromCart } from "../store/cart";
+import { changeQuantity } from "../store/cart";
 //UI
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Tooltip from '@mui/material/Tooltip';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import {spacing} from '@mui/system';
-import Chip from '@mui/material/Chip';
-
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Tooltip from "@mui/material/Tooltip";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import ButtonGroup from "@mui/material/ButtonGroup";
 import EmptyCart from "./EmptyCart";
 import PageNotFound from "./PageNotFound";
-
 <link
-	rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 />;
-
 class Cart extends Component {
   constructor() {
     super();
@@ -36,11 +29,9 @@ class Cart extends Component {
     this.changeQuantity = this.changeQuantity.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
-
   componentDidMount() {
     this.props.fetchCart(this.props.match.params.userId);
   }
-
   handleDelete(productId) {
     this.props.deleteFromCart(
       this.props.match.params.userId,
@@ -48,7 +39,6 @@ class Cart extends Component {
       this.props.history
     );
   }
-
   changeQuantity(productId, newQuantity) {
     if (newQuantity === 0) {
       this.handleDelete(productId);
@@ -61,12 +51,10 @@ class Cart extends Component {
       );
     }
   }
-
   render() {
     const cart = this.props.cart || [];
     const authId = this.props.auth.id;
     const { userId } = this.props.match.params;
-
     if (authId && authId !== +userId) {
       // if there is an authId and it does not match id in URL
       // (a user is logged in but does not own this cart)
@@ -98,7 +86,6 @@ class Cart extends Component {
                       <DeleteIcon />
                     </IconButton>
                   </Tooltip>
-
                   <ButtonGroup>
                     <Tooltip title="Decrease">
                       <Button
@@ -137,23 +124,21 @@ class Cart extends Component {
     }
   }
 }
-
 const mapState = (state) => {
   return {
     cart: state.cart,
     auth: state.auth,
   };
-
-const mapDispatch = (dispatch) => {
-	return {
-		fetchCart: (userId) => dispatch(fetchCart(userId)),
-		deleteFromCart: (userId, productId, history) =>
-			dispatch(deleteFromCart(userId, productId, history)),
-		changeQuantity: (userId, productId, newQuantity) =>
-			dispatch(changeQuantity(userId, productId, newQuantity)),
-	};
 };
-
+const mapDispatch = (dispatch) => {
+  return {
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
+    deleteFromCart: (userId, productId, history) =>
+      dispatch(deleteFromCart(userId, productId, history)),
+    changeQuantity: (userId, productId, newQuantity) =>
+      dispatch(changeQuantity(userId, productId, newQuantity)),
+  };
+};
 export default connect(mapState, mapDispatch)(Cart);
 
 /*

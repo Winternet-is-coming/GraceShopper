@@ -1,32 +1,25 @@
-
-import React, {Component, Fragment} from 'react';
-import {connect} from 'react-redux';
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom';
-import {Login, Signup} from './components/AuthForm';
-import Home from './components/Home';
-import {me} from './store';
-import AllProducts from './components/AllProducts';
-import SingleProduct from './components/SingleProduct';
-import Cart from './components/Cart';
-import Confirmation from './components/Confirmation';
-import EmptyCart from './components/EmptyCart';
-
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Login, Signup } from "./components/AuthForm";
+import Home from "./components/Home";
+import { me } from "./store";
+import AllProducts from "./components/AllProducts";
+import SingleProduct from "./components/SingleProduct";
+import Cart from "./components/Cart";
+import Confirmation from "./components/Confirmation";
+import EmptyCart from "./components/EmptyCart";
 /**
  * COMPONENT
  */
 class Routes extends Component {
-
-	componentDidMount() {
-		this.props.loadInitialData();
-	}
-
-	render() {
-		const {isLoggedIn} = this.props;
-
-		
+  componentDidMount() {
+    this.props.loadInitialData();
+  }
+  render() {
+    const { isLoggedIn } = this.props;
     return (
       <div className="body-container">
-      <div>
         {isLoggedIn ? (
           <Switch>
             <Route exact path="/products" component={AllProducts} />
@@ -50,7 +43,6 @@ class Routes extends Component {
     );
   }
 }
-
 /**
  * CONTAINER
  */
@@ -61,7 +53,6 @@ const mapState = (state) => {
     isLoggedIn: !!state.auth.id,
   };
 };
-
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
@@ -69,7 +60,6 @@ const mapDispatch = (dispatch) => {
     },
   };
 };
-
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes));
