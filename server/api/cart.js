@@ -1,13 +1,15 @@
 const router = require("express").Router();
 const {
-  models: { Order, Product, Order_Products },
+  models: { Order, Product, Order_Products, User },
 } = require("../db");
 
 module.exports = router;
 
 router.get("/:userId", async (req, res, next) => {
   try {
-    if (req.headers.authorization === req.params.userId) {
+    const { id } = await User.findByToken(req.headers.authorization);
+
+    if (id === +req.params.userId) {
       const cart = await Order_Products.findAll({
         include: [
           {
