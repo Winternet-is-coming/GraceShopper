@@ -9,6 +9,7 @@ import SingleProduct from "./components/SingleProduct";
 import Cart from "./components/Cart";
 import Confirmation from "./components/Confirmation";
 import EmptyCart from "./components/EmptyCart";
+
 /**
  * COMPONENT
  */
@@ -16,8 +17,10 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
   }
+
   render() {
     const { isLoggedIn } = this.props;
+
     return (
       <div className="body-container">
         {isLoggedIn ? (

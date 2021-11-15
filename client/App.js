@@ -1,10 +1,9 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import Routes from "./Routes";
+import AllProducts from "./components/AllProducts";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
-
-// import AllProducts from "./components/AllProducts";
-// import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
 //Material UI
 import Grid from "@material-ui/core/Grid";
