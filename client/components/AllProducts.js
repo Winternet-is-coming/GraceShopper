@@ -1,13 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
+import { Link } from "react-router-dom";
 
 //MUI Components
-import Container from "@material-ui/core/Container";
+//import Container from "@material-ui/core/Container";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+//import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Box from "@mui/material/Box";
+//import Box from "@mui/material/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
@@ -31,42 +32,41 @@ export class AllProducts extends React.Component {
   render() {
     return (
       <div className="all-products">
-        <Grid container spacing={1}>
+        <Grid justifyContent="center" container spacing={1}>
           {this.props.products.allProducts.map((product) => (
-            <Grid item key={product.id} xs={12} sm={2} md={3}>
-              <Card
-                sx={{ minWidth: 300, padding: 5, margin: 5, minHeight: 300 }}
-              >
+            <Grid item key={product.id}>
+              <Card sx={{ width: 325, padding: 5, margin: 5, height: 500 }}>
                 <div>
                   <Root>
                     <Grid container justifyContent="center">
                       <CardMedia
-                        sx={{ height: 300, width: 300 }}
+                        sx={{ height: 255, width: 300 }}
                         component="img"
                         image={product.imageUrl}
                         alt="product-img"
                       />
-                      <Typography variant="h5">{product.name}</Typography>
-
-                      {/* <CardContent>
-                      <Typography variant="body2">
-                        {product.description}
-                      </Typography> 
-                    </CardContent>*/}
+                      <Typography variant="h6">{product.name}</Typography>
                     </Grid>
+
                     <Divider />
                     <Grid container justifyContent="center">
                       <Typography variant="body2">
                         ${product.price}.00
                       </Typography>
                     </Grid>
-                    <Grid item>
-                      <Button variant="outlined" size="small">
-                        View Details
-                      </Button>
-                      <CardContent>
+
+                    <Grid container justifyContent="center">
+                      <Link to={`/products/${product.id}`}>
+                        <Button variant="outlined" size="small">
+                          View Details
+                        </Button>
+                      </Link>
+                      {/* <Box alignContent="center"> */}
+                      <Button aligncontent="right" href="/cart/userId">
                         <AddShoppingCartIcon />
-                      </CardContent>
+                      </Button>
+                      <script type="module" src="/cart.js"></script>
+                      {/* </Box> */}
                     </Grid>
                   </Root>
                 </div>
