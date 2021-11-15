@@ -27,6 +27,8 @@ router.get("/:userId", async (req, res, next) => {
         attributes: ["quantity"],
       });
       res.json(cart);
+    } else {
+      res.send("Access denied");
     }
   } catch (err) {
     next(err);
