@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import FeaturedSnacks from "./FeaturedSnacks"
 
 export const Home = (props) => {
   const { email } = props;
@@ -59,7 +60,7 @@ export const Home = (props) => {
       >
         <Divider>Our Products</Divider>
         <Typography variant="body2" textAlign="center">
-          Product cards will go here
+          <FeaturedSnacks />
         </Typography>
       </Box>
 
