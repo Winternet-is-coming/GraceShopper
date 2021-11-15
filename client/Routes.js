@@ -1,32 +1,28 @@
-
-import React, {Component, Fragment} from 'react';
-import {connect} from 'react-redux';
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom';
-import {Login, Signup} from './components/AuthForm';
-import Home from './components/Home';
-import {me} from './store';
-import AllProducts from './components/AllProducts';
-import SingleProduct from './components/SingleProduct';
-import Cart from './components/Cart';
-import Confirmation from './components/Confirmation';
-import EmptyCart from './components/EmptyCart';
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Login, Signup } from "./components/AuthForm";
+import Home from "./components/Home";
+import { me } from "./store";
+import AllProducts from "./components/AllProducts";
+import SingleProduct from "./components/SingleProduct";
+import Cart from "./components/Cart";
+import Confirmation from "./components/Confirmation";
+import EmptyCart from "./components/EmptyCart";
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
+  componentDidMount() {
+    this.props.loadInitialData();
+  }
 
-	componentDidMount() {
-		this.props.loadInitialData();
-	}
+  render() {
+    const { isLoggedIn } = this.props;
 
-	render() {
-		const {isLoggedIn} = this.props;
-
-		
     return (
       <div className="body-container">
-      <div>
         {isLoggedIn ? (
           <Switch>
             <Route exact path="/products" component={AllProducts} />
