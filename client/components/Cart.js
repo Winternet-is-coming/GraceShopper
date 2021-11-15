@@ -17,6 +17,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import {spacing} from '@mui/system';
+import Chip from '@mui/material/Chip';
 
 <link
 	rel="stylesheet"
@@ -57,13 +58,11 @@ class Cart extends Component {
 	render() {
 		const cart = this.props.cart;
 
-		console.log('cart:', cart);
-
 		return (
 			<div>
 				{cart.map((order) => (
 					<Card
-						sx={{m: 2, p: 1, display: 'flex'}}
+						sx={{ml: 5, mr: 5, mt: 1, display: 'flex'}}
 						key={order.product.id}
 						className="cartProductCard"
 						variant="outlined"
@@ -72,7 +71,10 @@ class Cart extends Component {
 							<CardMedia
 								component="img"
 								sx={{
-									p: 2,
+									ml: 3,
+									mt: 1,
+									mr: 3,
+									mb: 1,
 									width: 150,
 								}}
 								image={order.product.imageUrl}
@@ -81,7 +83,7 @@ class Cart extends Component {
 						</Box>
 						<Box
 							sx={{
-								pr: 2,
+								mr: 2,
 								display: 'flex',
 								flexDirection: 'column',
 							}}
@@ -118,6 +120,7 @@ class Cart extends Component {
 								</ButtonGroup>
 								<Tooltip title="Delete">
 									<IconButton
+										sx={{ml: 2}}
 										variant="outlined"
 										onClick={(event) => {
 											event.defaultMuiPrevented = true;
@@ -132,7 +135,14 @@ class Cart extends Component {
 					</Card>
 				))}
 				<div>
-					<Button>Checkout</Button>
+					<Card>
+						<Box sx={{display: 'flex', flexDirection: 'row-reverse '}}>
+							<CardContent>Total: $</CardContent>
+							<Button href="/confirmation" variant="contained">
+								Checkout
+							</Button>
+						</Box>
+					</Card>
 				</div>
 			</div>
 		);

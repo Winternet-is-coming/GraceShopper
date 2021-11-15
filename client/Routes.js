@@ -7,8 +7,8 @@ import {me} from './store';
 import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import Cart from './components/Cart';
-
-
+import Confirmation from './components/Confirmation';
+import EmptyCart from './components/EmptyCart';
 /**
  * COMPONENT
  */
@@ -16,7 +16,6 @@ class Routes extends Component {
 	componentDidMount() {
 		this.props.loadInitialData();
 	}
-
 
 	render() {
 		const {isLoggedIn} = this.props;
@@ -28,7 +27,9 @@ class Routes extends Component {
 						<Route exact path="/products" component={AllProducts} />
 						<Route exact path="/products/:id" component={SingleProduct} />
 						<Route path="/home" component={Home} />
-						<Route path="/cart/:userId" component={Cart} />
+						<Route path="/cart" component={EmptyCart} />
+						<Route exact path="/cart/:userId" component={Cart} />
+						<Route path="/confirmation" component={Confirmation} />
 						<Redirect to="/home" />
 					</Switch>
 				) : (
@@ -36,7 +37,8 @@ class Routes extends Component {
 						<Route path="/" exact component={Login} />
 						<Route path="/login" component={Login} />
 						<Route path="/signup" component={Signup} />
-						<Route path="/cart/:userId" component={Cart} />
+						<Route path="/cart" component={EmptyCart} />
+						<Route exact path="/cart/:userId" component={Cart} />
 					</Switch>
 				)}
 			</div>
