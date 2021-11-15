@@ -1,19 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
-import AllCards from "./AllCards";
+import { Link } from "react-router-dom";
 
 //MUI Components
-import Container from "@material-ui/core/Container";
+//import Container from "@material-ui/core/Container";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+//import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Box from "@mui/material/Box";
+//import Box from "@mui/material/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import { styled } from "@mui/material/styles";
 import Grid from "@material-ui/core/Grid";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 const Root = styled("div")(({ theme }) => ({
   width: "90%",
@@ -29,55 +30,57 @@ export class AllProducts extends React.Component {
     this.props.fetchProducts();
   }
   render() {
-    console.log(this.props.products);
     return (
-      <Container>
-        <Grid
-          container
-          direction="row"
-          justifyContent="flex-start"
-          alignItems="flex-start"
-          spacing={5}
-        >
-          <div className="all-products">
-            {this.props.products.map((product) => (
-              <Grid item key={product.id} xs={12} sm={6} md={4}>
-                <Card sx={{ minWidth: 300, padding: 5, margin: 5 }}>
-                  <div>
-                    <Root>
+      <div className="all-products">
+        <Grid justifyContent="center" container spacing={1}>
+          {this.props.products.allProducts.map((product) => (
+            <Grid item key={product.id}>
+              <Card sx={{ width: 325, padding: 5, margin: 5, height: 500 }}>
+                <div>
+                  <Root>
+                    <Grid container justifyContent="center">
                       <CardMedia
-                        sx={{ minHeight: 300, minWidth: 150 }}
+                        sx={{ height: 255, width: 300 }}
                         component="img"
-                        height="400"
                         image={product.imageUrl}
                         alt="product-img"
                       />
-                      <Typography variant="h4">{product.name}</Typography>
+                      <Typography variant="h6">{product.name}</Typography>
+                    </Grid>
 
-                      <CardContent>
-                        <Typography variant="body2">
-                          {product.description}
-                        </Typography>
-                      </CardContent>
-                      <Divider />
-                      <Typography variant="body2">{product.price}</Typography>
-                      <Box textAlign="center">
-                        <Button variant="contained">Add to Cart</Button>
-                      </Box>
-                    </Root>
-                  </div>
-                </Card>
-              </Grid>
-            ))}
-          </div>
+                    <Divider />
+                    <Grid container justifyContent="center">
+                      <Typography variant="body2">
+                        ${product.price}.00
+                      </Typography>
+                    </Grid>
+
+                    <Grid container justifyContent="center">
+                      <Link to={`/products/${product.id}`}>
+                        <Button variant="outlined" size="small">
+                          View Details
+                        </Button>
+                      </Link>
+                      {/* <Box alignContent="center"> */}
+                      <Button aligncontent="right" href="/cart/userId">
+                        <AddShoppingCartIcon />
+                      </Button>
+                      <script type="module" src="/cart.js"></script>
+                      {/* </Box> */}
+                    </Grid>
+                  </Root>
+                </div>
+              </Card>
+            </Grid>
+          ))}
         </Grid>
-      </Container>
+      </div>
     );
   }
 }
 
 const mapState = (state) => {
-  return { products: state.products.allProducts };
+  return { products: state.products };
 };
 
 const mapDispatch = (dispatch) => {

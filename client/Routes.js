@@ -1,3 +1,4 @@
+
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom';
@@ -9,10 +10,12 @@ import SingleProduct from './components/SingleProduct';
 import Cart from './components/Cart';
 import Confirmation from './components/Confirmation';
 import EmptyCart from './components/EmptyCart';
+
 /**
  * COMPONENT
  */
 class Routes extends Component {
+
 	componentDidMount() {
 		this.props.loadInitialData();
 	}
@@ -44,25 +47,26 @@ class Routes extends Component {
 			</div>
 		);
 	}
+
 }
 
 /**
  * CONTAINER
  */
 const mapState = (state) => {
-	return {
-		// Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
-		// Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-		isLoggedIn: !!state.auth.id,
-	};
+  return {
+    // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
+    // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
+    isLoggedIn: !!state.auth.id,
+  };
 };
 
 const mapDispatch = (dispatch) => {
-	return {
-		loadInitialData() {
-			dispatch(me());
-		},
-	};
+  return {
+    loadInitialData() {
+      dispatch(me());
+    },
+  };
 };
 
 // The `withRouter` wrapper makes sure that updates are not blocked

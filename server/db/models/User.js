@@ -25,8 +25,6 @@ const User = db.define('user', {
 	},
 });
 
-module.exports = User;
-
 /**
  * instanceMethods
  */
@@ -36,7 +34,8 @@ User.prototype.correctPassword = function (candidatePwd) {
 };
 
 User.prototype.generateToken = function () {
-	return jwt.sign({id: this.id}, process.env.JWT);
+  const token = jwt.sign({ id: this.id }, process.env.JWT);
+  return token;
 };
 
 /**
@@ -54,18 +53,18 @@ User.authenticate = async function ({email, password}) {
 };
 
 User.findByToken = async function (token) {
-	try {
-		const {id} = await jwt.verify(token, process.env.JWT);
-		const user = User.findByPk(id);
-		if (!user) {
-			throw 'nooo';
-		}
-		return user;
-	} catch (ex) {
-		const error = Error('bad token');
-		error.status = 401;
-		throw error;
-	}
+  try {
+    const { id } = jwt.verify(token, process.env.JWT);
+    const user = await User.findByPk(id);
+    if (!user) {
+      throw "nooo";
+    }
+    return user;
+  } catch (ex) {
+    const error = Error("bad token");
+    error.status = 401;
+    throw error;
+  }
 };
 
 /**
@@ -81,3 +80,4 @@ const hashPassword = async (user) => {
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
+module.exports = User;
