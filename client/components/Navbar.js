@@ -41,7 +41,7 @@ function Navbar({ handleClick, isLoggedIn }) {
       <CssBaseline>
         <AppBar position="sticky" className={classes.header}>
           <ToolBar>
-            <Link to="/" className={classes.logo}>
+            <Link to="/home" className={classes.logo}>
               <img
                 src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/15849/giant-panda-taiyaki-clipart-md.png"
                 className={classes.logo}
@@ -82,9 +82,12 @@ function Navbar({ handleClick, isLoggedIn }) {
                 </Button>
               </div>
             )}
-            <Button color="inherit" href="/cart/:userId">
+            <Button color="inherit" href="/cart/userId">
               <ShoppingCart />
             </Button>
+            {/* <Button color="inherit" href={`/cart/${state.auth.id}`}>
+              <ShoppingCart />
+            </Button> */}
           </ToolBar>
         </AppBar>
       </CssBaseline>
@@ -98,6 +101,7 @@ function Navbar({ handleClick, isLoggedIn }) {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
+    auth: state.auth,
   };
 };
 
