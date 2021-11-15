@@ -19,11 +19,11 @@ const App = () => {
       />
       <Navbar />
 
-      <div>
+      {/* <div>
         <Grid container justifyContent="center">
           <Grid item></Grid>
         </Grid>
-      </div>
+      </div> */}
 
       <Routes />
       <Footer />

@@ -19,43 +19,145 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import {spacing} from '@mui/system';
 import Chip from '@mui/material/Chip';
 
+import EmptyCart from "./EmptyCart";
+import PageNotFound from "./PageNotFound";
+
 <link
 	rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 />;
 
 class Cart extends Component {
-	constructor() {
-		super();
-		this.changeQuantity = this.changeQuantity.bind(this);
-		this.handleDelete = this.handleDelete.bind(this);
-	}
+  constructor() {
+    super();
+    this.state = {
+      cart: [],
+    };
+    this.changeQuantity = this.changeQuantity.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
 
-	componentDidMount() {
-		this.props.fetchCart(this.props.match.params.userId);
-	}
+  componentDidMount() {
+    this.props.fetchCart(this.props.match.params.userId);
+  }
 
-	handleDelete(productId) {
-		this.props.deleteFromCart(
-			this.props.match.params.userId,
-			productId,
-			this.props.history
-		);
-	}
+  handleDelete(productId) {
+    this.props.deleteFromCart(
+      this.props.match.params.userId,
+      productId,
+      this.props.history
+    );
+  }
 
-	changeQuantity(productId, newQuantity) {
-		if (newQuantity === 0) {
-			this.handleDelete(productId);
-		} else {
-			this.props.changeQuantity(
-				this.props.match.params.userId,
-				productId,
-				newQuantity
-			);
-		}
-	}
+  changeQuantity(productId, newQuantity) {
+    if (newQuantity === 0) {
+      this.handleDelete(productId);
+    } else {
+      // update quantity in db
+      this.props.changeQuantity(
+        this.props.match.params.userId,
+        productId,
+        newQuantity
+      );
+    }
+  }
 
-	render() {
+  render() {
+    const cart = this.props.cart || [];
+    const authId = this.props.auth.id;
+    const { userId } = this.props.match.params;
+
+    if (authId && authId !== +userId) {
+      // if there is an authId and it does not match id in URL
+      // (a user is logged in but does not own this cart)
+      return <PageNotFound />;
+    } else if (authId) {
+      // if the authId does match
+      return (
+        <div>
+          {cart.length ? (
+            cart.map((order) => (
+              <Card
+                key={order.product.id}
+                className="cartProductCard"
+                variant="outlined"
+              >
+                <CardContent>
+                  <img src={order.product.imageUrl} style={{ width: 100 }} />
+                  <h4>{order.product.name}</h4>
+                  <p>Price: $ {order.product.price}</p>
+                  <p>Quantity: {order.quantity}</p>
+                </CardContent>
+                <CardActions>
+                  <Tooltip title="Delete">
+                    <IconButton
+                      onClick={() => {
+                        this.handleDelete(order.product.id);
+                      }}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
+
+                  <ButtonGroup>
+                    <Tooltip title="Decrease">
+                      <Button
+                        aria-label="reduce"
+                        onClick={() => {
+                          let newQuantity = order.quantity - 1;
+                          this.changeQuantity(order.product.id, newQuantity);
+                        }}
+                      >
+                        <RemoveIcon fontSize="small" />
+                      </Button>
+                    </Tooltip>
+                    <Tooltip title="Increase">
+                      <Button
+                        aria-label="increase"
+                        onClick={() => {
+                          let newQuantity = order.quantity + 1;
+                          this.changeQuantity(order.product.id, newQuantity);
+                        }}
+                      >
+                        <AddIcon fontSize="small" />
+                      </Button>
+                    </Tooltip>
+                  </ButtonGroup>
+                </CardActions>
+              </Card>
+            ))
+          ) : (
+            <EmptyCart />
+          )}
+        </div>
+      );
+    } else {
+      // if there is no authId (not logged in)
+      return <PageNotFound />;
+    }
+  }
+}
+
+const mapState = (state) => {
+  return {
+    cart: state.cart,
+    auth: state.auth,
+  };
+
+const mapDispatch = (dispatch) => {
+	return {
+		fetchCart: (userId) => dispatch(fetchCart(userId)),
+		deleteFromCart: (userId, productId, history) =>
+			dispatch(deleteFromCart(userId, productId, history)),
+		changeQuantity: (userId, productId, newQuantity) =>
+			dispatch(changeQuantity(userId, productId, newQuantity)),
+	};
+};
+
+export default connect(mapState, mapDispatch)(Cart);
+
+/*
+render() {
 		const cart = this.props.cart;
 
 		return (
@@ -147,20 +249,5 @@ class Cart extends Component {
 			</div>
 		);
 	}
-}
 
-const mapState = (state) => {
-	return {cart: state.cart};
-};
-
-const mapDispatch = (dispatch) => {
-	return {
-		fetchCart: (userId) => dispatch(fetchCart(userId)),
-		deleteFromCart: (userId, productId, history) =>
-			dispatch(deleteFromCart(userId, productId, history)),
-		changeQuantity: (userId, productId, newQuantity) =>
-			dispatch(changeQuantity(userId, productId, newQuantity)),
-	};
-};
-
-export default connect(mapState, mapDispatch)(Cart);
+*/
