@@ -2,15 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
 import { Link } from "react-router-dom";
-import SingleProduct from "./SingleProduct";
-import Cart from "./Cart";
 
 //MUI Components
-import Container from "@material-ui/core/Container";
+//import Container from "@material-ui/core/Container";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+//import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Box from "@mui/material/Box";
+//import Box from "@mui/material/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
@@ -64,10 +62,8 @@ export class AllProducts extends React.Component {
                         </Button>
                       </Link>
                       {/* <Box alignContent="center"> */}
-                      <Button aligncontent="right">
-                        <Link to="/cart/userId">
-                          <AddShoppingCartIcon />
-                        </Link>
+                      <Button aligncontent="right" href="/cart/userId">
+                        <AddShoppingCartIcon />
                       </Button>
                       <script type="module" src="/cart.js"></script>
                       {/* </Box> */}

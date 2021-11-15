@@ -157,6 +157,60 @@ async function seed() {
       imageUrl:
         "https://www.japancandystore.com/media/catalog/product/cache/11/thumbnail/600x600/9df78eab33525d08d6e5fb8d27136e95/2/0/20190426_021.jpg",
     }),
+    Product.create({
+      name: "Meiji Meltykiss Party Assortment",
+      price: 2000,
+      quantity: 75,
+      description:
+        " Meltykiss Party Assortment comes with three flavours, Premium chocolate, rich fruity strawberry and rich green tea. This is a Japanese winter limited edition. It’s a perfect gift to give to that someone special.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2017/11/MEIJI-Meltykiss-Party-Assortment-of-Three-Flavour.jpg",
+    }),
+    Product.create({
+      name: "Calbee JagaRico Potato Sticks Original Flavor",
+      price: 200,
+      quantity: 60,
+      description:
+        " French fries in chip form. There’s a crunch in every bite.",
+      imageUrl:
+        "https://img01.weeecdn.com/2020-08/FD2GQS2lRxyHV5RGEUW_ng-square.jpg",
+    }),
+    Product.create({
+      name: "Calbee Honey Butter Potato Chips",
+      price: 300,
+      quantity: 50,
+      description:
+        "Potato Chips covered in a concoction of honey butter sauce and then baked to perfection. Will definitely have you reaching back for more. It is one of the most popular flavors in Japan for a reason.",
+      imageUrl:
+        "https://img01.weeecdn.com/2021-03/17MnKxcoQa2QPa3e47Rp2g-square.jpg",
+    }),
+    Product.create({
+      name: "Peach Parfait Kit Kat",
+      price: 1200,
+      quantity: 50,
+      description:
+        " Love peaches? Love parfaits? This Kit Kat combines the best of both worlds.",
+      imageUrl:
+        "https://i.etsystatic.com/30378333/r/il/65deba/3262486314/il_1588xN.3262486314_4a06.jpg",
+    }),
+    Product.create({
+      name: "Japanese Ume Plum Kit Kat",
+      price: 1300,
+      quantity: 45,
+      description:
+        "Sweet, sour, and refreshing Japanese Plum flavor covered in white chocolate with the original crispy wafer in the middle.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2021/01/Kit-Kat-Ume-Plum-Made-in-Japan3-300x300.jpg",
+    }),
+    Product.create({
+      name: "Japanese Hojicha Roasted Tea Kit Kat",
+      price: 1500,
+      quantity: 60,
+      description:
+        "Hojicha flavored Kit Kats used to be a Kyoto only limited souvenir. Now, you can also get a taste of this deeply infused roasted tea infused with white chocolate Kit Kat.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2021/03/Kit-Kat-Japanese-Hojicha-Roasted-Tea-12-Piece.jpg",
+    }),
   ]);
   const orders = await Order.bulkCreate([
     { userId: 1 },
