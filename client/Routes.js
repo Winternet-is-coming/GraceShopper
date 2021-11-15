@@ -46,7 +46,6 @@ class Routes extends Component {
     );
   }
 }
-
 /**
  * CONTAINER
  */
@@ -57,7 +56,6 @@ const mapState = (state) => {
     isLoggedIn: !!state.auth.id,
   };
 };
-
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
@@ -65,7 +63,6 @@ const mapDispatch = (dispatch) => {
     },
   };
 };
-
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes));
