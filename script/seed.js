@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 const {
-	db,
-	models: {User, Product, Order, Order_Products},
-} = require('../server/db');
+  db,
+  models: { User, Product, Order, Order_Products },
+} = require("../server/db");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -15,9 +15,9 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ email: "grace@oishii.com", password: "123"}),
-    User.create({ email: "boxu@oishii.com", password: "123"}),
-    User.create({ email: "sen@oishii.com", password: "123", isAdmin: true}),
+    User.create({ email: "grace@oishii.com", password: "123" }),
+    User.create({ email: "boxu@oishii.com", password: "123" }),
+    User.create({ email: "sen@oishii.com", password: "123", isAdmin: true }),
     User.create({ email: "courtney@oishii.com", password: "123" }),
   ]);
 
@@ -94,43 +94,160 @@ async function seed() {
       imageUrl:
         "https://cdn.shopify.com/s/files/1/0561/3553/products/JP-656_x700.jpg?v=1575122802",
     }),
-  ]);  
-	const orders = await Order.bulkCreate([
-		{userId: 1},
-		{userId: 2},
-		{userId: 3},
-		{userId: 4},
-	]);
+    Product.create({
+      name: "Chocolate Giant Pocky",
+      price: 15,
+      quantity: 50,
+      description: "It’s like Pocky but bigger!",
+      imageUrl: "https://m.media-amazon.com/images/I/71wQA31dR8L._SL1500_.jpg",
+    }),
+    Product.create({
+      name: "Hi-Chew Candy - Mango",
+      price: 3,
+      quantity: 100,
+      description:
+        "A cultural icon, these super juicy and yummy candies feel like gum at first, but become softer as you chew!",
+      imageUrl:
+        "https://cdn.shoplightspeed.com/shops/632181/files/31847362/pacific-candy-hi-chew-fruit-mango.jpg",
+    }),
 
-	const orderProducts = await Order_Products.bulkCreate([
-		{orderId: 1, productId: 1, quantity: 3},
-		{orderId: 1, productId: 2, quantity: 1},
-		{orderId: 1, productId: 3, quantity: 4},
-		{orderId: 1, productId: 4, quantity: 1},
-		{orderId: 2, productId: 5, quantity: 2},
-		{orderId: 2, productId: 6, quantity: 1},
-		{orderId: 2, productId: 7, quantity: 5},
-		{orderId: 2, productId: 8, quantity: 1},
-		{orderId: 2, productId: 1, quantity: 3},
-		{orderId: 3, productId: 1, quantity: 2},
-		{orderId: 3, productId: 2, quantity: 3},
-		{orderId: 3, productId: 3, quantity: 1},
-		{orderId: 3, productId: 4, quantity: 4},
-		{orderId: 4, productId: 5, quantity: 1},
-		{orderId: 4, productId: 6, quantity: 6},
-		{orderId: 4, productId: 7, quantity: 1},
-		{orderId: 4, productId: 8, quantity: 2},
-		{orderId: 4, productId: 4, quantity: 1},
-	]);
+    Product.create({
+      name: "Matcha Kit Kat",
+      price: 15000,
+      quantity: 1,
+      description: "Reserved for Ben!",
+      imageUrl:
+        "https://i.pinimg.com/originals/07/d2/c0/07d2c0e0007685f12159b1b4e9e45c69.jpg",
+    }),
 
-		console.log(`seeded ${users.length} users`);
-	console.log(`seeded successfully`);
-	return {
-		users,
-		products,
-		orders,
-		orderProducts,
-	};
+    Product.create({
+      name: "Seafood Kit Kat",
+      price: 1000,
+      quantity: 1,
+      description: "One of a kind Kit Kat",
+      imageUrl:
+        "https://www.tokyoweekender.com/wp-content/uploads/2016/04/kitkat.jpg",
+    }),
+
+    Product.create({
+      name: "Sakura sake Kit Kat",
+      price: 2000,
+      quantity: 1,
+      description: "Who would say no to alcohol right?",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2020/02/KIT-KAT-Sakura-Japanese-Sake-Made-in-Japan1a.jpg",
+    }),
+
+    Product.create({
+      name: "Crayon Shin-Chan Chocobi Corn Snacks - Lemon",
+      price: 400,
+      quantity: 99,
+      description:
+        "This box of star-shaped corn snacks features prints of Crayon Shin-Chan characters! Enjoy the revitalizing lemon flavor of these tasty treats. They come with 1 Crayon Shin-Chan sticker taken from a set of 20 different designs.",
+      imageUrl:
+        "https://www.japancandystore.com/media/catalog/product/cache/11/thumbnail/600x600/9df78eab33525d08d6e5fb8d27136e95/2/0/20210514_093_1.jpg",
+    }),
+
+    Product.create({
+      name: "Crayon Shin-Chan Hot Milk Biscuits",
+      price: 450,
+      quantity: 99,
+      description:
+        " These star-shaped puffy corn snacks from Tohato are beloved by the characters in Crayon Shin-Chan! They are flavored with Hokkaido milk and have a satisfying crunch. Feel like you are in their anime world as you snack on these sweet choco corn biscuits. Each pack comes with a collectible Crayon Shin-Chan sticker.",
+      imageUrl:
+        "https://www.japancandystore.com/media/catalog/product/cache/11/thumbnail/600x600/9df78eab33525d08d6e5fb8d27136e95/2/0/20190426_021.jpg",
+    }),
+    Product.create({
+      name: "Meiji Meltykiss Party Assortment",
+      price: 2000,
+      quantity: 75,
+      description:
+        " Meltykiss Party Assortment comes with three flavours, Premium chocolate, rich fruity strawberry and rich green tea. This is a Japanese winter limited edition. It’s a perfect gift to give to that someone special.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2017/11/MEIJI-Meltykiss-Party-Assortment-of-Three-Flavour.jpg",
+    }),
+    Product.create({
+      name: "Calbee JagaRico Potato Sticks Original Flavor",
+      price: 200,
+      quantity: 60,
+      description:
+        " French fries in chip form. There’s a crunch in every bite.",
+      imageUrl:
+        "https://img01.weeecdn.com/2020-08/FD2GQS2lRxyHV5RGEUW_ng-square.jpg",
+    }),
+    Product.create({
+      name: "Calbee Honey Butter Potato Chips",
+      price: 300,
+      quantity: 50,
+      description:
+        "Potato Chips covered in a concoction of honey butter sauce and then baked to perfection. Will definitely have you reaching back for more. It is one of the most popular flavors in Japan for a reason.",
+      imageUrl:
+        "https://img01.weeecdn.com/2021-03/17MnKxcoQa2QPa3e47Rp2g-square.jpg",
+    }),
+    Product.create({
+      name: "Peach Parfait Kit Kat",
+      price: 1200,
+      quantity: 50,
+      description:
+        " Love peaches? Love parfaits? This Kit Kat combines the best of both worlds.",
+      imageUrl:
+        "https://i.etsystatic.com/30378333/r/il/65deba/3262486314/il_1588xN.3262486314_4a06.jpg",
+    }),
+    Product.create({
+      name: "Japanese Ume Plum Kit Kat",
+      price: 1300,
+      quantity: 45,
+      description:
+        "Sweet, sour, and refreshing Japanese Plum flavor covered in white chocolate with the original crispy wafer in the middle.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2021/01/Kit-Kat-Ume-Plum-Made-in-Japan3-300x300.jpg",
+    }),
+    Product.create({
+      name: "Japanese Hojicha Roasted Tea Kit Kat",
+      price: 1500,
+      quantity: 60,
+      description:
+        "Hojicha flavored Kit Kats used to be a Kyoto only limited souvenir. Now, you can also get a taste of this deeply infused roasted tea infused with white chocolate Kit Kat.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2021/03/Kit-Kat-Japanese-Hojicha-Roasted-Tea-12-Piece.jpg",
+    }),
+  ]);
+  const orders = await Order.bulkCreate([
+    { userId: 1 },
+    { userId: 2 },
+    { userId: 3 },
+    { userId: 4 },
+  ]);
+
+  const orderProducts = await Order_Products.bulkCreate([
+    { orderId: 1, productId: 1, quantity: 3 },
+    { orderId: 1, productId: 2, quantity: 1 },
+    { orderId: 1, productId: 3, quantity: 4 },
+    { orderId: 1, productId: 4, quantity: 1 },
+    { orderId: 2, productId: 5, quantity: 2 },
+    { orderId: 2, productId: 6, quantity: 1 },
+    { orderId: 2, productId: 7, quantity: 5 },
+    { orderId: 2, productId: 8, quantity: 1 },
+    { orderId: 2, productId: 1, quantity: 3 },
+    { orderId: 3, productId: 1, quantity: 2 },
+    { orderId: 3, productId: 2, quantity: 3 },
+    { orderId: 3, productId: 3, quantity: 1 },
+    { orderId: 3, productId: 4, quantity: 4 },
+    { orderId: 4, productId: 5, quantity: 1 },
+    { orderId: 4, productId: 6, quantity: 6 },
+    { orderId: 4, productId: 7, quantity: 1 },
+    { orderId: 4, productId: 8, quantity: 2 },
+    { orderId: 4, productId: 4, quantity: 1 },
+  ]);
+
+  console.log(`seeded ${users.length} users`);
+  console.log(`seeded successfully`);
+  return {
+    users,
+    products,
+    orders,
+    orderProducts,
+  };
 }
 
 /*
@@ -139,17 +256,17 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-	console.log('seeding...');
-	try {
-		await seed();
-	} catch (err) {
-		console.error(err);
-		process.exitCode = 1;
-	} finally {
-		console.log('closing db connection');
-		await db.close();
-		console.log('db connection closed');
-	}
+  console.log("seeding...");
+  try {
+    await seed();
+  } catch (err) {
+    console.error(err);
+    process.exitCode = 1;
+  } finally {
+    console.log("closing db connection");
+    await db.close();
+    console.log("db connection closed");
+  }
 }
 
 /*
@@ -158,7 +275,7 @@ async function runSeed() {
   any errors that might occur inside of `seed`.
 */
 if (module === require.main) {
-	runSeed();
+  runSeed();
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
