@@ -21,6 +21,7 @@ class Routes extends Component {
 
     return (
       <div className="body-container">
+      <div>
         {isLoggedIn ? (
           <Switch>
             <Route exact path="/products" component={AllProducts} />

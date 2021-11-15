@@ -10,23 +10,18 @@ const {
  *      match the models, and populates the database.
  */
 async function seed() {
-	await db.sync({force: true}); // clears db and matches models to tables
-	console.log('db synced!');
+  await db.sync({ force: true }); // clears db and matches models to tables
+  console.log("db synced!");
 
-	// Creating Users
-	const users = await User.bulkCreate([
-		{email: 'grace@oishii.com', password: '123'},
-		{email: 'boxu@oishii.com', password: '123'},
-		{email: 'sen@oishii.com', password: '123'},
-		{email: 'courtney@oishii.com', password: '123'},
-	]);
-	// const users = await Promise.all([
-	// 	User.create({email: 'grace@oishii.com', password: '123'}),
-	// 	User.create({email: 'boxu@oishii.com', password: '123'}),
-	// 	User.create({email: 'sen@oishii.com', password: '123'}),
-	// 	User.create({email: 'courtney@oishii.com', password: '123'}),
-	// ]);
-	const products = await Promise.all([
+  // Creating Users
+  const users = await Promise.all([
+    User.create({ email: "grace@oishii.com", password: "123"}),
+    User.create({ email: "boxu@oishii.com", password: "123"}),
+    User.create({ email: "sen@oishii.com", password: "123", isAdmin: true}),
+    User.create({ email: "courtney@oishii.com", password: "123" }),
+  ]);
+
+  const products = await Promise.all([
     Product.create({
       name: "Matcha Pocky",
       price: 13,
@@ -99,8 +94,7 @@ async function seed() {
       imageUrl:
         "https://cdn.shopify.com/s/files/1/0561/3553/products/JP-656_x700.jpg?v=1575122802",
     }),
-  ]);
-  
+  ]);  
 	const orders = await Order.bulkCreate([
 		{userId: 1},
 		{userId: 2},

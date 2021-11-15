@@ -20,7 +20,6 @@ import { CssBaseline } from "@material-ui/core";
 const useStyles = makeStyles({
   header: {
     backgroundColor: "pink",
-    color: "black",
     margin: 0,
   },
   tool: {
