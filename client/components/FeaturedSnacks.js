@@ -77,12 +77,15 @@ export class FeaturedSnacks extends React.Component {
     );
   }
 }
+
 const mapState = (state) => {
   return { products: state.products };
 };
+
 const mapDispatch = (dispatch) => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
   };
 };
+
 export default connect(mapState, mapDispatch)(FeaturedSnacks);

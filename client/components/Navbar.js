@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
+import AllProducts from "./AllProducts";
 
 //Material UI
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
@@ -25,6 +26,11 @@ const useStyles = makeStyles({
   tool: {
     flexGrow: 1,
   },
+  logo: {
+    width: 45,
+    height: 45,
+    marginRight: 10,
+  },
 });
 
 function Navbar({ handleClick, isLoggedIn }) {
@@ -35,33 +41,50 @@ function Navbar({ handleClick, isLoggedIn }) {
       <CssBaseline>
         <AppBar position="sticky" className={classes.header}>
           <ToolBar>
+            <Link to="/" className={classes.logo}>
+              <img
+                src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/15849/giant-panda-taiyaki-clipart-md.png"
+                className={classes.logo}
+              />
+            </Link>
             <Typography variant="h6" className={classes.tool}>
               Oishii
             </Typography>
             {isLoggedIn ? (
               <div>
                 {/* The navbar will show these links after you log in */}
-                <Button>
-                  <Link to="/home">Home</Link>
+                <Button color="inherit" href="/products">
+                  Snacks
                 </Button>
-                <Button>
-                  <a href="#" onClick={handleClick}>
-                    Logout
-                  </a>
+                <Button color="inherit" href="/home">
+                  Home
+                </Button>
+                <Button color="inherit" href="#" onClick={handleClick}>
+                  {/* <a href="#" onClick={handleClick}> */}
+                  Logout
+                  {/* </a> */}
                 </Button>
               </div>
             ) : (
               <div>
                 {/* The navbar will show these links before you log in */}
-                <Button>
-                  <Link to="/login">Login</Link>
+                <Button color="inherit" href="/products">
+                  Snacks
                 </Button>
-                <Button>
-                  <Link to="/signup">Sign Up</Link>
+                <Button color="inherit" href="/home">
+                  Home
+                </Button>
+                <Button color="inherit" href="/login">
+                  Login
+                </Button>
+                <Button color="inherit" href="/signup">
+                  Sign Up
                 </Button>
               </div>
             )}
-            <ShoppingCart />
+            <Button color="inherit" href="/cart/:userId">
+              <ShoppingCart />
+            </Button>
           </ToolBar>
         </AppBar>
       </CssBaseline>
