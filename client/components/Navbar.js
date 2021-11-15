@@ -71,6 +71,9 @@ function Navbar({ handleClick, isLoggedIn }) {
                 <Button color="inherit" href="/products">
                   Snacks
                 </Button>
+                <Button color="inherit" href="/home">
+                  Home
+                </Button>
                 <Button color="inherit" href="/login">
                   Login
                 </Button>
