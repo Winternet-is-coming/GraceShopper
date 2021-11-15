@@ -47,8 +47,15 @@ export const fetchCart = (userId) => {
 export const deleteFromCart = (userId, productId, history) => {
   return async (dispatch) => {
     try {
+      const token = window.localStorage.getItem("token");
+
       const { data: product } = await axios.delete(
-        `/api/cart/${userId}/${productId}`
+        `/api/cart/${userId}/${productId}`,
+        {
+          headers: {
+            authorization: token,
+          },
+        }
       );
       dispatch(_deleteFromCart(product));
       // history.push(`/cart/${userId}`);
@@ -61,9 +68,15 @@ export const deleteFromCart = (userId, productId, history) => {
 export const changeQuantity = (userId, productId, newQuantity) => {
   return async (dispatch) => {
     try {
+      const token = window.localStorage.getItem("token");
       const { data: product } = await axios.post(
         `/api/cart/${userId}/${productId}`,
-        { data: { newQuantity } }
+        {
+          data: {
+            newQuantity,
+            authorization: token,
+          },
+        }
       );
       dispatch(_changeQuantity(product));
     } catch (e) {

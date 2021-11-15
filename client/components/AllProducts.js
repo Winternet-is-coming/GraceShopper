@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
 import { Link } from "react-router-dom";
-
 //MUI Components
 //import Container from "@material-ui/core/Container";
 import Card from "@mui/material/Card";
@@ -62,7 +61,10 @@ export class AllProducts extends React.Component {
                         </Button>
                       </Link>
                       {/* <Box alignContent="center"> */}
-                      <Button aligncontent="right" href="/cart/userId">
+                      <Button
+                        aligncontent="right"
+                        href={`/cart/${this.props.auth.id}`}
+                      >
                         <AddShoppingCartIcon />
                       </Button>
                       <script type="module" src="/cart.js"></script>
@@ -80,7 +82,7 @@ export class AllProducts extends React.Component {
 }
 
 const mapState = (state) => {
-  return { products: state.products };
+  return { products: state.products, auth: state.auth };
 };
 
 const mapDispatch = (dispatch) => {

@@ -20,12 +20,12 @@ import PageNotFound from './PageNotFound';
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
 
-
 <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 />;
 class Cart extends Component {
+  
 	constructor() {
 		super();
 		this.state = {
@@ -187,5 +187,4 @@ const mapDispatch = (dispatch) => {
       dispatch(changeQuantity(userId, productId, newQuantity)),
   };
 };
-
 export default connect(mapState, mapDispatch)(Cart);

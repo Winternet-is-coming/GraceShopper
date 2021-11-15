@@ -62,9 +62,9 @@ export const Home = (props) => {
         }}
       >
         <Divider>Our Products</Divider>
-        <Typography variant="body2" textAlign="center">
-          {/* <FeaturedSnacks /> */}
-        </Typography>
+        {/* <Typography variant="body2" textAlign="center"> */}
+          <FeaturedSnacks />
+        {/* </Typography> */}
       </Box>
 
 

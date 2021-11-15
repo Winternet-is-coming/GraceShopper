@@ -27,6 +27,8 @@ router.get("/:userId", async (req, res, next) => {
         attributes: ["quantity"],
       });
       res.json(cart);
+    } else {
+      res.send("Access denied");
     }
   } catch (err) {
     next(err);
@@ -35,20 +37,26 @@ router.get("/:userId", async (req, res, next) => {
 
 router.delete("/:userId/:productId", async (req, res, next) => {
   try {
-    const product = await Order_Products.findOne({
-      include: {
-        model: Order,
-        where: {
-          userId: req.params.userId,
+    const { id } = await User.findByToken(req.headers.authorization);
+
+    if (id === +req.params.userId) {
+      const product = await Order_Products.findOne({
+        include: {
+          model: Order,
+          where: {
+            userId: req.params.userId,
+          },
+          attributes: [],
         },
-        attributes: [],
-      },
-      where: {
-        productId: req.params.productId,
-      },
-    });
-    await product.destroy();
-    res.json(product);
+        where: {
+          productId: req.params.productId,
+        },
+      });
+      await product.destroy();
+      res.json(product);
+    } else {
+      res.send("Access denied");
+    }
   } catch (e) {
     next(e);
   }
@@ -56,22 +64,30 @@ router.delete("/:userId/:productId", async (req, res, next) => {
 
 router.post("/:userId/:productId", async (req, res, next) => {
   try {
-    const product = await Order_Products.findOne({
-      include: {
-        model: Order,
-        where: {
-          userId: req.params.userId,
-        },
-        attributes: [],
-      },
-      where: {
-        productId: req.params.productId,
-      },
-    });
+    // console.log("*** req headers:", req.headers);
+    // console.log("*** req data:", req.body.data);
+    const { id } = await User.findByToken(req.body.data.authorization);
 
-    await product.update({ quantity: req.body.data.newQuantity });
-    console.log("done updating in db");
-    res.json(product);
+    if (id === +req.params.userId) {
+      const product = await Order_Products.findOne({
+        include: {
+          model: Order,
+          where: {
+            userId: req.params.userId,
+          },
+          attributes: [],
+        },
+        where: {
+          productId: req.params.productId,
+        },
+      });
+
+      await product.update({ quantity: req.body.data.newQuantity });
+      console.log("done updating in db");
+      res.json(product);
+    } else {
+      res.send("Access denied");
+    }
   } catch (e) {
     next(e);
   }
