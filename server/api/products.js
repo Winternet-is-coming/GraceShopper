@@ -48,7 +48,7 @@ router.delete('/:id', requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
     const { name, price, quantity, description, imageUrl } = req.body

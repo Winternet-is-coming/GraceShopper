@@ -19,6 +19,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Carousel from '@mui/material/Carousel';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -37,20 +38,22 @@ export class FeaturedSnacks extends React.Component {
   }
   render() {
     console.log(this.props);
+    const products = this.props.products.allProducts || [];
     return (
-      // <div>
-      //   {this.props.allProducts.map((product) => (
-      <Card sx={{ width: 325, padding: 5, margin: 5, height: 500 }}>
-        {/* <CardHeader title={product.name}/>
-          <CardMedia
-            component="img"
-            image={product.imageUrl}
-          />
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              {product.description}
-            </Typography>
-          </CardContent> */}
+      <div>
+        <Carousel>
+        {products.map((product) => (
+          <Card sx={{ width: 325, padding: 5, margin: 5, height: 500 }}>
+          <CardHeader title={product.name}/>
+            <CardMedia
+              component="img"
+              image={product.imageUrl}
+            />
+            <CardContent>
+              <Typography variant="body2" color="text.secondary">
+                {product.description}
+              </Typography>
+            </CardContent>
         {/* <CardActions disableSpacing>
           <ExpandMore
               expand={expanded}
@@ -70,9 +73,10 @@ export class FeaturedSnacks extends React.Component {
             <Typography>direction</Typography>
           </CardContent>
           </Collapse> */}
-      </Card>
-      //   ))}
-      // </div>
+        </Card>
+        ))}
+      </Carousel>
+      </div>
     );
   }
 }
