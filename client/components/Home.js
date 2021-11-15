@@ -1,9 +1,11 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import FeaturedSnacks from './FeaturedSnacks';
+
+import React from "react";
+import { connect } from "react-redux";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import FeaturedSnacks from "./FeaturedSnacks";
+
 
 export const Home = (props) => {
 	const {email} = props;
@@ -52,17 +54,19 @@ export const Home = (props) => {
 				</Typography>
 			</Box>
 
-			<Box
-				sx={{
-					marginBottom: 20,
-					marginTop: 10,
-				}}
-			>
-				<Divider>Our Products</Divider>
-				<Typography variant="body2" textAlign="center">
-					{/* <FeaturedSnacks /> */}
-				</Typography>
-			</Box>
+
+      <Box
+        sx={{
+          marginBottom: 20,
+          marginTop: 10,
+        }}
+      >
+        <Divider>Our Products</Divider>
+        <Typography variant="body2" textAlign="center">
+          {/* <FeaturedSnacks /> */}
+        </Typography>
+      </Box>
+
 
 			<Box
 				fixed
