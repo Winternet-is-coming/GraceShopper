@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
-import AllProducts from "./AllProducts";
 
 //Material UI
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
@@ -33,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Navbar({ handleClick, isLoggedIn }) {
+function Navbar({ handleClick, isLoggedIn, auth }) {
   const classes = useStyles();
 
   return (
@@ -82,12 +81,9 @@ function Navbar({ handleClick, isLoggedIn }) {
                 </Button>
               </div>
             )}
-            <Button color="inherit" href="/cart/userId">
+            <Button color="inherit" href={`/cart/${auth.id}`}>
               <ShoppingCart />
             </Button>
-            {/* <Button color="inherit" href={`/cart/${state.auth.id}`}>
-              <ShoppingCart />
-            </Button> */}
           </ToolBar>
         </AppBar>
       </CssBaseline>
