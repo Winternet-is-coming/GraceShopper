@@ -1,0 +1,17 @@
+curl 'http://localhost:8080/api/cart/1' \
+  -H 'Connection: keep-alive' \
+  -H 'Pragma: no-cache' \
+  -H 'Cache-Control: no-cache' \
+  -H 'sec-ch-ua: "Google Chrome";v="95", "Chromium";v="95", ";Not A Brand";v="99"' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'authorization: 1' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36' \
+  -H 'sec-ch-ua-platform: "Linux"' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Referer: http://localhost:8080/cart/1' \
+  -H 'Accept-Language: en-US,en;q=0.9' \
+  -H 'Cookie: io=0vqcvvDCp-RzcxIZAAAo' \
+  --compressed
