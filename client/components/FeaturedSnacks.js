@@ -77,6 +77,7 @@ export class FeaturedSnacks extends React.Component {
     );
   }
 }
+
 const mapState = (state) => {
   return { products: state.products };
 };

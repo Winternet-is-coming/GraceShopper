@@ -9,7 +9,7 @@ export const Home = (props) => {
   const { email } = props;
 
   return (
-    <div>
+    <div style={{ minWidth: 1200 }}>
       <Box
         sx={{
           backgroundImage: 'url("/images/sakura-bg.jpg")',

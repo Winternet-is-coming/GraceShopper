@@ -1,29 +1,33 @@
 const router = require("express").Router();
 const {
-  models: { Order, Product, Order_Products },
+  models: { Order, Product, Order_Products, User },
 } = require("../db");
 
 module.exports = router;
 
 router.get("/:userId", async (req, res, next) => {
   try {
-    const cart = await Order_Products.findAll({
-      include: [
-        {
-          model: Order,
-          where: {
-            userId: req.params.userId,
+    const { id } = await User.findByToken(req.headers.authorization);
+
+    if (id === +req.params.userId) {
+      const cart = await Order_Products.findAll({
+        include: [
+          {
+            model: Order,
+            where: {
+              userId: req.params.userId,
+            },
+            attributes: [],
           },
-          attributes: [],
-        },
-        {
-          model: Product,
-          attributes: ["id", "name", "price", "imageUrl"],
-        },
-      ],
-      attributes: ["quantity"],
-    });
-    res.json(cart);
+          {
+            model: Product,
+            attributes: ["id", "name", "price", "imageUrl"],
+          },
+        ],
+        attributes: ["quantity"],
+      });
+      res.json(cart);
+    }
   } catch (err) {
     next(err);
   }
@@ -66,6 +70,8 @@ router.post("/:userId/:productId", async (req, res, next) => {
     });
 
     await product.update({ quantity: req.body.data.newQuantity });
+    console.log("done updating in db");
+    res.json(product);
   } catch (e) {
     next(e);
   }

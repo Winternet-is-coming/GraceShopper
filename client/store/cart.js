@@ -30,7 +30,13 @@ const _changeQuantity = (product) => {
 export const fetchCart = (userId) => {
   return async (dispatch) => {
     try {
-      const { data: cart } = await axios.get(`/api/cart/${userId}`);
+      const token = window.localStorage.getItem("token");
+
+      const { data: cart } = await axios.get(`/api/cart/${userId}`, {
+        headers: {
+          authorization: token,
+        },
+      });
       dispatch(setCART(cart));
     } catch (error) {
       console.log("Can't find your order", error);
@@ -77,12 +83,16 @@ export default function cartReducer(state = [], action) {
         return cartItem.product.id !== action.product.productId;
       });
     case CHANGE_QUANTITY:
-      return state.map((cartItem) => {
+      const newState = state.map((cartItem) => {
         if (cartItem.product.id === action.product.productId) {
-          cartItem.product.quantity = action.product.quantity;
+          return {
+            ...cartItem,
+            quantity: action.product.quantity,
+          };
         }
         return cartItem;
       });
+      return newState;
     default:
       return state;
   }
