@@ -68,15 +68,8 @@ export const deleteFromCart = (userId, productId, history) => {
 export const changeQuantity = (userId, productId, newQuantity) => {
   return async (dispatch) => {
     try {
-      const token = window.localStorage.getItem("token");
-
       const { data: product } = await axios.post(
         `/api/cart/${userId}/${productId}`,
-        {
-          headers: {
-            authorization: token,
-          },
-        },
         { data: { newQuantity } }
       );
       dispatch(_changeQuantity(product));
