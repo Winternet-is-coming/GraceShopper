@@ -27,7 +27,7 @@ class SingleProduct extends Component {
     const { product } = this.props;
 
     return (
-      <Container fixed>
+      <Container fixed sx={{ marginTop: 20 }}>
         <div className="single-product-container">
           <Card sx={{ width: 550, minWidth: 300, minHeight: 400, padding: 5 }}>
             <Root>

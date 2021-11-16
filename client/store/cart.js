@@ -58,7 +58,6 @@ export const deleteFromCart = (userId, productId, history) => {
         }
       );
       dispatch(_deleteFromCart(product));
-      // history.push(`/cart/${userId}`);
     } catch (e) {
       console.log(`Can't delete this item`, e);
     }
@@ -69,7 +68,7 @@ export const changeQuantity = (userId, productId, newQuantity) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem("token");
-      const { data: product } = await axios.post(
+      const { data: product } = await axios.put(
         `/api/cart/${userId}/${productId}`,
         {
           data: {
@@ -84,8 +83,6 @@ export const changeQuantity = (userId, productId, newQuantity) => {
     }
   };
 };
-
-// export const addToCart = () => {};
 
 export default function cartReducer(state = [], action) {
   switch (action.type) {
