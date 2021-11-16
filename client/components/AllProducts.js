@@ -16,6 +16,7 @@ import Grid from "@material-ui/core/Grid";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { addToCart } from "../store/cart";
 import { fetchCart } from "../store/cart";
+import Alert from "@mui/material/Alert";
 
 const Root = styled("div")(({ theme }) => ({
   width: "90%",
@@ -29,7 +30,17 @@ const Root = styled("div")(({ theme }) => ({
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.fetchProducts();
+    // this.props.fetchCart(this.props.auth.id);
   }
+
+  successfulAdd() {
+    return (
+      <Alert severity="success" color="info">
+        Added to cart!
+      </Alert>
+    );
+  }
+
   render() {
     return (
       <div className="all-products">
@@ -68,9 +79,10 @@ export class AllProducts extends React.Component {
                       <Button
                         aligncontent="right"
                         // href={`/cart/${this.props.auth.id}`}
-                        onClick={() =>
-                          this.props.addToCart(this.props.auth.id, product.id)
-                        }
+                        onClick={() => {
+                          this.props.addToCart(this.props.auth.id, product.id);
+                          this.successfulAdd();
+                        }}
                       >
                         <AddShoppingCartIcon />
                       </Button>
@@ -100,6 +112,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
     addToCart: (userId, productId) => dispatch(addToCart(userId, productId)),
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
   };
 };
 

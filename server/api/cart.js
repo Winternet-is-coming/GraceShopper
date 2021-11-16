@@ -83,7 +83,6 @@ router.put("/:userId/:productId", async (req, res, next) => {
       });
 
       await product.update({ quantity: req.body.data.newQuantity });
-      console.log("done updating in db");
       res.json(product);
     } else {
       res.send("Access denied");
@@ -128,6 +127,7 @@ router.post("/:userId/:productId", async (req, res, next) => {
       res.send("Access denied");
     }
   } catch (e) {
+    console.log("*** there was an add to cart error in express");
     next(e);
   }
 });

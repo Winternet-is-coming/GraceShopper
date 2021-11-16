@@ -104,6 +104,7 @@ export const addToCart = (userId, productId) => {
           },
         }
       );
+      console.log("*** product from thunk:", product);
       dispatch(_addToCart(product));
     } catch (e) {
       console.log("There was an issue with adding to cart: ", e);
@@ -133,9 +134,8 @@ export default function cartReducer(state = [], action) {
     case ADD_TO_CART:
       // this handles the condition when the item already exists in the cart but the quantity was updated
       let existsInCart = false;
-      console.log("state:", state);
       const updatedState = state.map((cartItem) => {
-        if (cartItem.product.id === action.product.productId) {
+        if (cartItem.productId === action.product.productId) {
           existsInCart = true;
           return {
             ...cartItem,
@@ -148,7 +148,6 @@ export default function cartReducer(state = [], action) {
       if (!existsInCart) {
         return [...state, action.product];
       }
-
       return updatedState;
 
     default:
