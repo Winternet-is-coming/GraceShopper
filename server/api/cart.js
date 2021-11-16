@@ -62,10 +62,8 @@ router.delete("/:userId/:productId", async (req, res, next) => {
   }
 });
 
-router.post("/:userId/:productId", async (req, res, next) => {
+router.put("/:userId/:productId", async (req, res, next) => {
   try {
-    // console.log("*** req headers:", req.headers);
-    // console.log("*** req data:", req.body.data);
     const { id } = await User.findByToken(req.body.data.authorization);
 
     if (id === +req.params.userId) {
