@@ -24,15 +24,8 @@ import CardMedia from '@mui/material/CardMedia';
 	rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 />;
+
 class Cart extends Component {
-	constructor() {
-		super();
-		this.state = {
-			cart: [],
-		};
-		this.changeQuantity = this.changeQuantity.bind(this);
-		this.handleDelete = this.handleDelete.bind(this);
-	}
 	componentDidMount() {
 		this.props.fetchCart(this.props.match.params.userId);
 	}

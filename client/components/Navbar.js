@@ -52,12 +52,13 @@ function Navbar({ handleClick, isLoggedIn, auth }) {
             {isLoggedIn ? (
               <div>
                 {/* The navbar will show these links after you log in */}
-                <Button color="inherit" href="/products">
-                  Snacks
-                </Button>
                 <Button color="inherit" href="/home">
                   Home
                 </Button>
+                <Button color="inherit" href="/products">
+                  Snacks
+                </Button>
+
                 <Button color="inherit" href="#" onClick={handleClick}>
                   {/* <a href="#" onClick={handleClick}> */}
                   Logout
@@ -67,11 +68,11 @@ function Navbar({ handleClick, isLoggedIn, auth }) {
             ) : (
               <div>
                 {/* The navbar will show these links before you log in */}
-                <Button color="inherit" href="/products">
-                  Snacks
-                </Button>
                 <Button color="inherit" href="/home">
                   Home
+                </Button>
+                <Button color="inherit" href="/products">
+                  Snacks
                 </Button>
                 <Button color="inherit" href="/login">
                   Login

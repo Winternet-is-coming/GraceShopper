@@ -3,6 +3,7 @@ import axios from "axios";
 const SET_CART = "SET_CART";
 const DELETE_FROM_CART = "DELETE_FROM_CART";
 const CHANGE_QUANTITY = "CHANGE_QUANTITY";
+const ADD_TO_CART = "ADD_TO_CART";
 
 //action creator
 export const setCART = (cart) => {
@@ -22,6 +23,13 @@ const _deleteFromCart = (product) => {
 const _changeQuantity = (product) => {
   return {
     type: CHANGE_QUANTITY,
+    product,
+  };
+};
+
+const _addToCart = (product) => {
+  return {
+    type: ADD_TO_CART,
     product,
   };
 };
@@ -58,7 +66,6 @@ export const deleteFromCart = (userId, productId, history) => {
         }
       );
       dispatch(_deleteFromCart(product));
-      // history.push(`/cart/${userId}`);
     } catch (e) {
       console.log(`Can't delete this item`, e);
     }
@@ -69,7 +76,7 @@ export const changeQuantity = (userId, productId, newQuantity) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem("token");
-      const { data: product } = await axios.post(
+      const { data: product } = await axios.put(
         `/api/cart/${userId}/${productId}`,
         {
           data: {
@@ -85,7 +92,24 @@ export const changeQuantity = (userId, productId, newQuantity) => {
   };
 };
 
-// export const addToCart = () => {};
+export const addToCart = (userId, productId) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem("token");
+      const { data: product } = await axios.post(
+        `/api/cart/${userId}/${productId}`,
+        {
+          data: {
+            authorization: token,
+          },
+        }
+      );
+      dispatch(_addToCart(product));
+    } catch (e) {
+      console.log("There was an issue with adding to cart: ", e);
+    }
+  };
+};
 
 export default function cartReducer(state = [], action) {
   switch (action.type) {
@@ -106,6 +130,26 @@ export default function cartReducer(state = [], action) {
         return cartItem;
       });
       return newState;
+    case ADD_TO_CART:
+      // this handles the condition when the item already exists in the cart but the quantity was updated
+      let existsInCart = false;
+      const updatedState = state.map((cartItem) => {
+        if (cartItem.product.id === action.product.productId) {
+          existsInCart = true;
+          return {
+            ...cartItem,
+            quantity: action.product.quantity,
+          };
+        }
+      });
+
+      // this handles the condition when the item does not already exist in the cart
+      if (!existsInCart) {
+        return [...state, action.product];
+      }
+
+      return updatedState;
+
     default:
       return state;
   }

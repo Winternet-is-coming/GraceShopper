@@ -122,7 +122,7 @@ async function seed() {
 
     Product.create({
       name: "Seafood Kit Kat",
-      price: 1000,
+      price: 10,
       quantity: 1,
       description: "One of a kind Kit Kat",
       imageUrl:
@@ -131,7 +131,7 @@ async function seed() {
 
     Product.create({
       name: "Sakura sake Kit Kat",
-      price: 2000,
+      price: 20,
       quantity: 1,
       description: "Who would say no to alcohol right?",
       imageUrl:
@@ -140,7 +140,7 @@ async function seed() {
 
     Product.create({
       name: "Crayon Shin-Chan Chocobi Corn Snacks - Lemon",
-      price: 400,
+      price: 4,
       quantity: 99,
       description:
         "This box of star-shaped corn snacks features prints of Crayon Shin-Chan characters! Enjoy the revitalizing lemon flavor of these tasty treats. They come with 1 Crayon Shin-Chan sticker taken from a set of 20 different designs.",
@@ -150,7 +150,7 @@ async function seed() {
 
     Product.create({
       name: "Crayon Shin-Chan Hot Milk Biscuits",
-      price: 450,
+      price: 4,
       quantity: 99,
       description:
         " These star-shaped puffy corn snacks from Tohato are beloved by the characters in Crayon Shin-Chan! They are flavored with Hokkaido milk and have a satisfying crunch. Feel like you are in their anime world as you snack on these sweet choco corn biscuits. Each pack comes with a collectible Crayon Shin-Chan sticker.",
@@ -159,7 +159,7 @@ async function seed() {
     }),
     Product.create({
       name: "Meiji Meltykiss Party Assortment",
-      price: 2000,
+      price: 20,
       quantity: 75,
       description:
         " Meltykiss Party Assortment comes with three flavours, Premium chocolate, rich fruity strawberry and rich green tea. This is a Japanese winter limited edition. It’s a perfect gift to give to that someone special.",
@@ -168,7 +168,7 @@ async function seed() {
     }),
     Product.create({
       name: "Calbee JagaRico Potato Sticks Original Flavor",
-      price: 200,
+      price: 2,
       quantity: 60,
       description:
         " French fries in chip form. There’s a crunch in every bite.",
@@ -177,7 +177,7 @@ async function seed() {
     }),
     Product.create({
       name: "Calbee Honey Butter Potato Chips",
-      price: 300,
+      price: 3,
       quantity: 50,
       description:
         "Potato Chips covered in a concoction of honey butter sauce and then baked to perfection. Will definitely have you reaching back for more. It is one of the most popular flavors in Japan for a reason.",
@@ -186,7 +186,7 @@ async function seed() {
     }),
     Product.create({
       name: "Peach Parfait Kit Kat",
-      price: 1200,
+      price: 12,
       quantity: 50,
       description:
         " Love peaches? Love parfaits? This Kit Kat combines the best of both worlds.",
@@ -195,7 +195,7 @@ async function seed() {
     }),
     Product.create({
       name: "Japanese Ume Plum Kit Kat",
-      price: 1300,
+      price: 13,
       quantity: 45,
       description:
         "Sweet, sour, and refreshing Japanese Plum flavor covered in white chocolate with the original crispy wafer in the middle.",
@@ -204,7 +204,7 @@ async function seed() {
     }),
     Product.create({
       name: "Japanese Hojicha Roasted Tea Kit Kat",
-      price: 1500,
+      price: 15,
       quantity: 60,
       description:
         "Hojicha flavored Kit Kats used to be a Kyoto only limited souvenir. Now, you can also get a taste of this deeply infused roasted tea infused with white chocolate Kit Kat.",
