@@ -43,21 +43,18 @@ export class FeaturedSnacks extends React.Component {
 
     return (
       <div>
-        {/* <Carousel>
+        {/* <Carousel> */}
         {products.map((product) => (
           <Card sx={{ width: 325, padding: 5, margin: 5, height: 500 }}>
-          <CardHeader title={product.name}/>
-            <CardMedia
-              component="img"
-              image={product.imageUrl}
-            />
+            <CardHeader title={product.name} />
+            <CardMedia component="img" image={product.imageUrl} />
             <CardContent>
               <Typography variant="body2" color="text.secondary">
                 {product.description}
               </Typography>
             </CardContent>
 
-        {/* <CardActions disableSpacing>
+            {/* <CardActions disableSpacing>
 
           <ExpandMore
               expand={expanded}
@@ -77,10 +74,9 @@ export class FeaturedSnacks extends React.Component {
             <Typography>direction</Typography>
           </CardContent>
           </Collapse> */}
-
-        {/* </Card>
+          </Card>
         ))}
-      </Carousel> */}
+        {/* </Carousel> */}
       </div>
     );
   }
