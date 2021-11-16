@@ -134,7 +134,7 @@ export default function cartReducer(state = [], action) {
       // this handles the condition when the item already exists in the cart but the quantity was updated
       let existsInCart = false;
       const updatedState = state.map((cartItem) => {
-        if (cartItem.product.id === action.product.productId) {
+        if (cartItem.productId === action.product.productId) {
           existsInCart = true;
           return {
             ...cartItem,
@@ -147,7 +147,6 @@ export default function cartReducer(state = [], action) {
       if (!existsInCart) {
         return [...state, action.product];
       }
-
       return updatedState;
 
     default:

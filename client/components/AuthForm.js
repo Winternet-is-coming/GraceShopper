@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import { authenticate } from "../store";
 
 //MUI Components
@@ -29,7 +29,7 @@ const Root = styled("div")(({ theme }) => ({
  */
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
-  console.log(props)
+  // console.log(props)
   if (props.name === "signup") {
     return (
       <div>
@@ -61,6 +61,7 @@ const AuthForm = (props) => {
       </div>
     );
   } else {
+
       return (
         <div>
           <Card sx={{ width: 325, padding: 5, margin: 5, height: 300 }}>
@@ -119,15 +120,14 @@ const mapSignup = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
-      evt.preventDefault()
-      const formName = evt.target.name
-      const email = evt.target.email.value
-      const password = evt.target.password.value
-      dispatch(authenticate(email, password, formName))
-    }
-  }
-}
-
+      evt.preventDefault();
+      const formName = evt.target.name;
+      const email = evt.target.email.value;
+      const password = evt.target.password.value;
+      dispatch(authenticate(email, password, formName));
+    },
+  };
+};
 
 export const Login = connect(mapLogin, mapDispatch)(AuthForm);
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
