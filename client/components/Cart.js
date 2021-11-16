@@ -19,6 +19,8 @@ import EmptyCart from './EmptyCart';
 import PageNotFound from './PageNotFound';
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
+import LinearProgress from '@mui/material/LinearProgress';
+import Typography from '@mui/material/Typography';
 
 <link
 	rel="stylesheet"
@@ -52,8 +54,19 @@ class Cart extends Component {
 		const cart = this.props.cart || [];
 		const authId = this.props.auth.id;
 		const {userId} = this.props.match.params;
-		// const subTotal = cart.map((order) => order.product.price * order.quantity);
-		// const total = subTotal.reduce((prev, curr) => prev + curr, 0);
+		const subTotal = cart
+			.map((order) => order.product.price * order.quantity)
+			.reduce((prev, curr) => prev + curr, 0);
+		const totalItems = cart
+			.map((order) => order.quantity)
+			.reduce((prev, curr) => prev + curr, 0);
+
+		if (this.props.isLoading)
+			return (
+				<Box sx={{width: '100%'}}>
+					<LinearProgress />
+				</Box>
+			);
 
 		if (authId && authId !== +userId) {
 			// if there is an authId and it does not match id in URL
@@ -140,19 +153,26 @@ class Cart extends Component {
 						<EmptyCart />
 					)}
 					<div>
-						<Card>
-							<Box sx={{display: 'flex', flexDirection: 'row-reverse '}}>
+						<Card
+							sx={{
+								ml: 5,
+								mr: 5,
+								display: 'flex',
+								justifyContent: 'flex-end',
+							}}
+						>
+							<Box
+								sx={{
+									mr: 2,
+									display: 'flex',
+									flexDirection: 'column',
+								}}
+							>
 								<CardContent>
-									<h3>
-										Subtotal (
-										{cart
-											.map((order) => order.quantity)
-											.reduce((prev, curr) => prev + curr, 0)}{' '}
-										item): $
-										{cart
-											.map((order) => order.product.price * order.quantity)
-											.reduce((prev, curr) => prev + curr, 0)}
-									</h3>
+									<Typography variant="h5">
+										Subtotal ({totalItems}
+										items): ${subTotal}
+									</Typography>
 								</CardContent>
 								<Button href="/confirmation" variant="contained">
 									Checkout
@@ -170,8 +190,9 @@ class Cart extends Component {
 }
 const mapState = (state) => {
 	return {
-		cart: state.cart,
+		cart: state.cart.cart,
 		auth: state.auth,
+		isLoading: state.cart.isLoading,
 	};
 };
 
