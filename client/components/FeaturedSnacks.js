@@ -6,6 +6,7 @@ import AllProducts from "./AllProducts";
 //MUI Components
 
 import { styled } from "@mui/material/styles";
+import Button from "@material-ui/core/Button";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid"
 import CardHeader from "@mui/material/CardHeader";
@@ -37,21 +38,28 @@ export class FeaturedSnacks extends React.Component {
   componentDidMount() {
     this.props.fetchProducts();
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.products.allProducts.length !== prevProps.products.allProducts.length) {
+      this.setState(this.props.products.allProducts)
+    }
+  }
+
   render() {
-    console.log(this.props);
     const products = this.props.products.allProducts || [];
     const getRandomProduct = (arr) => {
-      const randomId = Math.floor(Math.random() * arr.length)
-      return arr[randomId]
+      const randomIdx = Math.floor(Math.random() * arr.length)
+      return arr[randomIdx]
     }
     const featuredProducts = [getRandomProduct(products), getRandomProduct(products), getRandomProduct(products), getRandomProduct(products)]
-    console.log(featuredProducts)
-
+    console.log("featuredProducts", featuredProducts)
+    if (featuredProducts[0] === undefined) return <div>Loading...</div>
     return (
       <div>
-        <Grid justifyContent="center" container spacing={0.5}>
+        <Grid justifyContent="center" container spacing={1}>
         {featuredProducts.map((product) => (
-          <Card sx={{ width: 325, padding: 5, margin: 5, height: 500 }}>
+          <Grid item key={product.name}>
+          <Card sx={{ width: 325, padding: 5, margin: 5, height: 300 }}>
             <CardHeader title={product.name} />
             <CardMedia component="img" image={product.imageUrl} />
             <CardContent>
@@ -60,8 +68,14 @@ export class FeaturedSnacks extends React.Component {
               </Typography>
             </CardContent>
           </Card>
+          </Grid>
         ))}
         </Grid>
+          <Link to='/products}'>
+            <Button variant="outlined" size="small">
+                View All Snacks
+            </Button>
+          </Link>
       </div>
     );
   }
