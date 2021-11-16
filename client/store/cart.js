@@ -148,12 +148,10 @@ export default function cartReducer(state = initialState, action) {
 					};
 				}
 			});
-
 			// this handles the condition when the item does not already exist in the cart
 			if (!existsInCart) {
 				return [...state, action.product];
 			}
-
 			return updatedState;
 
 		default:
