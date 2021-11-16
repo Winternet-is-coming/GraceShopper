@@ -38,7 +38,7 @@ export class AllProducts extends React.Component {
                 <div>
                   <Root>
                     <Grid container justifyContent="center">
-                      <Button>
+                      <Button href={`/products/${product.id}`}>
                         <CardMedia
                           sx={{ height: 255, width: 300 }}
                           component="img"
