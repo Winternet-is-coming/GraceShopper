@@ -23,7 +23,6 @@ const Root = styled("div")(({ theme }) => ({
 class SingleProduct extends Component {
   componentDidMount() {
     this.props.fetchProduct(this.props.match.params.id);
-    // this.props.fetchCart(this.props.auth.id);
   }
 
   render() {

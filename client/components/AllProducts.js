@@ -30,7 +30,6 @@ const Root = styled("div")(({ theme }) => ({
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.fetchProducts();
-    // this.props.fetchCart(this.props.auth.id);
   }
 
   successfulAdd() {
