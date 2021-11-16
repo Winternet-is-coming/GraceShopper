@@ -7,6 +7,7 @@ import AllProducts from "./AllProducts";
 
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid"
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -20,7 +21,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-// import Carousel from '@mui/material/Carousel';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -40,11 +40,17 @@ export class FeaturedSnacks extends React.Component {
   render() {
     console.log(this.props);
     const products = this.props.products.allProducts || [];
+    const getRandomProduct = (arr) => {
+      const randomId = Math.floor(Math.random() * arr.length)
+      return arr[randomId]
+    }
+    const featuredProducts = [getRandomProduct(products), getRandomProduct(products), getRandomProduct(products), getRandomProduct(products)]
+    console.log(featuredProducts)
 
     return (
       <div>
-        {/* <Carousel> */}
-        {products.map((product) => (
+        <Grid justifyContent="center" container spacing={0.5}>
+        {featuredProducts.map((product) => (
           <Card sx={{ width: 325, padding: 5, margin: 5, height: 500 }}>
             <CardHeader title={product.name} />
             <CardMedia component="img" image={product.imageUrl} />
@@ -53,30 +59,9 @@ export class FeaturedSnacks extends React.Component {
                 {product.description}
               </Typography>
             </CardContent>
-
-            {/* <CardActions disableSpacing>
-
-          <ExpandMore
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-          </ExpandMore>
-          </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>Method:</Typography>
-            <Typography paragraph>direction</Typography>
-            <Typography paragraph>direction</Typography>
-            <Typography paragraph>direction</Typography>
-            <Typography>direction</Typography>
-          </CardContent>
-          </Collapse> */}
           </Card>
         ))}
-        {/* </Carousel> */}
+        </Grid>
       </div>
     );
   }
