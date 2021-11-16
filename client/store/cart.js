@@ -111,10 +111,70 @@ export const addToCart = (userId, productId) => {
   };
 };
 
-export default function cartReducer(state = [], action) {
+const initialState = {
+  cart: [],
+  isLoading: true,
+};
+
+export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case SET_CART:
-      return action.cart;
+      return { ...state, cart: action.cart, isLoading: false };
+    case DELETE_FROM_CART:
+      const filteredCart = state.cart.filter((cartItem) => {
+        return cartItem.product.id !== action.product.productId;
+      });
+      return { ...state, cart: filteredCart, isLoading: false };
+    case CHANGE_QUANTITY:
+      const newCart = state.cart.map((cartItem) => {
+        if (cartItem.product.id === action.product.productId) {
+          return {
+            ...cartItem,
+            quantity: action.product.quantity,
+          };
+        }
+        return cartItem;
+      });
+      return { ...state, cart: newCart, isLoading: false };
+    case ADD_TO_CART:
+      // this handles the condition when the item already exists in the cart but the quantity was updated
+      let existsInCart = false;
+      const updatedCart = state.cart.map((cartItem) => {
+        if (cartItem.productId === action.product.productId) {
+          existsInCart = true;
+          return {
+            ...cartItem,
+            quantity: action.product.quantity,
+          };
+        }
+      });
+
+      // this handles the condition when the item does not already exist in the cart
+      if (!existsInCart) {
+        return {
+          ...state,
+          cart: [...state.cart, action.product],
+          isLoading: false,
+        };
+      }
+      return { ...state, cart: updatedCart, isLoading: false };
+
+    default:
+      return state;
+  }
+}
+
+/*
+
+const initialState = {
+  cart: [],
+  isLoading: true,
+};
+export default function cartReducer(state = initialState, action) {
+  switch (action.type) {
+    case SET_CART:
+      // return action.cart;
+      return {...state, cart: action.cart, isLoading: false};
     case DELETE_FROM_CART:
       return state.filter((cartItem) => {
         return cartItem.product.id !== action.product.productId;
@@ -134,7 +194,7 @@ export default function cartReducer(state = [], action) {
       // this handles the condition when the item already exists in the cart but the quantity was updated
       let existsInCart = false;
       const updatedState = state.map((cartItem) => {
-        if (cartItem.productId === action.product.productId) {
+        if (cartItem.product.id === action.product.productId) {
           existsInCart = true;
           return {
             ...cartItem,
@@ -142,14 +202,16 @@ export default function cartReducer(state = [], action) {
           };
         }
       });
-
       // this handles the condition when the item does not already exist in the cart
       if (!existsInCart) {
         return [...state, action.product];
       }
       return updatedState;
-
     default:
       return state;
   }
 }
+
+
+
+*/
