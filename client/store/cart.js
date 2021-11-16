@@ -104,7 +104,6 @@ export const addToCart = (userId, productId) => {
           },
         }
       );
-      console.log("*** product from thunk:", product);
       dispatch(_addToCart(product));
     } catch (e) {
       console.log("There was an issue with adding to cart: ", e);
