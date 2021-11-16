@@ -38,12 +38,14 @@ export class AllProducts extends React.Component {
                 <div>
                   <Root>
                     <Grid container justifyContent="center">
-                      <CardMedia
-                        sx={{ height: 255, width: 300 }}
-                        component="img"
-                        image={product.imageUrl}
-                        alt="product-img"
-                      />
+                      <Button href={`/products/${product.id}`}>
+                        <CardMedia
+                          sx={{ height: 255, width: 300 }}
+                          component="img"
+                          image={product.imageUrl}
+                          alt="product-img"
+                        />
+                      </Button>
                       <Typography variant="h6">{product.name}</Typography>
                     </Grid>
 
