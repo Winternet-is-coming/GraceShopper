@@ -96,7 +96,7 @@ router.put("/:userId/:productId", async (req, res, next) => {
 // adding to cart in progress
 router.post("/:userId/:productId", async (req, res, next) => {
   try {
-    const { id } = await User.findByToken(req.headers.authorization);
+    const { id } = await User.findByToken(req.body.data.authorization);
 
     if (id === +req.params.userId) {
       const product = await Order_Products.findOne({
@@ -124,10 +124,6 @@ router.post("/:userId/:productId", async (req, res, next) => {
         });
         res.json(newEntry);
       }
-
-      // insert a new row into Order_Products
-      // with matching userId and productId
-      // and quantity 1
     } else {
       res.send("Access denied");
     }
