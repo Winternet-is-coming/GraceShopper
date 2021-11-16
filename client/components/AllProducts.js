@@ -14,6 +14,8 @@ import Divider from "@material-ui/core/Divider";
 import { styled } from "@mui/material/styles";
 import Grid from "@material-ui/core/Grid";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { addToCart } from "../store/cart";
+import { fetchCart } from "../store/cart";
 
 const Root = styled("div")(({ theme }) => ({
   width: "90%",
@@ -65,7 +67,10 @@ export class AllProducts extends React.Component {
                       {/* <Box alignContent="center"> */}
                       <Button
                         aligncontent="right"
-                        href={`/cart/${this.props.auth.id}`}
+                        // href={`/cart/${this.props.auth.id}`}
+                        onClick={() =>
+                          this.props.addToCart(this.props.auth.id, product.id)
+                        }
                       >
                         <AddShoppingCartIcon />
                       </Button>
@@ -84,12 +89,17 @@ export class AllProducts extends React.Component {
 }
 
 const mapState = (state) => {
-  return { products: state.products, auth: state.auth };
+  return {
+    cart: state.cart,
+    products: state.products,
+    auth: state.auth,
+  };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
+    addToCart: (userId, productId) => dispatch(addToCart(userId, productId)),
   };
 };
 
