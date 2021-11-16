@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import { styled } from "@mui/material/styles";
+import { addToCart } from "../store/cart";
+import { fetchCart } from "../store/cart";
 
 const Root = styled("div")(({ theme }) => ({
   width: "90%",
@@ -21,6 +23,7 @@ const Root = styled("div")(({ theme }) => ({
 class SingleProduct extends Component {
   componentDidMount() {
     this.props.fetchProduct(this.props.match.params.id);
+    this.props.fetchCart(this.props.auth.id);
   }
 
   render() {
@@ -37,7 +40,17 @@ class SingleProduct extends Component {
               <Divider />
               <Typography variant="body2">$ {product.price}</Typography>
               <Box textAlign="center">
-                <Button variant="contained">Add to Cart</Button>
+                <Button
+                  variant="contained"
+                  onClick={() =>
+                    this.props.addToCart(
+                      this.props.auth.id,
+                      this.props.match.params.id
+                    )
+                  }
+                >
+                  Add to Cart
+                </Button>
               </Box>
             </Root>
           </Card>
@@ -54,13 +67,17 @@ class SingleProduct extends Component {
 
 const mapState = (state) => {
   return {
+    cart: state.cart,
     product: state.products.singleProduct,
+    auth: state.auth,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     fetchProduct: (id) => dispatch(fetchSingleProduct(id)),
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
+    addToCart: (userId, productId) => dispatch(addToCart(userId, productId)),
   };
 };
 
