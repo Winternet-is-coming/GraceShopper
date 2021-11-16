@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchCart } from "../store/cart";
-import { deleteFromCart } from "../store/cart";
-import { changeQuantity } from "../store/cart";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {fetchCart} from '../store/cart';
+import {deleteFromCart} from '../store/cart';
+import {changeQuantity} from '../store/cart';
 //UI
 
 import IconButton from '@mui/material/IconButton';
@@ -21,11 +21,10 @@ import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
 
 <link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+	rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 />;
 class Cart extends Component {
-  
 	constructor() {
 		super();
 		this.state = {
@@ -151,10 +150,16 @@ class Cart extends Component {
 						<Card>
 							<Box sx={{display: 'flex', flexDirection: 'row-reverse '}}>
 								<CardContent>
-									Total: $
-									{cart
-										.map((order) => order.product.price * order.quantity)
-										.reduce((prev, curr) => prev + curr, 0)}
+									<h3>
+										Subtotal (
+										{cart
+											.map((order) => order.quantity)
+											.reduce((prev, curr) => prev + curr, 0)}{' '}
+										item): $
+										{cart
+											.map((order) => order.product.price * order.quantity)
+											.reduce((prev, curr) => prev + curr, 0)}
+									</h3>
 								</CardContent>
 								<Button href="/confirmation" variant="contained">
 									Checkout
@@ -171,20 +176,20 @@ class Cart extends Component {
 	}
 }
 const mapState = (state) => {
-
-  return {
-    cart: state.cart,
-    auth: state.auth,
-  };
+	return {
+		cart: state.cart,
+		auth: state.auth,
+	};
 };
 
 const mapDispatch = (dispatch) => {
-  return {
-    fetchCart: (userId) => dispatch(fetchCart(userId)),
-    deleteFromCart: (userId, productId, history) =>
-      dispatch(deleteFromCart(userId, productId, history)),
-    changeQuantity: (userId, productId, newQuantity) =>
-      dispatch(changeQuantity(userId, productId, newQuantity)),
-  };
+	return {
+		fetchCart: (userId) => dispatch(fetchCart(userId)),
+		deleteFromCart: (userId, productId, history) =>
+			dispatch(deleteFromCart(userId, productId, history)),
+		changeQuantity: (userId, productId, newQuantity) =>
+			dispatch(changeQuantity(userId, productId, newQuantity)),
+	};
 };
+
 export default connect(mapState, mapDispatch)(Cart);
