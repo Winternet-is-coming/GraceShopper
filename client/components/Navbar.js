@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { connect, useSelector, useDispatch, useStore } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
@@ -16,6 +16,8 @@ import {
   createTheme,
 } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
+import { fetchCart } from "../store/cart";
+import Badge from "@material-ui/core/Badge";
 
 const useStyles = makeStyles({
   header: {
@@ -32,8 +34,17 @@ const useStyles = makeStyles({
   },
 });
 
-function Navbar({ handleClick, isLoggedIn, auth }) {
+function Navbar(props) {
   const classes = useStyles();
+  const { handleClick, isLoggedIn, auth, cart, fetchCart } = props;
+
+  const id = auth.id || 0;
+
+  useEffect(() => {
+    if (id > 0) {
+      fetchCart(auth.id);
+    }
+  }, [id]);
 
   return (
     <div>
@@ -83,7 +94,9 @@ function Navbar({ handleClick, isLoggedIn, auth }) {
               </div>
             )}
             <Button color="inherit" href={`/cart/${auth.id}`}>
-              <ShoppingCart />
+              <Badge badgeContent={cart.length} color="primary">
+                <ShoppingCart />
+              </Badge>
             </Button>
           </ToolBar>
         </AppBar>
@@ -99,6 +112,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     auth: state.auth,
+    cart: state.cart.cart,
   };
 };
 
@@ -107,6 +121,7 @@ const mapDispatch = (dispatch) => {
     handleClick() {
       dispatch(logout());
     },
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
   };
 };
 
