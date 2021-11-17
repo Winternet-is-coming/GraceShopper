@@ -10,32 +10,39 @@ module.exports = router;
 router.get("/:userId", async (req, res, next) => {
   try {
     const { id } = await User.findByToken(req.headers.authorization);
-
-    if (id === +req.params.userId) {
-      const cart = await Order_Products.findAll({
-        include: [
-          {
-            model: Order,
-            where: {
-              userId: req.params.userId,
+    if (id) {
+      if (id === +req.params.userId) {
+        const cart = await Order_Products.findAll({
+          include: [
+            {
+              model: Order,
+              where: {
+                userId: req.params.userId,
+              },
+              attributes: [],
             },
-            attributes: [],
-          },
-          {
-            model: Product,
-            attributes: ["id", "name", "price", "imageUrl"],
-          },
-        ],
-        attributes: ["quantity"],
-      });
-      res.json(cart);
+            {
+              model: Product,
+              attributes: ["id", "name", "price", "imageUrl"],
+            },
+          ],
+          attributes: ["quantity"],
+        });
+        res.json(cart);
+      } else {
+        res.send("Access denied");
+      }
     } else {
-      res.send("Access denied");
+      // this is where the session logic goes
     }
   } catch (err) {
     next(err);
   }
 });
+
+// router.get("/:userId", async (req,res, next){
+//   let cart = new cart(req.session.cart ? req.session.cart : {})
+// })
 
 router.delete("/:userId/:productId", async (req, res, next) => {
   try {
