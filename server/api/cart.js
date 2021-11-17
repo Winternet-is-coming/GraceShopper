@@ -47,10 +47,10 @@ router.get("/:userId", async (req, res, next) => {
 
       // if not, create a new order and send it back
       else {
-        const newCart = await Order.create({
+        await Order.create({
           userId: id,
         });
-        res.json(newCart);
+        res.json([]);
       }
     } else {
       // if the user id does not match the id associated with the token
@@ -78,7 +78,6 @@ router.delete("/:userId/:productId", async (req, res, next) => {
           productId: req.params.productId,
         },
       });
-      console.log("***PRODUCT from db:", product);
       await product.destroy();
       res.json(product);
     } else {
