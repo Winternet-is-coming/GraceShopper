@@ -115,18 +115,17 @@ const initialState = {
 	cart: [],
 	isLoading: true,
 };
-
 export default function cartReducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_CART:
-			// return action.cart;
 			return {...state, cart: action.cart, isLoading: false};
 		case DELETE_FROM_CART:
-			return state.filter((cartItem) => {
+			const filteredCart = state.cart.filter((cartItem) => {
 				return cartItem.product.id !== action.product.productId;
 			});
+			return {...state, cart: filteredCart, isLoading: false};
 		case CHANGE_QUANTITY:
-			const newState = state.map((cartItem) => {
+			const newCart = state.cart.map((cartItem) => {
 				if (cartItem.product.id === action.product.productId) {
 					return {
 						...cartItem,
@@ -135,11 +134,11 @@ export default function cartReducer(state = initialState, action) {
 				}
 				return cartItem;
 			});
-			return newState;
+			return {...state, cart: newCart, isLoading: false};
 		case ADD_TO_CART:
 			// this handles the condition when the item already exists in the cart but the quantity was updated
 			let existsInCart = false;
-			const updatedState = state.map((cartItem) => {
+			const updatedCart = state.cart.map((cartItem) => {
 				if (cartItem.product.id === action.product.productId) {
 					existsInCart = true;
 					return {
@@ -150,10 +149,13 @@ export default function cartReducer(state = initialState, action) {
 			});
 			// this handles the condition when the item does not already exist in the cart
 			if (!existsInCart) {
-				return [...state, action.product];
+				return {
+					...state,
+					cart: [...state.cart, action.product],
+					isLoading: false,
+				};
 			}
-			return updatedState;
-
+			return {...state, cart: updatedCart, isLoading: false};
 		default:
 			return state;
 	}
