@@ -21,34 +21,35 @@ class Routes extends Component {
 	render() {
 		const {isLoggedIn} = this.props;
 
-		return (
-			<div className="body-container">
-				{isLoggedIn ? (
-					<Switch>
-						<Route exact path="/products" component={AllProducts} />
-						<Route exact path="/products/:id" component={SingleProduct} />
-						<Route path="/home" component={Home} />
-						<Route exact path="/cart" component={EmptyCart} />
-						<Route path="/cart/:userId" component={Cart} />
-						<Route path="/confirmation" component={Confirmation} />
-						<Redirect to="/home" />
-					</Switch>
-				) : (
-					<Switch>
-						<Route path="/" exact component={Login} />
-						<Route path="/home" component={Home} />
-						<Route path="/login" component={Login} />
-						<Route path="/signup" component={Signup} />
-						<Route exact path="/cart" component={EmptyCart} />
-						<Route path="/cart/:userId" component={Cart} />
-						<Route path="/confirmation" component={Confirmation} />
-						<Route exact path="/products" component={AllProducts} />
-						<Route exact path="/products/:id" component={SingleProduct} />
-					</Switch>
-				)}
-			</div>
-		);
-	}
+
+    return (
+      <div className="body-container">
+        {isLoggedIn ? (
+          <Switch>
+            <Route exact path="/products" component={AllProducts} />
+            <Route exact path="/products/:id" component={SingleProduct} />
+            <Route path="/home" component={Home} />
+            <Route exact path="/cart" component={EmptyCart} />
+            <Route path="/cart/:userId" component={Cart} />
+            <Route path="/confirmation" component={Confirmation} />
+            <Redirect to="/home" />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/home" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/cart/:userId" component={Cart} />
+            <Route path="/confirmation" component={Confirmation} />
+            <Route exact path="/products" component={AllProducts} />
+            <Route exact path="/products/:id" component={SingleProduct} />
+          </Switch>
+        )}
+      </div>
+    );
+  }
+
 }
 /**
  * CONTAINER
