@@ -18,6 +18,8 @@ import {
 import { CssBaseline } from "@material-ui/core";
 import { fetchCart } from "../store/cart";
 import Badge from "@material-ui/core/Badge";
+import { styled } from "@mui/system";
+import { BadgeUnstyled } from "@mui/core";
 
 const useStyles = makeStyles({
   header: {
@@ -33,6 +35,24 @@ const useStyles = makeStyles({
     marginRight: 10,
   },
 });
+
+const StyledBadge = styled(BadgeUnstyled)`
+  .MuiBadge-badge {
+    z-index: auto;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    white-space: nowrap;
+    text-align: center;
+    background: #008ebd;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px #fff;
+  }
+`;
 
 function Navbar(props) {
   const classes = useStyles();
@@ -94,9 +114,15 @@ function Navbar(props) {
               </div>
             )}
             <Button color="inherit" href={`/cart/${auth.id}`}>
-              <Badge badgeContent={cart.length} color="primary">
+              <StyledBadge
+                badgeContent={cart.length}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+              >
                 <ShoppingCart />
-              </Badge>
+              </StyledBadge>
             </Button>
           </ToolBar>
         </AppBar>
