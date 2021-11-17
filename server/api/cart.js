@@ -23,6 +23,10 @@ router.get("/:userId", async (req, res, next) => {
       // if so, send it back
       if (order) {
         const cart = await Order_Products.findAll({
+          // orderId in Order_Products must match order.id
+          where: {
+            orderId: order.id,
+          },
           include: [
             {
               model: Order,
@@ -74,8 +78,34 @@ router.delete("/:userId/:productId", async (req, res, next) => {
           productId: req.params.productId,
         },
       });
+      console.log("***PRODUCT from db:", product);
       await product.destroy();
       res.json(product);
+    } else {
+      res.send("Access denied");
+    }
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.put("/:userId", async (req, res, next) => {
+  try {
+    const { id } = await User.findByToken(req.body.data.authorization);
+
+    if (id === +req.params.userId) {
+      // find the order associated with this userId
+      const order = await Order.findOne({
+        where: {
+          [Op.and]: [{ userId: id }, { isFulfilled: false }],
+        },
+      });
+
+      // update the isFulfilled value of the order to 'true'
+      await order.update({ isFulfilled: true });
+
+      // send back the order
+      res.json(order);
     } else {
       res.send("Access denied");
     }
@@ -117,16 +147,29 @@ router.post("/:userId/:productId", async (req, res, next) => {
     const { id } = await User.findByToken(req.body.data.authorization);
 
     if (id === +req.params.userId) {
+      // find the order id associated with this user
+      const order = await Order.findOne({
+        where: {
+          [Op.and]: [{ userId: id }, { isFulfilled: false }],
+        },
+      });
+
+      // find the product which matches the productId and is associated with this user's open order
       const product = await Order_Products.findOne({
         include: {
           model: Order,
           where: {
-            userId: req.params.userId,
+            id: order.id,
           },
           attributes: [],
         },
         where: {
-          productId: req.params.productId,
+          [Op.and]: [
+            {
+              productId: req.params.productId,
+              orderId: order.id,
+            },
+          ],
         },
       });
 
