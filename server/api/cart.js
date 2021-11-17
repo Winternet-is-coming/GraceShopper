@@ -12,24 +12,44 @@ router.get("/:userId", async (req, res, next) => {
     const { id } = await User.findByToken(req.headers.authorization);
 
     if (id === +req.params.userId) {
-      const cart = await Order_Products.findAll({
-        include: [
-          {
-            model: Order,
-            where: {
-              userId: req.params.userId,
-            },
-            attributes: [],
-          },
-          {
-            model: Product,
-            attributes: ["id", "name", "price", "imageUrl"],
-          },
-        ],
-        attributes: ["quantity"],
+      // check if this user already has an open order
+      // check Orders model for a matching user Id, which has a 'false' value for isFulFilled
+      const order = await Order.findOne({
+        where: {
+          [Op.and]: [{ userId: id }, { isFulfilled: false }],
+        },
       });
-      res.json(cart);
+
+      // if so, send it back
+      if (order) {
+        const cart = await Order_Products.findAll({
+          include: [
+            {
+              model: Order,
+              where: {
+                userId: req.params.userId,
+              },
+              attributes: [],
+            },
+            {
+              model: Product,
+              attributes: ["id", "name", "price", "imageUrl"],
+            },
+          ],
+          attributes: ["quantity"],
+        });
+        res.json(cart);
+      }
+
+      // if not, create a new order and send it back
+      else {
+        const newCart = await Order.create({
+          userId: id,
+        });
+        res.json(newCart);
+      }
     } else {
+      // if the user id does not match the id associated with the token
       res.send("Access denied");
     }
   } catch (err) {
@@ -115,8 +135,17 @@ router.post("/:userId/:productId", async (req, res, next) => {
         await product.update({ quantity: newQuantity });
         res.json(product);
       } else {
+        // find the orderId associated with this user
+        const order = await Order.findOne({
+          where: {
+            [Op.and]: [{ userId: id }, { isFulfilled: false }],
+          },
+        });
+
+        // add a new product associated with this orderId
         const newEntry = await Order_Products.create({
-          orderId: req.params.userId,
+          // orderId should === order.id
+          orderId: order.id,
           productId: req.params.productId,
           quantity: 1,
         });
