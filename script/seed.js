@@ -19,6 +19,8 @@ async function seed() {
     User.create({ email: "boxu@oishii.com", password: "123" }),
     User.create({ email: "sen@oishii.com", password: "123", isAdmin: true }),
     User.create({ email: "courtney@oishii.com", password: "123" }),
+    User.create({ email: "ben@oishii.com", password: "123" }),
+    User.create({ email: "jess@oishii.com", password: "123" }),
   ]);
 
   const products = await Promise.all([
@@ -210,6 +212,168 @@ async function seed() {
         "Hojicha flavored Kit Kats used to be a Kyoto only limited souvenir. Now, you can also get a taste of this deeply infused roasted tea infused with white chocolate Kit Kat.",
       imageUrl:
         "https://www.takaski.com/wp-content/uploads/2021/03/Kit-Kat-Japanese-Hojicha-Roasted-Tea-12-Piece.jpg",
+    }),
+    Product.create({
+      name: "Petit Cheese Crackers",
+      price: 5,
+      quantity: 50,
+      description:
+        "Bourbon’s Petit Series is one of the most popular and fun Japanese snack products. This product is Petit Cheese Crackers, a perfect snack for morning and afternoon tea!",
+      imageUrl:
+        "https://cdn.shopify.com/s/files/1/0768/4331/products/Bourbon-Petit-Senbei-1024x72_1024x1024.jpg",
+    }),
+    Product.create({
+      name: "Choco Pie Original",
+      price: 10,
+      quantity: 50,
+      description:
+        "One of the most delicious chocolate pie snacks in Japan. Find out why Japanese have been so crazy about this chocolate pie for decades!",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2016/10/LOTTE-Choco-Pie-Original-Made-in-Japan2.jpg",
+    }),
+    Product.create({
+      name: "Pretz Mild Roast",
+      price: 6,
+      quantity: 50,
+      description:
+        "Pretz is the perfect savory snacks when you’re on the go. Our variety of these pretzel sticks ranges from pizza flavor to a sweet corn flavor.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2016/02/GLICO-Pretz-Mild-Salad-Made-in-Japan4.jpg",
+    }),
+    Product.create({
+      name: "MEIJI Fran Double Chocolate Sticks",
+      price: 8,
+      quantity: 50,
+      description:
+        "MEIJI Fran Double Chocolate Sticks are made of buttery biscuit sticks dipped in dark chocolate cream. The bittersweet biscuit sticks are pleasant treats to accompany your morning coffee or afternoon tea.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2017/05/Fran-Double-Chocolate.jpg",
+    }),
+    Product.create({
+      name: "MEIJI Takenoko No Sato",
+      price: 11,
+      quantity: 50,
+      description:
+        "MEIJI Takenoko No Sato – Original (meaning “Bamboo Shoot of the Village”) are delicious sweet snacks that are made to look like cute little bamboo shoots, with a milk chocolate “bamboo shoot” and crunchy biscuit “stalk” – a very tasty combination!",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2016/12/MEIJI-Takenoko-No-Sato-Original.jpg",
+    }),
+    Product.create({
+      name: "Mini Strawberry Kit Kat",
+      price: 7,
+      quantity: 50,
+      description:
+        "KIT KAT Japan is one of the most popular Japanese snacks in the world. KIT KAT Strawberry is a limited version, available only for a limited time. It has a sweet strawberry flavor creating slightly sour taste mixed with beautiful chocolate on crispy wafer. This bag contains 12 individually wrapped mini bars.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2016/10/KIT-KAT-Mini-Strawberry.jpg",
+    }),
+    Product.create({
+      name: "GLICO Cratz Pepper Bacon",
+      price: 4,
+      quantity: 50,
+      description:
+        "GLICO Cratz Pepper Bacon. This savoury taste will have you licking your fingers soon after finishing these Cratz. There are mixed with awesome pretzel crackers that are not too hard and not too light.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2016/04/GLICO-Cratz-Pepper-Bacon-1.jpg",
+    }),
+    Product.create({
+      name: "Pocky Chocolate Luxury",
+      price: 100,
+      quantity: 50,
+      description:
+        "The perfect balance of high quality creamy chocolate and the crunch of a biscuit stick gives Pocky its irresistible taste. Share happiness!",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2019/11/GLICO-Chocolate-Luxury-20-Pocky-Limited-Time-Only-in-Japan-1.jpg",
+    }),
+    Product.create({
+      name: "MEIJI Macadamia Nuts Chocolate",
+      price: 14,
+      quantity: 50,
+      description:
+        "Introduced some 40 years ago, MEIJI Macadamia Chocolate has always been one of the most popular chocolate among all Japanese. Meiji is a Japanese dairy and confectionery business that has been operating for 100 years.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2016/12/MEIJI-Macadamia-Nuts-Chocolate-Japan.jpg",
+    }),
+    Product.create({
+      name: "Premium Mini Mint Kit Kat",
+      price: 7,
+      quantity: 50,
+      description:
+        "A refreshing taste with a mint scent. Uses peppermint fragrance. Be one of the first to try the latest Japanese KitKat in your country. Both Chocolate Premium Mint Kit Kats and Citrus Premium Mint Kit Kats contain Feuilletine, or crushed up bits of crepe, as well as rum powder formulated into the cream between the wafers–said to have a sweet aroma and a rich taste aimed at adults. ",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2021/05/Kit-Kat-Premium-Mint-Limited-Seasonal-Special-Edition-Made-in-Japan.jpg",
+    }),
+    Product.create({
+      name: "MEIJI Fruit Gumi Gummy Candy Orange",
+      price: 5,
+      quantity: 50,
+      description:
+        "One of the best selling soft candy in Japan. Using carefully selected sweet grapes as the key ingredient, the sweetness and the flavours have been packed into each gummy. They are made with concentrated real grape juice preserving the real fruit taste. ",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2018/02/MEIJI-Fruit-Gumi-Gummy-Candy-Orange-Made-in-Japan2.jpg",
+    }),
+    Product.create({
+      name: "Uji Matcha Green Tea Caramel Corn",
+      price: 15,
+      quantity: 50,
+      description:
+        "A bittersweet, fragrant matcha flavor that you can enjoy. Uji matcha is joining the ranks of fluffy, crispy, and softly melting caramel corn with a gentle taste! You can enjoy the bittersweet and fragrant taste of matcha.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2019/03/TOHATO-Uji-Matcha-Green-Tea-Caramel-Corns-Made-in-Japan2.jpg",
+    }),
+    Product.create({
+      name: "FUJIYA Milky Vanilla Candy",
+      price: 3,
+      quantity: 50,
+      description:
+        "Fujiya Milky is a brand which started production in 1951 and are made of high quality milk from the Hokkaido region of Japan! This candy box features the well known Peko-Chan on the box and it contains around 7 individually wrapped candies. These soft and chewy treats are deliciously milky and matcha flavoured at the same time!",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2019/02/FUJIYA-Milky-Candy-Made-in-Japan2.jpg",
+    }),
+    Product.create({
+      name: "Hi-Chew Assortment",
+      price: 11,
+      quantity: 50,
+      description:
+        "The famous fruity chewy candy from Japan ! Since its first release in 1975 by the confectionery producer Morinaga, Hi-Chew has became one of the most famous and best-selling Japanese candy. These sweets are juicy, chewy, and creamy at the same time. Though the individually wrapped little blocks look like usual bubblegum first, they soon become softer and smoother when you continue chewing them.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2016/10/MORINAGA-Hi-Chew-Assortment-4-Flavours-Made-in-Japan2.jpg",
+    }),
+    Product.create({
+      name: "Galbo Chocolate Strawberry Dagashi",
+      price: 10,
+      quantity: 50,
+      description:
+        "Meiji’s Galbo chocolates are popular in Japan for their unique texture. These chocolate snacks are coated with hard chocolaty goodness and have a chocolate-soaked cookie inside. What a tasty surprise! Perfect for picnics and parties!",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2020/01/MEIJI-Galbo-Chocolate-Strawberry-Dagashi-Snacks-Made-in-Japan2.jpg",
+    }),
+    Product.create({
+      name: "Cream Genmai Brown Rice Brownie Matcha",
+      price: 13,
+      quantity: 50,
+      description:
+        "ASAHI Cream Genmai Brown Rice Brownie Matcha contains 10 types of nutrition including dietary fiber, vitamin, calsium, iron, etc. Stay healthy by eating this highly nutritious and rich brownie with delicious matcha cream.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2018/05/ASAHI-Cream-Genmai-Brown-Rice-Brownie-Matcha-Made-in-Japan.jpg",
+    }),
+    Product.create({
+      name: "Kinako Mochi Chocolate",
+      price: 12,
+      quantity: 50,
+      description:
+        "The gummy mochi is in the middle! The texture of the gummy mochi helps to spread the flavor of the kinako ‘chocolate’ all around your mouth. Chewing the gummy mochi produced more saliva that melted the chocolate further as well.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2016/06/CHIRORU-CHOCO-Kinako-Mochi-Chocolate.jpg",
+    }),
+    Product.create({
+      name: "BOURBON Alfort Chocolate & Cocoa Cookie",
+      price: 6,
+      quantity: 50,
+      description:
+        "Bite-size chocolatey-topped cookies Elegant and perfectly delightful, Alfort bite-size chocolatey cookies are the ideal after-dinner treat or anytime snack. Widely enjoyed in Japan, these cookies are great with coffee or tea and just the right size to take with you anywhere. Beautiful milky chocolate on top of crispy cookie. Perfect companion for morning and afternoon tea.",
+      imageUrl:
+        "https://www.takaski.com/wp-content/uploads/2016/10/BOURBON-Alfort-Chocolate-Cookie-Original-Blue-Made-in-Japan.jpg",
     }),
   ]);
   const orders = await Order.bulkCreate([
