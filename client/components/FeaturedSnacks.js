@@ -39,43 +39,54 @@ export class FeaturedSnacks extends React.Component {
     this.props.fetchProducts();
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.products.allProducts.length !== prevProps.products.allProducts.length) {
-      this.setState(this.props.products.allProducts)
-    }
-  }
-
   render() {
     const products = this.props.products.allProducts || [];
-    const getRandomProduct = (arr) => {
-      const randomIdx = Math.floor(Math.random() * arr.length)
-      return arr[randomIdx]
+    const getRandomProducts = (arr) => {
+      let i = 0
+      let featuredProductArr = [];
+      while (i < 4) {
+        let randomIdx = Math.floor(Math.random() * arr.length)
+        if (arr[randomIdx] in featuredProductArr) {
+          i++
+        } else {
+          i++
+          featuredProductArr.push(arr[randomIdx])
+        }
+      }
+      return featuredProductArr;
     }
-    const featuredProducts = [getRandomProduct(products), getRandomProduct(products), getRandomProduct(products), getRandomProduct(products)]
-    console.log("featuredProducts", featuredProducts)
+    const featuredProducts = getRandomProducts(products)
+    console.log(featuredProducts)
+
     if (featuredProducts[0] === undefined) return <div>Loading...</div>
     return (
       <div>
         <Grid justifyContent="center" container spacing={1}>
         {featuredProducts.map((product) => (
-          <Grid item key={product.name}>
-          <Card sx={{ width: 325, padding: 5, margin: 5, height: 300 }}>
-            <CardHeader title={product.name} />
-            <CardMedia component="img" image={product.imageUrl} />
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                {product.description}
-              </Typography>
-            </CardContent>
+          <Grid item key={product.id}>
+            <Card sx={{ width: 325, padding: 5, margin: 5, height: 300 }}>
+              <Grid container justifyContent="center">
+                <Button href={`/products/${product.id}`}>
+                  <CardMedia
+                    sx={{ height: 170, width: 200 }}
+                    component="img"
+                    image={product.imageUrl}
+                    alt="product-img"
+                  />
+                </Button>
+                <Typography variant="h6">{product.name}</Typography>
+              </Grid>
           </Card>
           </Grid>
         ))}
         </Grid>
-          <Link to='/products}'>
-            <Button variant="outlined" size="small">
+        <Grid container justifyContent="center">
+          <Link to='/products'>
+            <Button variant="outlined" size="small" justifyContent="center">
                 View All Snacks
             </Button>
           </Link>
+        </Grid>
       </div>
     );
   }

@@ -5,9 +5,9 @@ const request = require("supertest");
 const {
   db,
   models: { Product },
-} = require("../db");
-const seed = require("../../script/seed");
-const app = require("../app");
+} = require("../../../server/db");
+const seed = require("../../../script/seed");
+const app = require("../../../server/app");
 
 describe("Product routes", () => {
   beforeEach(async () => {

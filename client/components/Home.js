@@ -61,7 +61,7 @@ export const Home = (props) => {
         <Divider>Our Products</Divider>
         <FeaturedSnacks />
       </Box>
-
+      <Divider></Divider>
       <Box
         fixed
         sx={{
