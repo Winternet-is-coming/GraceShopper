@@ -93,70 +93,82 @@ export const changeQuantity = (userId, productId, newQuantity) => {
 };
 
 export const addToCart = (userId, productId) => {
-	return async (dispatch) => {
-		try {
-			const token = window.localStorage.getItem('token');
-			const {data: product} = await axios.post(
-				`/api/cart/${userId}/${productId}`,
-				{
-					data: {
-						authorization: token,
-					},
-				}
-			);
-			dispatch(_addToCart(product));
-		} catch (e) {
-			console.log('There was an issue with adding to cart: ', e);
-		}
-	};
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem("token");
+      const { data: product } = await axios.post(
+        `/api/cart/${userId}/${productId}`,
+        {
+          data: {
+            authorization: token,
+          },
+        }
+      );
+      dispatch(_addToCart({ ...product, id: product.productId }));
+    } catch (e) {
+      console.log("There was an issue with adding to cart: ", e);
+    }
+  };
 };
 
 const initialState = {
-	cart: [],
-	isLoading: true,
+  cart: [],
+  isLoading: true,
 };
+
 export default function cartReducer(state = initialState, action) {
-	switch (action.type) {
-		case SET_CART:
-			return {...state, cart: action.cart, isLoading: false};
-		case DELETE_FROM_CART:
-			const filteredCart = state.cart.filter((cartItem) => {
-				return cartItem.product.id !== action.product.productId;
-			});
-			return {...state, cart: filteredCart, isLoading: false};
-		case CHANGE_QUANTITY:
-			const newCart = state.cart.map((cartItem) => {
-				if (cartItem.product.id === action.product.productId) {
-					return {
-						...cartItem,
-						quantity: action.product.quantity,
-					};
-				}
-				return cartItem;
-			});
-			return {...state, cart: newCart, isLoading: false};
-		case ADD_TO_CART:
-			// this handles the condition when the item already exists in the cart but the quantity was updated
-			let existsInCart = false;
-			const updatedCart = state.cart.map((cartItem) => {
-				if (cartItem.product.id === action.product.productId) {
-					existsInCart = true;
-					return {
-						...cartItem,
-						quantity: action.product.quantity,
-					};
-				}
-			});
-			// this handles the condition when the item does not already exist in the cart
-			if (!existsInCart) {
-				return {
-					...state,
-					cart: [...state.cart, action.product],
-					isLoading: false,
-				};
-			}
-			return {...state, cart: updatedCart, isLoading: false};
-		default:
-			return state;
-	}
+  switch (action.type) {
+    case SET_CART:
+      return { ...state, cart: action.cart, isLoading: false };
+    case DELETE_FROM_CART:
+      const filteredCart = state.cart.filter((cartItem) => {
+        return cartItem.product.id !== action.product.productId;
+      });
+      return { ...state, cart: filteredCart, isLoading: false };
+    case CHANGE_QUANTITY:
+      const newCart = state.cart.map((cartItem) => {
+        if (cartItem.product.id === action.product.productId) {
+          return {
+            ...cartItem,
+            quantity: action.product.quantity,
+          };
+        }
+        return cartItem;
+      });
+      return { ...state, cart: newCart, isLoading: false };
+    case ADD_TO_CART:
+      // this handles the condition when the item already exists in the cart but the quantity was updated
+      let existsInCart = false;
+
+      const updatedCart = state.cart.map((cartItem) => {
+        if (cartItem.product.id === action.product.productId) {
+          existsInCart = true;
+          return {
+            product: cartItem.product,
+            quantity: action.product.quantity,
+          };
+        } else {
+          return cartItem;
+        }
+      });
+
+      // this handles the condition when the item does not already exist in the cart
+      if (!existsInCart) {
+        // need to return the new product along with an initial quantity of 1
+        const newItem = {
+          product: action.product,
+          quantity: 1,
+        };
+        return {
+          ...state,
+          cart: [...state.cart, newItem],
+          isLoading: false,
+        };
+      } else {
+        return { ...state, cart: updatedCart, isLoading: false };
+      }
+
+    default:
+      return state;
+  }
 }

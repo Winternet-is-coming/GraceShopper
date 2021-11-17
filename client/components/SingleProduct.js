@@ -66,7 +66,7 @@ class SingleProduct extends Component {
 
 const mapState = (state) => {
   return {
-    cart: state.cart,
+    cart: state.cart.cart,
     product: state.products.singleProduct,
     auth: state.auth,
   };

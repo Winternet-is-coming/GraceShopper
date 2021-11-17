@@ -32,14 +32,6 @@ export class AllProducts extends React.Component {
     this.props.fetchProducts();
   }
 
-  successfulAdd() {
-    return (
-      <Alert severity="success" color="info">
-        Added to cart!
-      </Alert>
-    );
-  }
-
   render() {
     return (
       <div className="all-products">
@@ -78,10 +70,9 @@ export class AllProducts extends React.Component {
                       <Button
                         aligncontent="right"
                         // href={`/cart/${this.props.auth.id}`}
-                        onClick={() => {
-                          this.props.addToCart(this.props.auth.id, product.id);
-                          this.successfulAdd();
-                        }}
+                        onClick={() =>
+                          this.props.addToCart(this.props.auth.id, product.id)
+                        }
                       >
                         <AddShoppingCartIcon />
                       </Button>
@@ -101,7 +92,7 @@ export class AllProducts extends React.Component {
 
 const mapState = (state) => {
   return {
-    cart: state.cart,
+    cart: state.cart.cart,
     products: state.products,
     auth: state.auth,
   };

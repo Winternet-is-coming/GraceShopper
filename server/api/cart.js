@@ -92,7 +92,6 @@ router.put("/:userId/:productId", async (req, res, next) => {
   }
 });
 
-// adding to cart in progress
 router.post("/:userId/:productId", async (req, res, next) => {
   try {
     const { id } = await User.findByToken(req.body.data.authorization);
@@ -127,7 +126,6 @@ router.post("/:userId/:productId", async (req, res, next) => {
       res.send("Access denied");
     }
   } catch (e) {
-    console.log("*** there was an add to cart error in express");
     next(e);
   }
 });
