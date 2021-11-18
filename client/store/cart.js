@@ -132,11 +132,18 @@ export const memberCheckout = (userId) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem("token");
-      await axios.put(`/api/cart/${userId}`, {
-        data: {
-          authorization: token,
-        },
-      });
+
+      if (token) {
+        console.log("guest id from membercheckout:", userId);
+        await axios.put(`/api/cart/${userId}`, {
+          data: {
+            authorization: token,
+          },
+        });
+      } else {
+        // reset 'cart' in localstorage to []
+        localStorage.setItem("cart", JSON.stringify([]));
+      }
 
       // clear local storage first for guest
 
