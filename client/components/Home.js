@@ -15,6 +15,7 @@ export const Home = (props) => {
           backgroundImage: 'url("/images/sakura-bg.jpg")',
           height: 700,
           textAlign: "right",
+          backgroundSize: "cover",
         }}
       >
         <br />
@@ -54,7 +55,7 @@ export const Home = (props) => {
 
       <Box
         sx={{
-          marginBottom: 20,
+          marginBottom: 10,
           marginTop: 10,
         }}
       >
