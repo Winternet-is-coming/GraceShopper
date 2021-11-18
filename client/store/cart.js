@@ -61,7 +61,6 @@ export const fetchCart = (userId) => {
           cart = lsCart;
         }
       }
-      console.log(cart);
       dispatch(setCART(cart));
     } catch (error) {
       console.log("Can't find your order", error);
@@ -134,7 +133,6 @@ export const memberCheckout = (userId) => {
       const token = window.localStorage.getItem("token");
 
       if (token) {
-        console.log("guest id from membercheckout:", userId);
         await axios.put(`/api/cart/${userId}`, {
           data: {
             authorization: token,

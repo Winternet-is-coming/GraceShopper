@@ -68,8 +68,6 @@ class Cart extends Component {
   }
 
   render() {
-    console.log(this.props.isLoggedIn);
-    console.log("id", this.props.auth.id);
     const cart = this.props.cart || [];
     const authId = this.props.auth.id;
     const { userId } = this.props.match.params;

@@ -66,9 +66,6 @@ function Navbar(props) {
     }
   }, [id]);
 
-  console.log("cart from navbar:", cart);
-  console.log("cart length:", cart.length);
-
   return (
     <div>
       <CssBaseline>
