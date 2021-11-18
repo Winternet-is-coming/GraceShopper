@@ -14,19 +14,23 @@ export const Home = (props) => {
         sx={{
           backgroundImage: 'url("/images/sakura-bg.jpg")',
           height: 700,
-          textAlign: "right",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "flex-end",
           backgroundSize: "cover",
+          backgroundPosition: "center top",
         }}
       >
         <br />
         <Typography
           variant="h3"
-          bgcolor="#ff8080"
+          bgcolor="#ffb8b8"
           color="white"
           sx={{
             marginTop: 5,
             padding: 1,
-            paddingRight: 5,
+            width: "450px",
           }}
         >
           Welcome to Oishii
@@ -59,7 +63,7 @@ export const Home = (props) => {
           marginTop: 10,
         }}
       >
-        <Divider>Our Products</Divider>
+        <Divider sx={{ fontWeight: "bold" }}>Our Products</Divider>
         <FeaturedSnacks />
       </Box>
       <Divider></Divider>
@@ -83,7 +87,7 @@ export const Home = (props) => {
             gap: 2,
           }}
         >
-          <Divider>About Oishii</Divider>
+          <Divider sx={{ fontWeight: "bold" }}>About Oishii</Divider>
           <Typography variant="body2">
             Oishii was founded in 2021 with the goal of sharing happiness
             through snacks to people all around the world. We have a lot of cute
@@ -111,7 +115,7 @@ export const Home = (props) => {
             gap: 2,
           }}
         >
-          <Divider>Customer Reviews</Divider>
+          <Divider sx={{ fontWeight: "bold" }}>Customer Reviews</Divider>
           <Typography variant="body2">
             "I searched for many years for a website where I can buy all the
             Japanese snacks that I want. Finally I found the perfect shop at
