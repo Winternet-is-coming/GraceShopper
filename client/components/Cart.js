@@ -32,12 +32,7 @@ class Cart extends Component {
     if (this.props.isLoggedIn) {
       this.props.fetchCart(this.props.match.params.userId);
     } else {
-      let cart = JSON.parse(window.localStorage.getItem("cart"));
-      if (Array.isArray(cart)) {
-        this.props.setCart(cart);
-      } else {
-        this.props.setCart([]);
-      }
+      this.props.fetchCart("guest");
     }
   }
   handleDelete(productId) {

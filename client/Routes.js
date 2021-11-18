@@ -44,8 +44,20 @@ class Routes extends Component {
               render={(props) => <Cart {...props} isLoggedIn={isLoggedIn} />}
             />
             <Route path="/confirmation" component={Confirmation} />
-            <Route exact path="/products" component={AllProducts} />
-            <Route exact path="/products/:id" component={SingleProduct} />
+            <Route
+              exact
+              path="/products"
+              render={(props) => (
+                <AllProducts {...props} isLoggedIn={isLoggedIn} />
+              )}
+            />
+            <Route
+              exact
+              path="/products/:id"
+              render={(props) => (
+                <SingleProduct {...props} isLoggedIn={isLoggedIn} />
+              )}
+            />
           </Switch>
         )}
       </div>
