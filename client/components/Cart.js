@@ -35,8 +35,15 @@ class Cart extends Component {
       this.props.fetchCart("guest");
     }
   }
+
+  componentDidUpdate(newProps) {
+    if (newProps.isLoggedIn && newProps.cart !== this.props.cart) {
+      this.props.fetchCart(this.props.match.params.userId);
+    }
+  }
+
   handleDelete(productId) {
-    if (this.props.isLoggedIn) {
+    if (this.props.auth.id) {
       this.props.deleteFromCart(
         this.props.match.params.userId,
         productId,
@@ -60,6 +67,8 @@ class Cart extends Component {
   }
 
   render() {
+    console.log(this.props.isLoggedIn);
+    console.log("id", this.props.auth.id);
     const cart = this.props.cart || [];
     const authId = this.props.auth.id;
     const { userId } = this.props.match.params;
@@ -128,7 +137,7 @@ class Cart extends Component {
                           aria-label="increase"
                           onClick={() => {
                             let newQuantity = order.quantity + 1;
-                            if (this.props.isLoggedIn) {
+                            if (this.props.auth.id) {
                               this.changeQuantity(
                                 order.product.id,
                                 newQuantity
@@ -149,7 +158,7 @@ class Cart extends Component {
                           aria-label="reduce"
                           onClick={() => {
                             let newQuantity = order.quantity - 1;
-                            if (this.props.isLoggedIn) {
+                            if (this.props.auth.id) {
                               this.changeQuantity(
                                 order.product.id,
                                 newQuantity
@@ -204,7 +213,7 @@ class Cart extends Component {
                     Subtotal (
                     {cart
                       .map((order) => order.quantity)
-                      .reduce((prev, curr) => prev + curr, 0)}
+                      .reduce((prev, curr) => prev + curr, 0)}{" "}
                     items): $
                     {cart
                       .map((order) => order.product.price * order.quantity)

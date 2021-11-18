@@ -41,7 +41,7 @@ class SingleProduct extends Component {
                 <Button
                   variant="contained"
                   onClick={() => {
-                    if (this.props.isLoggedIn) {
+                    if (this.props.auth.id) {
                       this.props.addToCart(this.props.auth.id, product.id);
                     } else {
                       this.props.addToGuestCart(product);

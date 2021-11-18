@@ -71,7 +71,7 @@ export class AllProducts extends React.Component {
                         aligncontent="right"
                         // href={`/cart/${this.props.auth.id}`}
                         onClick={() => {
-                          if (this.props.isLoggedIn) {
+                          if (this.props.auth.id) {
                             this.props.addToCart(
                               this.props.auth.id,
                               product.id
