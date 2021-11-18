@@ -1,95 +1,112 @@
-import axios from 'axios';
+import axios from "axios";
+
 //action type
-const SET_CART = 'SET_CART';
-const DELETE_FROM_CART = 'DELETE_FROM_CART';
-const CHANGE_QUANTITY = 'CHANGE_QUANTITY';
-const ADD_TO_CART = 'ADD_TO_CART';
+const SET_CART = "SET_CART";
+const DELETE_FROM_CART = "DELETE_FROM_CART";
+const CHANGE_QUANTITY = "CHANGE_QUANTITY";
+const ADD_TO_CART = "ADD_TO_CART";
+const USER_CHECKOUT = "USER_CHECKOUT";
 
 //action creator
 export const setCART = (cart) => {
-	return {
-		type: SET_CART,
-		cart,
-	};
+  return {
+    type: SET_CART,
+    cart,
+  };
 };
 
 const _deleteFromCart = (product) => {
-	return {
-		type: DELETE_FROM_CART,
-		product,
-	};
+  return {
+    type: DELETE_FROM_CART,
+    product,
+  };
 };
 
 const _changeQuantity = (product) => {
-	return {
-		type: CHANGE_QUANTITY,
-		product,
-	};
+  return {
+    type: CHANGE_QUANTITY,
+    product,
+  };
 };
 
-const _addToCart = (product) => {
-	return {
-		type: ADD_TO_CART,
-		product,
-	};
+export const _addToCart = (product) => {
+  return {
+    type: ADD_TO_CART,
+    product,
+  };
+};
+
+const _userCheckout = (cart) => {
+  return {
+    type: USER_CHECKOUT,
+    cart,
+  };
 };
 
 //thunk creator
 export const fetchCart = (userId) => {
-	return async (dispatch) => {
-		try {
-			const token = window.localStorage.getItem('token');
-
-			const {data: cart} = await axios.get(`/api/cart/${userId}`, {
-				headers: {
-					authorization: token,
-				},
-			});
-			dispatch(setCART(cart));
-		} catch (error) {
-			console.log("Can't find your order", error);
-		}
-	};
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem("token");
+      let cart = [];
+      if (userId !== "guest") {
+        const res = await axios.get(`/api/cart/${userId}`, {
+          headers: {
+            authorization: token,
+          },
+        });
+        cart = res.data;
+      } else {
+        const lsCart = JSON.parse(window.localStorage.getItem("cart"));
+        if (Array.isArray(lsCart)) {
+          cart = lsCart;
+        }
+      }
+      dispatch(setCART(cart));
+    } catch (error) {
+      console.log("Can't find your order", error);
+    }
+  };
 };
 
 export const deleteFromCart = (userId, productId, history) => {
-	return async (dispatch) => {
-		try {
-			const token = window.localStorage.getItem('token');
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem("token");
 
-			const {data: product} = await axios.delete(
-				`/api/cart/${userId}/${productId}`,
-				{
-					headers: {
-						authorization: token,
-					},
-				}
-			);
-			dispatch(_deleteFromCart(product));
-		} catch (e) {
-			console.log(`Can't delete this item`, e);
-		}
-	};
+      const { data: product } = await axios.delete(
+        `/api/cart/${userId}/${productId}`,
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      dispatch(_deleteFromCart(product));
+    } catch (e) {
+      console.log(`Can't delete this item`, e);
+    }
+  };
 };
 
 export const changeQuantity = (userId, productId, newQuantity) => {
-	return async (dispatch) => {
-		try {
-			const token = window.localStorage.getItem('token');
-			const {data: product} = await axios.put(
-				`/api/cart/${userId}/${productId}`,
-				{
-					data: {
-						newQuantity,
-						authorization: token,
-					},
-				}
-			);
-			dispatch(_changeQuantity(product));
-		} catch (e) {
-			console.log('There was an issue with changing quantity in the cart:', e);
-		}
-	};
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem("token");
+      const { data: product } = await axios.put(
+        `/api/cart/${userId}/${productId}`,
+        {
+          data: {
+            newQuantity,
+            authorization: token,
+          },
+        }
+      );
+      dispatch(_changeQuantity(product));
+    } catch (e) {
+      console.log("There was an issue with changing quantity in the cart:", e);
+    }
+  };
 };
 
 export const addToCart = (userId, productId) => {
@@ -107,6 +124,29 @@ export const addToCart = (userId, productId) => {
       dispatch(_addToCart({ ...product, id: product.productId }));
     } catch (e) {
       console.log("There was an issue with adding to cart: ", e);
+    }
+  };
+};
+
+export const userCheckout = (userId) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem("token");
+
+      if (token) {
+        await axios.put(`/api/cart/${userId}`, {
+          data: {
+            authorization: token,
+          },
+        });
+      } else {
+        // reset 'cart' in localstorage to []
+        localStorage.setItem("cart", JSON.stringify([]));
+      }
+
+      dispatch(_userCheckout([]));
+    } catch (e) {
+      console.log("There was an issue with checkout: ", e);
     }
   };
 };
@@ -167,7 +207,9 @@ export default function cartReducer(state = initialState, action) {
       } else {
         return { ...state, cart: updatedCart, isLoading: false };
       }
-
+    case USER_CHECKOUT:
+      // once user has checked out, reset their redux cart to an empty array
+      return { ...state, cart: [], isLoading: false };
     default:
       return state;
   }
