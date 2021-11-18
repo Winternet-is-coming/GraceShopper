@@ -53,6 +53,11 @@ export const fetchCart = (userId) => {
           authorization: token,
         },
       });
+
+      // set in localstorage if the cart doesn't already exist there
+      // get from localstorage
+      // this is the guest cart
+
       dispatch(setCART(cart));
     } catch (error) {
       console.log("Can't find your order", error);
@@ -123,11 +128,14 @@ export const memberCheckout = (userId) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem("token");
-      const { data: order } = await axios.put(`/api/cart/${userId}`, {
+      await axios.put(`/api/cart/${userId}`, {
         data: {
           authorization: token,
         },
       });
+
+      // clear local storage first for guest
+
       dispatch(_memberCheckout([]));
     } catch (e) {
       console.log("There was an issue with member checkout: ", e);
