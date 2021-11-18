@@ -17,6 +17,7 @@ export const Home = (props) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
+          paddingRight: 20,
           alignItems: "flex-end",
           backgroundSize: "cover",
           backgroundPosition: "center top",
@@ -30,7 +31,8 @@ export const Home = (props) => {
           sx={{
             marginTop: 5,
             padding: 1,
-            width: "450px",
+            width: "430px",
+            textAlign: "center",
           }}
         >
           Welcome to Oishii
