@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { deleteFromCart } from "../store/cart";
 import { changeQuantity } from "../store/cart";
-import { memberCheckout } from "../store/cart";
+import { userCheckout } from "../store/cart";
 import { fetchCart, setCART } from "../store/cart";
 //UI
 
@@ -71,6 +71,7 @@ class Cart extends Component {
     const cart = this.props.cart || [];
     const authId = this.props.auth.id;
     const { userId } = this.props.match.params;
+
     // const subTotal = cart
     // 	.map((order) => order.product.price * order.quantity)
     // 	.reduce((prev, curr) => prev + curr, 0);
@@ -223,7 +224,8 @@ class Cart extends Component {
                   // href="/confirmation"
                   variant="contained"
                   onClick={() => {
-                    this.props.memberCheckout(this.props.auth.id);
+                    this.props.userCheckout(this.props.auth.id);
+                    this.props.history.push("/confirmation");
                   }}
                 >
                   Checkout
@@ -252,7 +254,7 @@ const mapDispatch = (dispatch) => {
       dispatch(deleteFromCart(userId, productId, history)),
     changeQuantity: (userId, productId, newQuantity) =>
       dispatch(changeQuantity(userId, productId, newQuantity)),
-    memberCheckout: (userId) => dispatch(memberCheckout(userId)),
+    userCheckout: (userId) => dispatch(userCheckout(userId)),
     setCart: (cart) => dispatch(setCART(cart)),
     deleteFromGuestCart: (productId) => {
       let lsCart = JSON.parse(window.localStorage.getItem("cart"));

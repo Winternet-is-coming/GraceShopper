@@ -1,10 +1,11 @@
 import axios from "axios";
+
 //action type
 const SET_CART = "SET_CART";
 const DELETE_FROM_CART = "DELETE_FROM_CART";
 const CHANGE_QUANTITY = "CHANGE_QUANTITY";
 const ADD_TO_CART = "ADD_TO_CART";
-const MEMBER_CHECKOUT = "MEMBER_CHECKOUT";
+const USER_CHECKOUT = "USER_CHECKOUT";
 
 //action creator
 export const setCART = (cart) => {
@@ -35,9 +36,9 @@ export const _addToCart = (product) => {
   };
 };
 
-const _memberCheckout = (cart) => {
+const _userCheckout = (cart) => {
   return {
-    type: MEMBER_CHECKOUT,
+    type: USER_CHECKOUT,
     cart,
   };
 };
@@ -127,7 +128,7 @@ export const addToCart = (userId, productId) => {
   };
 };
 
-export const memberCheckout = (userId) => {
+export const userCheckout = (userId) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem("token");
@@ -143,11 +144,9 @@ export const memberCheckout = (userId) => {
         localStorage.setItem("cart", JSON.stringify([]));
       }
 
-      // clear local storage first for guest
-
-      dispatch(_memberCheckout([]));
+      dispatch(_userCheckout([]));
     } catch (e) {
-      console.log("There was an issue with member checkout: ", e);
+      console.log("There was an issue with checkout: ", e);
     }
   };
 };
@@ -208,8 +207,8 @@ export default function cartReducer(state = initialState, action) {
       } else {
         return { ...state, cart: updatedCart, isLoading: false };
       }
-    case MEMBER_CHECKOUT:
-      // once member has checked out, reset their redux cart to an empty array
+    case USER_CHECKOUT:
+      // once user has checked out, reset their redux cart to an empty array
       return { ...state, cart: [], isLoading: false };
     default:
       return state;
