@@ -23,7 +23,7 @@ import { BadgeUnstyled } from "@mui/core";
 
 const useStyles = makeStyles({
   header: {
-    backgroundColor: "pink",
+    backgroundColor: "#ff8080",
     margin: 0,
   },
   tool: {
@@ -95,6 +95,21 @@ function Navbar(props) {
                   Logout
                   {/* </a> */}
                 </Button>
+                <Button color="inherit" href={`/cart/${auth.id}`}>
+                  {cart.length > 0 ? (
+                    <StyledBadge
+                      badgeContent={cart.length}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                    >
+                      <ShoppingCart />
+                    </StyledBadge>
+                  ) : (
+                    <ShoppingCart />
+                  )}
+                </Button>
               </div>
             ) : (
               <div>
@@ -111,19 +126,23 @@ function Navbar(props) {
                 <Button color="inherit" href="/signup">
                   Sign Up
                 </Button>
+                <Button color="inherit" href={"/cart"}>
+                  {cart.length > 0 ? (
+                    <StyledBadge
+                      badgeContent={cart.length}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                    >
+                      <ShoppingCart />
+                    </StyledBadge>
+                  ) : (
+                    <ShoppingCart />
+                  )}
+                </Button>
               </div>
             )}
-            <Button color="inherit" href={`/cart/${auth.id}`}>
-              <StyledBadge
-                badgeContent={cart.length}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-              >
-                <ShoppingCart />
-              </StyledBadge>
-            </Button>
           </ToolBar>
         </AppBar>
       </CssBaseline>

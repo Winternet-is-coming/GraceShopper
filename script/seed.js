@@ -141,7 +141,7 @@ async function seed() {
     }),
 
     Product.create({
-      name: "Crayon Shin-Chan Chocobi Corn Snacks - Lemon",
+      name: "Lemon Chocobi Corn Snacks",
       price: 4,
       quantity: 99,
       description:

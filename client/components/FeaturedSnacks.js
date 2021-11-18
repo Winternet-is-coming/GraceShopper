@@ -1,43 +1,43 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {fetchProducts} from '../store/products';
-import {Link} from 'react-router-dom';
-import AllProducts from './AllProducts';
+import React from "react";
+import { connect } from "react-redux";
+import { fetchProducts } from "../store/products";
+import { Link } from "react-router-dom";
+import AllProducts from "./AllProducts";
 //MUI Components
 
-import {styled} from '@mui/material/styles';
-import Button from '@material-ui/core/Button';
-import Card from '@mui/material/Card';
-import Grid from '@mui/material/Grid';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import {red} from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { styled } from "@mui/material/styles";
+import Button from "@material-ui/core/Button";
+import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import { red } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const ExpandMore = styled((props) => {
-	const {expand, ...other} = props;
-	return <IconButton {...other} />;
-})(({theme, expand}) => ({
-	transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-	marginLeft: 'auto',
-	transition: theme.transitions.create('transform', {
-		duration: theme.transitions.duration.shortest,
-	}),
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
 }));
 
 export class FeaturedSnacks extends React.Component {
-	componentDidMount() {
-		this.props.fetchProducts();
-	}
+  componentDidMount() {
+    this.props.fetchProducts();
+  }
 
   render() {
     const products = this.props.products.allProducts || [];
@@ -57,10 +57,10 @@ export class FeaturedSnacks extends React.Component {
         }
       }
       return featuredProductArr;
-    }
-    const featuredProducts = getRandomProducts(products)
+    };
+    const featuredProducts = getRandomProducts(products);
 
-    if (featuredProducts[0] === undefined) return <div>Loading...</div>
+    if (featuredProducts[0] === undefined) return <div>Loading...</div>;
     return (
       <div>
         <Grid justifyContent="center" container spacing={1}>
@@ -92,17 +92,16 @@ export class FeaturedSnacks extends React.Component {
       </div>
     );
   }
-
 }
 
 const mapState = (state) => {
-	return {products: state.products};
+  return { products: state.products };
 };
 
 const mapDispatch = (dispatch) => {
-	return {
-		fetchProducts: () => dispatch(fetchProducts()),
-	};
+  return {
+    fetchProducts: () => dispatch(fetchProducts()),
+  };
 };
 
 export default connect(mapState, mapDispatch)(FeaturedSnacks);
