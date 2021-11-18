@@ -84,13 +84,13 @@ export const Home = (props) => {
         >
           <Divider>About Oishii</Divider>
           <Typography variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Oishii was founded in 2021 with the goal of sharing happiness
+            through snacks to people all around the world. We have a lot of cute
+            and delicious yummy goodies here! You can enjoy the shop while you
+            shop for yummy snacks. We will be having a "Keep the Yummy"
+            campaign, where we will donate a portion of the sales from all our
+            products to an animal rescue group. We want to share happiness and
+            cute adorable sweet Pocky with our customers and fans who shop here.
           </Typography>
         </Box>
       </Box>
@@ -110,15 +110,15 @@ export const Home = (props) => {
             gap: 2,
           }}
         >
-          <Divider>More Info</Divider>
+          <Divider>Customer Reviews</Divider>
           <Typography variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            "I searched for many years for a website where I can buy all the
+            Japanese snacks that I want. Finally I found the perfect shop at
+            Oishii!" — PockyLover50
+          </Typography>
+          <Typography variant="body2">
+            "My favorite thing about Oishii is the variety of snacks! I always
+            find something new to try when I shop here." — Oishii4Ever
           </Typography>
         </Box>
         <img
