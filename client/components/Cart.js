@@ -36,11 +36,15 @@ class Cart extends Component {
     }
   }
   handleDelete(productId) {
-    this.props.deleteFromCart(
-      this.props.match.params.userId,
-      productId,
-      this.props.history
-    );
+    if (this.props.isLoggedIn) {
+      this.props.deleteFromCart(
+        this.props.match.params.userId,
+        productId,
+        this.props.history
+      );
+    } else {
+      this.props.deleteFromGuestCart(productId);
+    }
   }
   changeQuantity(productId, newQuantity) {
     if (newQuantity === 0) {
@@ -124,7 +128,17 @@ class Cart extends Component {
                           aria-label="increase"
                           onClick={() => {
                             let newQuantity = order.quantity + 1;
-                            this.changeQuantity(order.product.id, newQuantity);
+                            if (this.props.isLoggedIn) {
+                              this.changeQuantity(
+                                order.product.id,
+                                newQuantity
+                              );
+                            } else {
+                              this.props.changeGuestQuantity(
+                                order.product.id,
+                                newQuantity
+                              );
+                            }
                           }}
                         >
                           <AddIcon fontSize="small" />
@@ -135,7 +149,17 @@ class Cart extends Component {
                           aria-label="reduce"
                           onClick={() => {
                             let newQuantity = order.quantity - 1;
-                            this.changeQuantity(order.product.id, newQuantity);
+                            if (this.props.isLoggedIn) {
+                              this.changeQuantity(
+                                order.product.id,
+                                newQuantity
+                              );
+                            } else {
+                              this.props.changeGuestQuantity(
+                                order.product.id,
+                                newQuantity
+                              );
+                            }
                           }}
                         >
                           <RemoveIcon fontSize="small" />
@@ -215,6 +239,30 @@ const mapDispatch = (dispatch) => {
     changeQuantity: (userId, productId, newQuantity) =>
       dispatch(changeQuantity(userId, productId, newQuantity)),
     setCart: (cart) => dispatch(setCART(cart)),
+    deleteFromGuestCart: (productId) => {
+      let lsCart = JSON.parse(window.localStorage.getItem("cart"));
+      if (Array.isArray(lsCart)) {
+        lsCart = lsCart.filter((order) => order.product.id !== productId);
+        window.localStorage.setItem("cart", JSON.stringify(lsCart));
+      }
+      dispatch(setCART(lsCart));
+    },
+    changeGuestQuantity: (productId, newQuantity) => {
+      let lsCart = JSON.parse(window.localStorage.getItem("cart"));
+      if (Array.isArray(lsCart)) {
+        if (newQuantity <= 0) {
+          lsCart = lsCart.filter((order) => order.product.id !== productId);
+        } else {
+          lsCart.forEach((order) => {
+            if (order.product.id === productId) {
+              order.quantity = newQuantity;
+            }
+          });
+        }
+        window.localStorage.setItem("cart", JSON.stringify(lsCart));
+      }
+      dispatch(setCART(lsCart));
+    },
   };
 };
 

@@ -8,8 +8,7 @@ import Button from "@material-ui/core/Button";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import { styled } from "@mui/material/styles";
-import { addToCart } from "../store/cart";
-import { fetchCart } from "../store/cart";
+import { addToCart, fetchCart, _addToCart } from "../store/cart";
 
 const Root = styled("div")(({ theme }) => ({
   width: "90%",
@@ -41,12 +40,13 @@ class SingleProduct extends Component {
               <Box textAlign="center">
                 <Button
                   variant="contained"
-                  onClick={() =>
-                    this.props.addToCart(
-                      this.props.auth.id,
-                      this.props.match.params.id
-                    )
-                  }
+                  onClick={() => {
+                    if (this.props.isLoggedIn) {
+                      this.props.addToCart(this.props.auth.id, product.id);
+                    } else {
+                      this.props.addToGuestCart(product);
+                    }
+                  }}
                 >
                   Add to Cart
                 </Button>
@@ -77,7 +77,25 @@ const mapDispatch = (dispatch) => {
     fetchProduct: (id) => dispatch(fetchSingleProduct(id)),
     fetchCart: (userId) => dispatch(fetchCart(userId)),
     addToCart: (userId, productId) => dispatch(addToCart(userId, productId)),
+    addToGuestCart: (product) => {
+      let lsCart = JSON.parse(window.localStorage.getItem("cart"));
+      if (Array.isArray(lsCart)) {
+        let updated = false;
+        lsCart.forEach((order) => {
+          if (order.product.id === product.id) {
+            order.quantity++;
+            updated = true;
+          }
+        });
+        if (!updated) {
+          lsCart.push({ product, quantity: 1 });
+        }
+      } else {
+        lsCart = [{ product, quantity: 1 }];
+      }
+      window.localStorage.setItem("cart", JSON.stringify(lsCart));
+      dispatch(_addToCart(product));
+    },
   };
 };
-
 export default connect(mapState, mapDispatch)(SingleProduct);
