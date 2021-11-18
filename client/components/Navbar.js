@@ -95,6 +95,17 @@ function Navbar(props) {
                   Logout
                   {/* </a> */}
                 </Button>
+                <Button color="inherit" href={`/cart/${auth.id}`}>
+                  <StyledBadge
+                    badgeContent={cart.length}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                  >
+                    <ShoppingCart />
+                  </StyledBadge>
+                </Button>
               </div>
             ) : (
               <div>
@@ -111,19 +122,19 @@ function Navbar(props) {
                 <Button color="inherit" href="/signup">
                   Sign Up
                 </Button>
+                <Button color="inherit" href={"/cart"}>
+                  <StyledBadge
+                    badgeContent={cart.length}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                  >
+                    <ShoppingCart />
+                  </StyledBadge>
+                </Button>
               </div>
             )}
-            <Button color="inherit" href={`/cart/${auth.id}`}>
-              <StyledBadge
-                badgeContent={cart.length}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-              >
-                <ShoppingCart />
-              </StyledBadge>
-            </Button>
           </ToolBar>
         </AppBar>
       </CssBaseline>

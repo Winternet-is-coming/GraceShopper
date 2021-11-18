@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
 import { Link } from "react-router-dom";
+
 //MUI Components
 //import Container from "@material-ui/core/Container";
 import Card from "@mui/material/Card";
@@ -14,8 +15,7 @@ import Divider from "@material-ui/core/Divider";
 import { styled } from "@mui/material/styles";
 import Grid from "@material-ui/core/Grid";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { addToCart } from "../store/cart";
-import { fetchCart } from "../store/cart";
+import { addToCart, fetchCart, _addToCart } from "../store/cart";
 import Alert from "@mui/material/Alert";
 
 const Root = styled("div")(({ theme }) => ({
@@ -70,9 +70,16 @@ export class AllProducts extends React.Component {
                       <Button
                         aligncontent="right"
                         // href={`/cart/${this.props.auth.id}`}
-                        onClick={() =>
-                          this.props.addToCart(this.props.auth.id, product.id)
-                        }
+                        onClick={() => {
+                          if (this.props.auth.id) {
+                            this.props.addToCart(
+                              this.props.auth.id,
+                              product.id
+                            );
+                          } else {
+                            this.props.addToGuestCart(product);
+                          }
+                        }}
                       >
                         <AddShoppingCartIcon />
                       </Button>
@@ -103,6 +110,25 @@ const mapDispatch = (dispatch) => {
     fetchProducts: () => dispatch(fetchProducts()),
     addToCart: (userId, productId) => dispatch(addToCart(userId, productId)),
     fetchCart: (userId) => dispatch(fetchCart(userId)),
+    addToGuestCart: (product) => {
+      let lsCart = JSON.parse(window.localStorage.getItem("cart"));
+      if (Array.isArray(lsCart)) {
+        let updated = false;
+        lsCart.forEach((order) => {
+          if (order.product.id === product.id) {
+            order.quantity++;
+            updated = true;
+          }
+        });
+        if (!updated) {
+          lsCart.push({ product, quantity: 1 });
+        }
+      } else {
+        lsCart = [{ product, quantity: 1 }];
+      }
+      window.localStorage.setItem("cart", JSON.stringify(lsCart));
+      dispatch(_addToCart(product));
+    },
   };
 };
 

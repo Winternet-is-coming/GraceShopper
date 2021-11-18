@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchCart } from "../store/cart";
 import { deleteFromCart } from "../store/cart";
 import { changeQuantity } from "../store/cart";
 import { memberCheckout } from "../store/cart";
+import { fetchCart, setCART } from "../store/cart";
 //UI
 
 import IconButton from "@mui/material/IconButton";
@@ -30,14 +30,29 @@ import Typography from "@mui/material/Typography";
 
 class Cart extends Component {
   componentDidMount() {
-    this.props.fetchCart(this.props.match.params.userId);
+    if (this.props.isLoggedIn) {
+      this.props.fetchCart(this.props.match.params.userId);
+    } else {
+      this.props.fetchCart("guest");
+    }
   }
+
+  componentDidUpdate(newProps) {
+    if (newProps.isLoggedIn && newProps.cart !== this.props.cart) {
+      this.props.fetchCart(this.props.match.params.userId);
+    }
+  }
+
   handleDelete(productId) {
-    this.props.deleteFromCart(
-      this.props.match.params.userId,
-      productId,
-      this.props.history
-    );
+    if (this.props.auth.id) {
+      this.props.deleteFromCart(
+        this.props.match.params.userId,
+        productId,
+        this.props.history
+      );
+    } else {
+      this.props.deleteFromGuestCart(productId);
+    }
   }
   changeQuantity(productId, newQuantity) {
     if (newQuantity === 0) {
@@ -53,6 +68,8 @@ class Cart extends Component {
   }
 
   render() {
+    console.log(this.props.isLoggedIn);
+    console.log("id", this.props.auth.id);
     const cart = this.props.cart || [];
     const authId = this.props.auth.id;
     const { userId } = this.props.match.params;
@@ -74,7 +91,7 @@ class Cart extends Component {
       // if there is an authId and it does not match id in URL
       // (a user is logged in but does not own this cart)
       return <PageNotFound />;
-    } else if (authId) {
+    } else {
       // if the authId does match
       return (
         <div>
@@ -121,7 +138,17 @@ class Cart extends Component {
                           aria-label="increase"
                           onClick={() => {
                             let newQuantity = order.quantity + 1;
-                            this.changeQuantity(order.product.id, newQuantity);
+                            if (this.props.auth.id) {
+                              this.changeQuantity(
+                                order.product.id,
+                                newQuantity
+                              );
+                            } else {
+                              this.props.changeGuestQuantity(
+                                order.product.id,
+                                newQuantity
+                              );
+                            }
                           }}
                         >
                           <AddIcon fontSize="small" />
@@ -132,7 +159,17 @@ class Cart extends Component {
                           aria-label="reduce"
                           onClick={() => {
                             let newQuantity = order.quantity - 1;
-                            this.changeQuantity(order.product.id, newQuantity);
+                            if (this.props.auth.id) {
+                              this.changeQuantity(
+                                order.product.id,
+                                newQuantity
+                              );
+                            } else {
+                              this.props.changeGuestQuantity(
+                                order.product.id,
+                                newQuantity
+                              );
+                            }
                           }}
                         >
                           <RemoveIcon fontSize="small" />
@@ -177,7 +214,7 @@ class Cart extends Component {
                     Subtotal (
                     {cart
                       .map((order) => order.quantity)
-                      .reduce((prev, curr) => prev + curr, 0)}
+                      .reduce((prev, curr) => prev + curr, 0)}{" "}
                     items): $
                     {cart
                       .map((order) => order.product.price * order.quantity)
@@ -198,12 +235,10 @@ class Cart extends Component {
           </div>
         </div>
       );
-    } else {
-      // if there is no authId (not logged in)
-      return <PageNotFound />;
     }
   }
 }
+
 const mapState = (state) => {
   return {
     cart: state.cart.cart,
@@ -220,6 +255,31 @@ const mapDispatch = (dispatch) => {
     changeQuantity: (userId, productId, newQuantity) =>
       dispatch(changeQuantity(userId, productId, newQuantity)),
     memberCheckout: (userId) => dispatch(memberCheckout(userId)),
+    setCart: (cart) => dispatch(setCART(cart)),
+    deleteFromGuestCart: (productId) => {
+      let lsCart = JSON.parse(window.localStorage.getItem("cart"));
+      if (Array.isArray(lsCart)) {
+        lsCart = lsCart.filter((order) => order.product.id !== productId);
+        window.localStorage.setItem("cart", JSON.stringify(lsCart));
+      }
+      dispatch(setCART(lsCart));
+    },
+    changeGuestQuantity: (productId, newQuantity) => {
+      let lsCart = JSON.parse(window.localStorage.getItem("cart"));
+      if (Array.isArray(lsCart)) {
+        if (newQuantity <= 0) {
+          lsCart = lsCart.filter((order) => order.product.id !== productId);
+        } else {
+          lsCart.forEach((order) => {
+            if (order.product.id === productId) {
+              order.quantity = newQuantity;
+            }
+          });
+        }
+        window.localStorage.setItem("cart", JSON.stringify(lsCart));
+      }
+      dispatch(setCART(lsCart));
+    },
   };
 };
 
