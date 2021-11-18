@@ -44,12 +44,15 @@ export class FeaturedSnacks extends React.Component {
     const getRandomProducts = (arr) => {
       let i = 0;
       let featuredProductArr = [];
+      let memo = {};
       while (i < 4) {
-        let randomIdx = Math.floor(Math.random() * arr.length);
-        if (arr[randomIdx] in featuredProductArr) {
+        let randomIdx = Math.floor(Math.random() * arr.length)
+        if (memo[randomIdx]) {
           i++;
+          featuredProductArr.push(arr[randomIdx - i])
         } else {
           i++;
+          memo[randomIdx] = true;
           featuredProductArr.push(arr[randomIdx]);
         }
       }
@@ -61,28 +64,28 @@ export class FeaturedSnacks extends React.Component {
     return (
       <div>
         <Grid justifyContent="center" container spacing={1}>
-          {featuredProducts.map((product) => (
-            <Grid item key={product.id}>
-              <Card sx={{ width: 325, padding: 5, margin: 5, height: 300 }}>
-                <Grid container justifyContent="center">
-                  <Button href={`/products/${product.id}`}>
-                    <CardMedia
-                      sx={{ height: 170, width: 200 }}
-                      component="img"
-                      image={product.imageUrl}
-                      alt="product-img"
-                    />
-                  </Button>
-                  <Typography variant="h6">{product.name}</Typography>
-                </Grid>
-              </Card>
-            </Grid>
-          ))}
+        {featuredProducts.map((product) => (
+          <Grid item key={product.id}>
+            <Card sx={{ width: 325, padding: 5, margin: 5, height: 300 }}>
+              <Grid container justifycontent="center">
+                <Button href={`/products/${product.id}`}>
+                  <CardMedia
+                    sx={{ height: 170, width: 200 }}
+                    component="img"
+                    image={product.imageUrl}
+                    alt="product-img"
+                  />
+                </Button>
+                <Typography variant="h6">{product.name}</Typography>
+              </Grid>
+          </Card>
+          </Grid>
+        ))}
         </Grid>
         <Grid container justifyContent="center">
-          <Link to="/products">
-            <Button variant="outlined" size="small" justifycontent="center">
-              View All Snacks
+          <Link to='/products'>
+            <Button variant="outlined" size="small">
+                View All Snacks
             </Button>
           </Link>
         </Grid>
