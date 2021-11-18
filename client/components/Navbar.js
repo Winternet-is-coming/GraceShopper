@@ -23,7 +23,7 @@ import { BadgeUnstyled } from "@mui/core";
 
 const useStyles = makeStyles({
   header: {
-    backgroundColor: "pink",
+    backgroundColor: "#ff8080",
     margin: 0,
   },
   tool: {
@@ -66,6 +66,9 @@ function Navbar(props) {
     }
   }, [id]);
 
+  console.log("cart from navbar:", cart);
+  console.log("cart length:", cart.length);
+
   return (
     <div>
       <CssBaseline>
@@ -96,15 +99,19 @@ function Navbar(props) {
                   {/* </a> */}
                 </Button>
                 <Button color="inherit" href={`/cart/${auth.id}`}>
-                  <StyledBadge
-                    badgeContent={cart.length}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                  >
+                  {cart.length > 0 ? (
+                    <StyledBadge
+                      badgeContent={cart.length}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                    >
+                      <ShoppingCart />
+                    </StyledBadge>
+                  ) : (
                     <ShoppingCart />
-                  </StyledBadge>
+                  )}
                 </Button>
               </div>
             ) : (
@@ -123,15 +130,19 @@ function Navbar(props) {
                   Sign Up
                 </Button>
                 <Button color="inherit" href={"/cart"}>
-                  <StyledBadge
-                    badgeContent={cart.length}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                  >
+                  {cart.length > 0 ? (
+                    <StyledBadge
+                      badgeContent={cart.length}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                    >
+                      <ShoppingCart />
+                    </StyledBadge>
+                  ) : (
                     <ShoppingCart />
-                  </StyledBadge>
+                  )}
                 </Button>
               </div>
             )}
