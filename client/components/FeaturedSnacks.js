@@ -42,21 +42,23 @@ export class FeaturedSnacks extends React.Component {
   render() {
     const products = this.props.products.allProducts || [];
     const getRandomProducts = (arr) => {
-      let i = 0
+      let i = 0;
       let featuredProductArr = [];
+      let memo = {};
       while (i < 4) {
         let randomIdx = Math.floor(Math.random() * arr.length)
-        if (arr[randomIdx] in featuredProductArr) {
-          i++
+        if (memo[randomIdx]) {
+          i++;
+          featuredProductArr.push(arr[randomIdx - i])
         } else {
-          i++
-          featuredProductArr.push(arr[randomIdx])
+          i++;
+          memo[randomIdx] = true;
+          featuredProductArr.push(arr[randomIdx]);
         }
       }
       return featuredProductArr;
     }
     const featuredProducts = getRandomProducts(products)
-    console.log(featuredProducts)
 
     if (featuredProducts[0] === undefined) return <div>Loading...</div>
     return (
@@ -65,7 +67,7 @@ export class FeaturedSnacks extends React.Component {
         {featuredProducts.map((product) => (
           <Grid item key={product.id}>
             <Card sx={{ width: 325, padding: 5, margin: 5, height: 300 }}>
-              <Grid container justifyContent="center">
+              <Grid container justifycontent="center">
                 <Button href={`/products/${product.id}`}>
                   <CardMedia
                     sx={{ height: 170, width: 200 }}
@@ -82,7 +84,7 @@ export class FeaturedSnacks extends React.Component {
         </Grid>
         <Grid container justifyContent="center">
           <Link to='/products'>
-            <Button variant="outlined" size="small" justifyContent="center">
+            <Button variant="outlined" size="small">
                 View All Snacks
             </Button>
           </Link>
