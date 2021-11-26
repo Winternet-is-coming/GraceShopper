@@ -72,13 +72,6 @@ class Cart extends Component {
     const authId = this.props.auth.id;
     const { userId } = this.props.match.params;
 
-    // const subTotal = cart
-    // 	.map((order) => order.product.price * order.quantity)
-    // 	.reduce((prev, curr) => prev + curr, 0);
-    // const totalItems = cart
-    // 	.map((order) => order.quantity)
-    // 	.reduce((prev, curr) => prev + curr, 0);
-
     if (this.props.isLoading)
       return (
         <Box sx={{ width: "100%" }}>
@@ -221,7 +214,6 @@ class Cart extends Component {
                   </Typography>
                 </CardContent>
                 <Button
-                  // href="/confirmation"
                   variant="contained"
                   onClick={() => {
                     this.props.userCheckout(this.props.auth.id);

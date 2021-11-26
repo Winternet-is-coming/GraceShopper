@@ -4,11 +4,8 @@ import { fetchProducts } from "../store/products";
 import { Link } from "react-router-dom";
 
 //MUI Components
-//import Container from "@material-ui/core/Container";
 import Card from "@mui/material/Card";
-//import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-//import Box from "@mui/material/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
@@ -16,7 +13,6 @@ import { styled } from "@mui/material/styles";
 import Grid from "@material-ui/core/Grid";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { addToCart, fetchCart, _addToCart } from "../store/cart";
-import Alert from "@mui/material/Alert";
 
 const Root = styled("div")(({ theme }) => ({
   width: "90%",
@@ -66,10 +62,8 @@ export class AllProducts extends React.Component {
                           View Details
                         </Button>
                       </Link>
-                      {/* <Box alignContent="center"> */}
                       <Button
                         aligncontent="right"
-                        // href={`/cart/${this.props.auth.id}`}
                         onClick={() => {
                           if (this.props.auth.id) {
                             this.props.addToCart(
@@ -84,7 +78,6 @@ export class AllProducts extends React.Component {
                         <AddShoppingCartIcon />
                       </Button>
                       <script type="module" src="/cart.js"></script>
-                      {/* </Box> */}
                     </Grid>
                   </Root>
                 </div>
