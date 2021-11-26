@@ -38,7 +38,7 @@ As a customer, I can:
 
 **Featured Products View**
 
-![oishii-featured-snacks](public/images/oishii-featured-snacks.png "featured products image")
+![oishii-featured-snacks](public/images/oishii-featured-snacks-2.png "featured products image")
 
 **All Products View**
 
