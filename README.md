@@ -1,77 +1,67 @@
-# FS-App-Template
+# Oishii Snacks
 
-## Setup
+![oishii-homepage](public/images/oishii-homepage.png "homepage image")
 
-To use this as boilerplate, you'll need to take the following steps:
+## Introduction
 
-* Don't fork or clone this repo! Instead, create a new, empty
-  directory on your machine and `git init` (or create an empty repo on
-  Github and clone it to your local machine)
+Oishii Snacks is an e-commerce site for users to browse and purchase from a variety of Japanese snacks! The site simulates the shopping experience for both members as well as guests. Users can view details about our snacks, add to cart, checkout, and more.
 
-* Now you will have to add the fs-app-template as a remote and merge it into your own repository.
+- Check out our site here: [Oishii Snacks](https://oishii-snacks.herokuapp.com/)
 
-```
-git remote add boilermaker git@github.com:FullstackAcademy/fs-app-template.git
-git fetch boilermaker
-git merge boilermaker/main
-git branch -m master main
-```
+- You can also watch our presentation here: [Oishii Snacks Presentation](https://www.youtube.com/watch?v=cuoRInoCywc)
 
-## Customize
+## Tech Stack
 
-Now that you've got the code, follow these steps to get acclimated:
+- JavaScript
+- React
+- Redux
+- PostgreSQL
+- Sequelize
+- Express
+- Node.js
 
-* Update project name and description in `package.json`
-* `npm install`
-* Create two postgres databases (`MY_APP_NAME` should match the `name`
-  parameter in `package.json`):
-* These commands will create both your **development** and **test** databases
+## Features
 
-```
-createdb <YOUR APP NAME HERE FROM package.json>
-createdb <YOUR APP NAME HERE FROM package.json>-test
-```
+As a customer, I can:
 
-* By default, running `npm test` will use your test database, while
-  regular development uses development database
+- View all available products so I can pick from a variety.
+- View details about a single product.
+- View featured products on the homepage.
+- Add a product to my cart, as a guest or as a member.
+- See how many items are in my cart by viewing the navbar.
+- View the products in my cart as well as a subtotal.
+- Edit the products in my cart by changing the quantity or removing a product.
+- Checkout the items in my cart, as a guest or as a member.
+- Create an account so I can have a logged-in experience.
+- Have a persistent cart so I can pick up where I left off.
+- Feel assured that my personal details and cart data can only be viewed and edited by me.
 
-## Start
+**Featured Products View**
 
-Sync and seed your database by running `npm run seed`. Running `npm run start:dev` will make great things happen!
+![oishii-featured-snacks](public/images/oishii-featured-snacks.png "featured products image")
 
-- start:dev will both start your server and build your client side files using webpack
-- start:dev:logger is the same as start:dev, but you will see your SQL queries (can be helpful for debugging)
-- start:dev:seed will start your server and also seed your database (this is useful when you are making schema changes and you don't want to run your seed script separately)
+**All Products View**
 
+![oishii-all-snacks](public/images/oishii-all-snacks.png "all products image")
 
-### Heroku
+**Single Product View**
 
-1.  Set up the [Heroku command line tools][heroku-cli]
-2.  `heroku login`
-3.  Add a git remote for heroku:
+![oishii-single-snack](public/images/oishii-single-snack.png "single product image")
 
-[heroku-cli]: https://devcenter.heroku.com/articles/heroku-cli
+**Cart View**
 
-* **If you are creating a new app...**
+![oishii-cart](public/images/oishii-cart.png "cart image")
 
-  1.  `heroku create` or `heroku create your-app-name` if you have a
-      name in mind.
-  2.  `heroku config:set JWT=<your secret here!>` to set a secret for JWT signing
+### Run This Project Locally
 
-Database Setup
+1. Fork and clone this repo. `npm install`
+2. Create a database using: `createdb oishii`
+3. Seed the database using: `npm run seed`
+4. Run the application with: `npm run start:dev`
 
-  3.  `heroku addons:create heroku-postgresql:hobby-dev` to add
-      ("provision") a postgres database to your heroku dyno (This creates your production database)
+### Next Steps
 
-  4.  `heroku config:set SEED=true` to get heroku to sync and seed your database
-
-  5.   note everytime your app restarts, the database tables will be dropped and re-created. To avoid this you can `config:unset SEED`
-
-
-* **If you already have a Heroku app...**
-
-  1.  `heroku git:remote your-app-name` You'll need to be a
-      collaborator on the app.
-
-
-Now, you should be deployed!
+- Make UI more responsive so users can shop on smaller screens.
+- Add filtering functionality to give users more control over their shopping experience.
+- Integrate payment processing (e.g. Stripe) for a more realistic experience.
+- Build an admin dashboard where products can be edited and added.
