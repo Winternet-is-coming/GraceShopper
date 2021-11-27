@@ -2,26 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
 import { Link } from "react-router-dom";
-import AllProducts from "./AllProducts";
 //MUI Components
 
 import { styled } from "@mui/material/styles";
 import Button from "@material-ui/core/Button";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -46,10 +35,10 @@ export class FeaturedSnacks extends React.Component {
       let featuredProductArr = [];
       let memo = {};
       while (i < 4) {
-        let randomIdx = Math.floor(Math.random() * arr.length)
+        let randomIdx = Math.floor(Math.random() * arr.length);
         if (memo[randomIdx]) {
           i++;
-          featuredProductArr.push(arr[randomIdx - i])
+          featuredProductArr.push(arr[randomIdx - i]);
         } else {
           i++;
           memo[randomIdx] = true;
@@ -64,28 +53,28 @@ export class FeaturedSnacks extends React.Component {
     return (
       <div>
         <Grid justifyContent="center" container spacing={1}>
-        {featuredProducts.map((product) => (
-          <Grid item key={product.id}>
-            <Card sx={{ width: 325, padding: 5, margin: 5, height: 300 }}>
-              <Grid container justifycontent="center">
-                <Button href={`/products/${product.id}`}>
-                  <CardMedia
-                    sx={{ height: 170, width: 200 }}
-                    component="img"
-                    image={product.imageUrl}
-                    alt="product-img"
-                  />
-                </Button>
-                <Typography variant="h6">{product.name}</Typography>
-              </Grid>
-          </Card>
-          </Grid>
-        ))}
+          {featuredProducts.map((product) => (
+            <Grid item key={product.id}>
+              <Card sx={{ width: 325, padding: 5, margin: 5, height: 300 }}>
+                <Grid container justifycontent="center">
+                  <Button href={`/products/${product.id}`}>
+                    <CardMedia
+                      sx={{ height: 170, width: 200 }}
+                      component="img"
+                      image={product.imageUrl}
+                      alt="product-img"
+                    />
+                  </Button>
+                  <Typography variant="h6">{product.name}</Typography>
+                </Grid>
+              </Card>
+            </Grid>
+          ))}
         </Grid>
         <Grid container justifyContent="center">
-          <Link to='/products'>
+          <Link to="/products">
             <Button variant="outlined" size="small">
-                View All Snacks
+              View All Snacks
             </Button>
           </Link>
         </Grid>

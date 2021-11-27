@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect, useSelector, useDispatch, useStore } from "react-redux";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
@@ -7,17 +7,11 @@ import { logout } from "../store";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import {
-  makeStyles,
-  ThemeProvider,
-  createTheme,
-} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
 import { fetchCart } from "../store/cart";
-import Badge from "@material-ui/core/Badge";
 import { styled } from "@mui/system";
 import { BadgeUnstyled } from "@mui/core";
 
@@ -91,9 +85,7 @@ function Navbar(props) {
                 </Button>
 
                 <Button color="inherit" href="#" onClick={handleClick}>
-                  {/* <a href="#" onClick={handleClick}> */}
                   Logout
-                  {/* </a> */}
                 </Button>
                 <Button color="inherit" href={`/cart/${auth.id}`}>
                   {cart.length > 0 ? (
@@ -150,9 +142,6 @@ function Navbar(props) {
   );
 }
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
